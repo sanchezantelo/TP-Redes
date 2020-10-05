@@ -1,0 +1,9 @@
+-Hacer menus
+
+
+-Ver registro de actividades -> consultar archivo usuario_x.log
+
+final
+-cerrar sesion -> close()
+
+
