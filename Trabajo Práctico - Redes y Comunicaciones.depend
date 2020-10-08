@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1602124787 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\codigo\main.cpp
+	<iostream>
+
+1602136455 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\codigo\client.cpp
+
+1602136562 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\codigo\server.cpp
+	<iostream>
+	<stdio.h>
+
+1602136012 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\server.c
+	<stdio.h>
+
