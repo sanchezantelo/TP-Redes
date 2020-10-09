@@ -2,13 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Trabajo Práctico - Redes y Comunicaciones" />
+		<Option title="Servidor" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="main/" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Trabajo Práctico - Redes y Comunicaciones" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/Servidor" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Trabajo Práctico - Redes y Comunicaciones" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Servidor" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,17 +30,15 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Codigo/Client.cpp">
-			<Option target="Debug" />
-		</Unit>
 		<Unit filename="Codigo/Server.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Server.c">
-			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
