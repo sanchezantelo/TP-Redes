@@ -32,10 +32,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Client Final.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="Client.cpp">
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="Cliente-TP.cpp" />
+		<Unit filename="Cliente-TP.cpp">
+			<Option target="Release" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
