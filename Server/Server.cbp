@@ -33,12 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Server Final.cpp" />
-		<Unit filename="Server-TP.cpp">
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="Server.cpp">
-			<Option target="Release" />
-		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

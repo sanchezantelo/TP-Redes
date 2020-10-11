@@ -35,12 +35,6 @@
 		<Unit filename="Client Final.cpp">
 			<Option target="Debug" />
 		</Unit>
-		<Unit filename="Client.cpp">
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="Cliente-TP.cpp">
-			<Option target="Release" />
-		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
