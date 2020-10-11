@@ -37,24 +37,27 @@ printf("Cliente Encontrado!.");
 
 
 //RECIBIMOS USUARIO Y CONTRASEÑA:
-//----------------------------------------------------------------------------------------------------
-//char nombre_usuario[]="Usuario:",contrasena[]="Contrasena:", usuario[50];
-//send(sockClient,nombre_usuario,sizeof(nombre_usuario),0); //envio el texto "Usuario:" al cliente
+
 char user[50], pass[50];
+printf("\nEsperando Ingreso de usuario...");
+fflush(stdin);
 recv(sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
-recv(sockClient,pass,sizeof(user),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
+
+printf("\n\nEsperando Ingreso de Contrase%ca...", 164);
+fflush(stdin);
+recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
 
 //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
-//fopen()
+//FALTA HACER!!!!!!!!!!
+
+
+
 
 //CLIENTE ACEPTADO
-send(sockClient,"TODO OK!! ESTAS CONECTADO!!",sizeof(user),0); //envio el texto "Usuario:" al cliente
+send(sockClient,"OK",2,0); //envio el texto "Usuario:" al cliente
 
 
-
-
-char bienvenido[150]="Bienvenido Al Canal de Yui ";
-strcat(bienvenido,user);
-send(sockClient,bienvenido,sizeof(bienvenido),0); //Le  envio la Bienvenida
+printf("\nNo apretes enter o se va todo al carajo! todavia no termine esta parte!");
+getchar();
 }
 }
