@@ -12,3 +12,15 @@
 	<iostream>
 	<winsock2.h>
 
+1602445476 source:g:\documents\git\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602444295 source:g:\documents\git\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+
+1602443072 g:\documents\git\tp-redes\client\include\servicio.h
+	<iostream>
+
