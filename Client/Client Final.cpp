@@ -169,8 +169,8 @@ int login(SOCKET sockClient){
 void enviar(SOCKET sock, char *mensaje){
     int error = 0;
     error = send(sock, mensaje, sizeof(mensaje), 0); //envio mi nombre de usuario al Servidor
-    if(error == -1){
-        cout << "No se pudo enviar el mensaje. Error "<< errno << endl;
+    if(error == SOCKET_ERROR){
+        cout << "No se pudo enviar el mensaje. Error "<< WSAGetLastError();
         system("pause>nul");
         closesocket(sock);
         exit(-1);
