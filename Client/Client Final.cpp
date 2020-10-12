@@ -11,6 +11,7 @@ int login(SOCKET sockclient);
 void enviar(SOCKET sock, char *mensaje);
 void altaServicio();
 void gestionarPasajes();
+void crearServicio(Servicio servicio);
 
 int main(int arg, char** argv){
     int opcion = 0, error = 0;
@@ -140,7 +141,7 @@ int login(SOCKET sockClient){
         memset(nombreUsuario,0,1000);
         cin >> nombreUsuario;
         //PEDIMOS LA CONTRASEÑA Y SE LO ENVIAMOS AL SERVIDOR
-        cout << "Contrase\xA4"<<"a: "; // \xA4 es la la letra 'ñ'
+        cout << "Contrase\xA4"<<"a: "; // \xA4 es la letra 'ñ'
         memset(contrasenia,0,1000);
         cin >> contrasenia;
 
@@ -187,21 +188,26 @@ void altaServicio() {
     char origen_string[3][20] = {"Buenos Aires", "Mar del Plata"};
     char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
 
+    Servicio serv= Servicio(1,"",1);
+
     while (seguir) {
         do {
             system("cls");
             cout << "Ingresar origen (1. Buenos Aires, 2. Mar del Plata)" << endl;
             cin >> origen;
+            serv.setOrigen(origen);
         } while (origen != 1 && origen != 2);
 
         system("cls");
         cout << "Ingresar fecha (aaaa-mm-dd)" << endl;
         cin >> fecha;
+        serv.setFecha(fecha);
 
         do {
             system("cls");
             cout << "Ingresar turno (1. manana, 2. tarde, 3. noche)" << endl;
             cin >> turno;
+            serv.setTurno(turno);
         } while (turno < 1 || turno > 3);
 
         system("cls");
@@ -209,14 +215,21 @@ void altaServicio() {
         cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
         cin >> opcion;
         switch (opcion) {
-            case '1': seguir = 0;/*crearServicio(origen, fecha, turno);*/ break;
-            case '2': break;
-            case '\n': break;
+            case '1':
+                seguir = 0;
+                crearServicio(serv);
             default: seguir = 0; break;
         }
         system("cls");
     }
 }
+void crearServicio(Servicio servicio){
+    SOCKET sockClient = crearSocket();
+    servicio.mostrar();
+    enviar(sockClient,servicio.mensaje());
+    system("PAUSE");
+}
+
 
 void gestionarPasajes() {
     int seguir = 1;
@@ -226,22 +239,26 @@ void gestionarPasajes() {
     int turno;
     char origen_string[3][20] = {"Vacio", "Buenos Aires", "Mar del Plata"};
     char turno_string[4][20] = {"Vacio", "Manana", "Tarde", "Noche"};
+    Servicio serv= Servicio(1,"",1);
 
     while (seguir) {
         do {
             system("cls");
             cout << "Buscar por origen (1. Buenos Aires, 2. Mar del Plata). [Si no desea buscar por origen ingrese 0]" << endl;
-            cin >> origen;
+           cin >> origen;
+           serv.setOrigen(origen);
         } while (origen < 0 || origen > 2);
 
         system("cls");
         cout << "Buscar por fecha (aaaa-mm-dd). [Si no desea buscar por fecha ingrese 0]" << endl;
         cin >> fecha;
+        serv.setFecha(fecha);
 
         do {
             system("cls");
             cout << "Buscar por turno (1. manana, 2. tarde, 3. noche). [Si no desea buscar por turno ingrese 0]" << endl;
             cin >> turno;
+            serv.setTurno(turno);
         } while (turno < 0 || turno > 3);
 
         system("cls");

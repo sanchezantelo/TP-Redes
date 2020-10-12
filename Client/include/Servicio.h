@@ -30,6 +30,7 @@ class Servicio
         void setfilaC(string _filaC);
         string getfilaC();
         void mostrar();
+        char* mensaje();
 
     protected:
 

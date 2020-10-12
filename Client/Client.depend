@@ -31,3 +31,15 @@
 1602476515 source:c:\users\damian\desktop\tp-redes\client\src\servicio.cpp
 	"Servicio.h"
 
+1602517302 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602515386 e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602517462 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+
