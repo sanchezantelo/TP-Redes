@@ -7,10 +7,11 @@
 	<iostream>
 	<winsock2.h>
 
-1602417160 source:c:\users\damian\desktop\tp-redes\client\client final.cpp
+1602506530 source:c:\users\damian\desktop\tp-redes\client\client final.cpp
 	<stdio.h>
 	<iostream>
 	<winsock2.h>
+	<Servicio.h>
 
 1602445476 source:g:\documents\git\tp-redes\client\client final.cpp
 	<stdio.h>
@@ -23,4 +24,10 @@
 
 1602443072 g:\documents\git\tp-redes\client\include\servicio.h
 	<iostream>
+
+1602476515 c:\users\damian\desktop\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602476515 source:c:\users\damian\desktop\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
 

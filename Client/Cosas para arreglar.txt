@@ -1,0 +1,13 @@
+-Una vez dentro del menú, si cerras el servidor al cliente no le avisa! y podes estar haciendo calculos e intentando reservar
+pasajes cuando ya ni siquiera estas conectado al servidor! por lo que hay que hacer un chequeo constante... como hacerlo?
+ni puta idea. (by damian)(FALTA)
+
+-Cuando se abre el cliente automaticamente intenta conectarse al servidor, si el servidor no esta activo entonces tira un error y 
+se va del programa, hay que arreglar eso, de forma de que abras el cliente y en ves de intentar conectarse automaticamente
+halla una opcion "contectarse" o "logearse", y ahi intentar conectarse, y si no se pudo conectar que resetee todas las variables y
+que vuelva al menu anterior...ES UN FASTIDIO hacer todo eso... pero bueno... (By Damian) (Opcional)
+(YA LO HICE!)
+
+-Falta el temporizador.
+-Falta los archivos .log
+-Falta el credenciales.txt

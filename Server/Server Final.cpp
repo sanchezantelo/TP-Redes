@@ -26,38 +26,34 @@ listen(sockServer,0);
 
 //USAR A ACEPTAR UNA CONEXION CON ACCEPT
 while(1){
-struct sockaddr_storage addrstorage; //storage es para guardar los datos del cliente que se va a conectar.
-int length = sizeof(addrstorage); //ya que no sabes el tamaño de la conexion del cliente (ipv4, ipv6 u otro), necesitamos hacer un sizeof.
+    struct sockaddr_storage addrstorage; //storage es para guardar los datos del cliente que se va a conectar.
+    int length = sizeof(addrstorage); //ya que no sabes el tamaño de la conexion del cliente (ipv4, ipv6 u otro), necesitamos hacer un sizeof.
 
-printf("\nEsperando a un cliente...");
-SOCKET sockClient = accept(sockServer,(struct sockaddr*)&addrstorage,&length); //"en el socket sockServer, acepto la conexion proveniente de un cliente X
-//y voy a guardar los datos del cliente en addrstorage. Luego les devuelvo un socket del cliente para que puedan comunicarse entre ustedes que llamamos sockClient"
-system("cls");
-printf("Cliente Encontrado!.");
+    printf("\nEsperando a un cliente...");
+    SOCKET sockClient = accept(sockServer,(struct sockaddr*)&addrstorage,&length); //"en el socket sockServer, acepto la conexion proveniente de un cliente X
+    //y voy a guardar los datos del cliente en addrstorage. Luego les devuelvo un socket del cliente para que puedan comunicarse entre ustedes que llamamos sockClient"
+    system("cls");
+    printf("Cliente Encontrado!.");
 
 
-//RECIBIMOS USUARIO Y CONTRASEÑA:
+    //RECIBIMOS USUARIO Y CONTRASEÑA:
 
-char user[50], pass[50];
-printf("\nEsperando Ingreso de usuario...");
-fflush(stdin);
-recv(sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
+    char user[50], pass[50];
+    printf("\nEsperando Ingreso de usuario y contrase%ca...", 164);
+    recv(sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
+    recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
 
-printf("\n\nEsperando Ingreso de Contrase%ca...", 164);
-fflush(stdin);
-recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
-
-//COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
-//FALTA HACER!!!!!!!!!!
+    //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
+    //FALTA HACER!!!!!!!!!!
 
 
 
 
-//CLIENTE ACEPTADO
-send(sockClient,"OK",2,0); //envio el texto "Usuario:" al cliente
+    //CLIENTE ACEPTADO
+    send(sockClient,"OK",2,0); //envio el texto "Usuario:" al cliente
 
-
-printf("\nNo apretes enter o se va todo al carajo! todavia no termine esta parte!");
-getchar();
+    printf("\nCliente conectado!");
+    printf("\nNo apretes ninguna tecla porque se resetea a esperar a un nuevo cliente.");
+    system("pause>nul");;
 }
 }
