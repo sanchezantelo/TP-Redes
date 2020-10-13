@@ -10,9 +10,13 @@
 	<stdio.h>
 	<winsock2.h>
 
-1602506062 source:c:\users\damian\desktop\tp-redes\server\server final.cpp
+1602559348 source:c:\users\damian\desktop\tp-redes\server\server final.cpp
 	<stdio.h>
 	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
 
 1602510892 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\server\server final.cpp
 	<stdio.h>

@@ -9,9 +9,9 @@ sockaddr_in crear_sockaddr_in(char IP[16], int PORT);
 int conexion(SOCKET sockClient, sockaddr_in sin);
 int login(SOCKET sockclient);
 void enviar(SOCKET sock, char *mensaje);
-void altaServicio();
+void altaServicio(SOCKET sock);
 void gestionarPasajes();
-void crearServicio(Servicio servicio);
+void crearServicio(SOCKET sock, Servicio servicio);
 
 int main(int arg, char** argv){
     int opcion = 0, error = 0;
@@ -28,14 +28,14 @@ int main(int arg, char** argv){
                 sockClient = crearSocket();
                 sin = crear_sockaddr_in(IP, PORT);
                 error = conexion(sockClient, sin);
-                if(error == 0)
-                    error = login(sockClient);
+                if(error == 0) // Si error == 0 quiere decir que está todo bien.
+                    error = login(sockClient); // Si no hubo problemas en el login error seguira valiendo 0
                 break;
             case 2:
-                exit(-1);
+                exit(-1); //Sale del programa retornando -1.
             default: break;
         }
-    }while(error == -1);
+    }while(error == -1); //SI HUBO UN ERROR ANTES, ERROR VALDRÁ -1
     //-----------------------------------------------------------------------------------------------------
 
     do {
@@ -55,7 +55,7 @@ int main(int arg, char** argv){
         switch (opcion) {
             case 1:
                 // Lista de instrucciones de la opción 1
-                altaServicio();
+                altaServicio(sockClient);
                 system("pause>nul"); // Pausa
                 break;
 
@@ -151,7 +151,7 @@ int login(SOCKET sockClient){
 
         //ME QUEDO ESPERANDO PARA VER SI INGRESE BIEN EL USUARIO Y CONTRASEÑA.
         recv(sockClient, respuesta, sizeof(respuesta),0);
-
+        printf("respuesta: %s", respuesta);
         if( strcmp( respuesta , "OK" ) != 0 ){
             cout << "\n\nNombre de usuario o Contrase\xA4" << "a incorrectos." << endl;
             system("pause>nul");
@@ -180,7 +180,7 @@ void enviar(SOCKET sock, char *mensaje){
     return;
 }
 
-void altaServicio() {
+void altaServicio(SOCKET sock) {
     int seguir = 1;
     char opcion;
     int origen;
@@ -218,16 +218,15 @@ void altaServicio() {
         switch (opcion) {
             case '1':
                 seguir = 0;
-                crearServicio(serv);
+                crearServicio(sock, serv);
             default: seguir = 0; break;
         }
         system("cls");
     }
 }
-void crearServicio(Servicio servicio){
-    SOCKET sockClient = crearSocket();
+void crearServicio(SOCKET sock, Servicio servicio){
     servicio.mostrar();
-    enviar(sockClient,servicio.mensaje());
+    enviar(sock,servicio.mensaje());
     system("PAUSE");
 }
 

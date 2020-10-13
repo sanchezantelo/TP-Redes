@@ -1,5 +1,5 @@
 #include "Servicio.h"
-
+#include <string.h>
 Servicio::Servicio(int _origen, string _fecha, int _turno)
 {
     origen = _origen;
