@@ -2,13 +2,14 @@
 #include <iostream>
 #include<winsock2.h>
 #include <Servicio.h>
+#include "../Funciones/Funciones.h"
 using namespace std;
-char nombreUsuario[1000];
+char user[1000] = "";
 SOCKET crearSocket();
 sockaddr_in crear_sockaddr_in(char IP[16], int PORT);
 int conexion(SOCKET sockClient, sockaddr_in sin);
 int login(SOCKET sockclient);
-void enviar(SOCKET sock, char *mensaje);
+void enviar(SOCKET sock, char *mensaje, int tamanio);
 void altaServicio(SOCKET sock);
 void gestionarPasajes();
 void crearServicio(SOCKET sock, Servicio servicio);
@@ -35,14 +36,13 @@ int main(int arg, char** argv){
                 exit(-1); //Sale del programa retornando -1.
             default: break;
         }
-    }while(error == -1); //SI HUBO UN ERROR ANTES, ERROR VALDRÁ -1
+    }while(error == -1); //si hubo algun error, vuelve al menu principal.
+
     //-----------------------------------------------------------------------------------------------------
 
     do {
-        system("cls");        // Para limpiar la pantalla
-
+        system("cls");
         // Texto del menú que se verá cada vez
-
         cout << "\n******RESERVA DE PASAJES*********\n\n" << endl;
         cout << "1. Alta servicio" << endl;
         cout << "2. Gestionar pasajes" << endl;
@@ -81,77 +81,28 @@ int main(int arg, char** argv){
     } while (opcion != 4);            // opción de SALIDA
 }
 
-SOCKET crearSocket(){
-    //INICIALIZAR WINSOCK Y VALIDAR
-    int error = 0;
-    WSAData wsaData; //Declaro una variable tipo data para inicializar winsock
-    error = WSAStartup(MAKEWORD(2,2), &wsaData); //Inicializo Winsock ver 2.2 WS2_32.dll
-    if(error != 0){
-        cout << "No se pudo inicializar la libreria Winsock." << endl;
-        system("pause>nul");
-        exit(-1);
-    }
-    //INICIALIZAR UN SOCKET Y VALIDAR
-    SOCKET sockClient = socket(AF_INET,SOCK_STREAM,0);
-    if(sockClient == INVALID_SOCKET){
-        cout << "No se ha podido inicializar el Socket. Error " << WSAGetLastError() << endl;
-        system("pause>nul");
-        exit(-1);
-    }
-    return sockClient;
-}
 
-sockaddr_in crear_sockaddr_in(char IP[16], int PORT){
-    struct hostent *remoteHost; //La estructura hostent es utilizada para obtener informacion de un host remoto (regularmente se utiliza mas en la parte cliente.)
-    remoteHost = (struct hostent*)gethostbyname(IP);
-    if(!remoteHost){
-        cout << "No se ha encontrado el servidor. Error " << WSAGetLastError() << endl;
-        system("pause>nul");
-        exit(-1);
-    }
-    struct sockaddr_in sin; //Creamos una estructura para almacenar todos los datos del server.
-    memcpy(&sin.sin_addr,remoteHost->h_addr,remoteHost->h_length); //asignamos la direccion ip
-    sin.sin_family = remoteHost->h_addrtype; //asignamos que vamos a usar ipv4
-    sin.sin_port = htons(PORT);  //asignamos puerto destino
-    memset(sin.sin_zero,0,8); //rellenamos esta variable con ceros por cuestiones problematicas.
-    return sin;
-}
 
-int conexion(SOCKET sockClient, sockaddr_in sin){
-    int error = 0;
-    error = connect(sockClient,(struct sockaddr*)&sin, sizeof(sin)); //Se intenta conectar contra el servidor
-    if(error == SOCKET_ERROR){
-        system("cls");
-        cout << "No se ha podido conectar al servidor. Connect error " << WSAGetLastError() << endl;
-        closesocket(sockClient);
-        WSACleanup();
-        system("pause>nul");
-    }
-    return error;
-}
 
 int login(SOCKET sockClient){
-    char contrasenia[1000] = {};
-    char respuesta[3] = "";
+    char pass[1000] = "", respuesta[2] = "";
     int numeroIntentos = 0, error = 0;
-
     do {
         system("cls");
         //PEDIMOS EL NOMBRE DE USUARIO Y LO ENVIAMOS AL SERVIDOR.
         cout << "Nombre de Usuario: ";
-        memset(nombreUsuario,0,1000);
-        cin >> nombreUsuario;
+        memset(user,0,1000);
+        cin >> user;
         //PEDIMOS LA CONTRASEÑA Y SE LO ENVIAMOS AL SERVIDOR
         cout << "Contrase\xA4"<<"a: "; // \xA4 es la letra 'ñ'
-        memset(contrasenia,0,1000);
-        cin >> contrasenia;
+        memset(pass,0,1000);
+        cin >> pass;
 
-        enviar(sockClient, nombreUsuario); //envio mi nombre de usuario al Servidor
-        enviar(sockClient, contrasenia); //envio mi Contraseña al Servidor
+        enviar(sockClient, user, sizeof(user)); //envio mi nombre de usuario al Servidor
+        enviar(sockClient, pass, sizeof(pass)); //envio mi Contraseña al Servidor
 
         //ME QUEDO ESPERANDO PARA VER SI INGRESE BIEN EL USUARIO Y CONTRASEÑA.
         recv(sockClient, respuesta, sizeof(respuesta),0);
-        printf("respuesta: %s", respuesta);
         if( strcmp( respuesta , "OK" ) != 0 ){
             cout << "\n\nNombre de usuario o Contrase\xA4" << "a incorrectos." << endl;
             system("pause>nul");
@@ -166,18 +117,6 @@ int login(SOCKET sockClient){
     } while(error == 0 && strcmp( respuesta , "OK" ) != 0);
 
     return error; //retorna -1 si se supero el limite de intentos
-}
-
-void enviar(SOCKET sock, char *mensaje){
-    int error = 0;
-    error = send(sock, mensaje, sizeof(mensaje), 0); //envio mi nombre de usuario al Servidor
-    if(error == SOCKET_ERROR){
-        cout << "No se pudo enviar el mensaje. Error "<< WSAGetLastError();
-        system("pause>nul");
-        closesocket(sock);
-        exit(-1);
-    }
-    return;
 }
 
 void altaServicio(SOCKET sock) {
@@ -226,7 +165,7 @@ void altaServicio(SOCKET sock) {
 }
 void crearServicio(SOCKET sock, Servicio servicio){
     servicio.mostrar();
-    enviar(sock,servicio.mensaje());
+    enviar(sock,servicio.mensaje(), sizeof(servicio.mensaje()));
     system("PAUSE");
 }
 

@@ -11,3 +11,4 @@ que vuelva al menu anterior...ES UN FASTIDIO hacer todo eso... pero bueno... (By
 -Falta el temporizador.
 -Falta los archivos .log
 -Falta el credenciales.txt
+-VER SI EL CLIENTE YEL SERVIDOR FUNCIONAN IEN EN MAQUNAS SEPARADAS CON OTRAS IPS! TIENE QUE FUNCIONAR EN TODAS LAS MAQUINAS!
