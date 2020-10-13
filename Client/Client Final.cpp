@@ -131,7 +131,8 @@ int conexion(SOCKET sockClient, sockaddr_in sin){
 }
 
 int login(SOCKET sockClient){
-    char contrasenia[1000] = {}, respuesta[2];
+    char contrasenia[1000] = {};
+    char respuesta[3] = "";
     int numeroIntentos = 0, error = 0;
 
     do {

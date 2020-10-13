@@ -43,3 +43,15 @@
 1602517462 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\src\servicio.cpp
 	"Servicio.h"
 
+1602550044 source:c:\users\softing\documents\unla\redes\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602518057 c:\users\softing\documents\unla\redes\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602518057 source:c:\users\softing\documents\unla\redes\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+

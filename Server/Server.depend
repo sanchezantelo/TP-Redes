@@ -18,3 +18,11 @@
 	<stdio.h>
 	<winsock2.h>
 
+1602550774 source:c:\users\softing\documents\unla\redes\tp-redes\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+

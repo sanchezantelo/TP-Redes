@@ -1,8 +1,51 @@
 #include <stdio.h>
 #include <winsock2.h>
+#include <fstream>
+#include <string>
+#include <iostream>
+#include <sstream>
 #define PORT 54321
 #define IP "127.0.0.1"
 #pragma comment (lib, "Ws2_32.lib" )
+
+using namespace std;
+
+
+/*
+* FUNCION LOGIN
+* param
+* char usuario
+* char password
+*/
+bool Login(char* usuario, char* password)
+{
+    //VARIABLE QUE SE VA A DEVOLVER TRUE SI EL USUARIO Y PASSWORD ESTAN OK, Y FALSE SI NO LO ESTA
+    bool respuesta = false;
+    //VARIABLE DEL ARCHIVO Y OPEN DEL MISMO
+    ifstream credenciales;
+    credenciales.open("credenciales.txt",ios::in);
+
+    //CHECK SI NO EXISTE ARCHIVO ARROJA ERROR
+    if(credenciales.fail())
+    {
+        cerr << "\n\nError al abrir el archivo" << endl;
+        exit(1);
+    }
+    //VARIABLES QUE SE VAN A UTILIZAR PARA RECORRER EL ARCHIVO
+    string storedUser;
+    string storedPass;
+    //PASAJE DE PARAMETROS, RECORRE ARCHIVO Y CHECKEA
+    while(credenciales >> storedUser >> storedPass)
+    {
+        //SI EL USUARIO Y EL PASSWORD SON LOS MISMOS RESPUESTA = TRUE
+        if(storedUser == string(usuario) && storedPass == string(password))
+        {
+        respuesta = true;
+        }
+    }
+    return respuesta;
+}
+
 int main(int arg, char** argv){
 //---------------------------------------------------------------------------------------------------
 //INICIALIZAR WINSOCK
@@ -38,7 +81,9 @@ while(1){
 
     //RECIBIMOS USUARIO Y CONTRASEÑA:
 
-    char user[50], pass[50];
+    char user[50] = "";
+    char pass[50] = "";
+    char respuesta[3] = "OK";
     printf("\nEsperando Ingreso de usuario y contrase%ca...", 164);
     recv(sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
     recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
@@ -46,11 +91,17 @@ while(1){
     //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
     //FALTA HACER!!!!!!!!!!
 
+    bool respuestaLogin = Login(user, pass);
+    if(respuestaLogin)
+    {
+        //TO-DO LOG A TXT
+        cout<<"\nLogin Correcto"<<endl;
+        //CLIENTE ACEPTADO
+        send(sockClient,respuesta,2,0); //envio el texto "Usuario:" al cliente
+    }
 
 
 
-    //CLIENTE ACEPTADO
-    send(sockClient,"OK",2,0); //envio el texto "Usuario:" al cliente
 
     printf("\nCliente conectado!");
     printf("\nNo apretes ninguna tecla porque se resetea a esperar a un nuevo cliente.");
