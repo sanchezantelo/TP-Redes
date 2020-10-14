@@ -85,7 +85,7 @@ int main(int arg, char** argv){
 
 
 int login(SOCKET sockClient){
-    char pass[1000] = "", respuesta[2] = "";
+    char pass[1000] = "", respuesta[3] = "";
     int numeroIntentos = 0, error = 0;
     do {
         system("cls");

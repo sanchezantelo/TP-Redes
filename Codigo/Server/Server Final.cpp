@@ -44,7 +44,7 @@ int main(int arg, char** argv){
             printf("Cliente Encontrado!.\n");
 
             //RECIBIMOS USUARIO Y CONTRASEÑA:
-            char user[1000] = "", pass[1000] = "", respuesta[2] = "";
+            char user[1000] = "", pass[1000] = "", respuesta[3] = "";
             bool salir = false;
             int numeroIntentos = 0;
             //Se sale del bucle cuando el cliente ingrese bien el usuario y contraseña o halla fallado 3 veces
