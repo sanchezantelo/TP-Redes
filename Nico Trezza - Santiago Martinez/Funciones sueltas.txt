@@ -1,0 +1,58 @@
+// Primero comprueba si esta creado en algun .txt, sino lo crea
+void crearServicio(int origen, string fecha, int turno) {
+    Servicio *servicio = new Servicio(origen, fecha, turno);
+    ofstream archivo;
+
+    string ruta = "archivos/" + fecha + ".txt";
+
+    archivo.open(ruta, ios::app);
+
+    if(archivo.fail()) {
+        cout << "Error al abrir el archivo" << endl;
+        exit(1);
+    }
+
+    archivo << servicio->getOrigen() << ";";
+    archivo << servicio->getFecha() << ";";
+    archivo << servicio->getTurno() << ";";
+    archivo << servicio->getfilaA() << ";";
+    archivo << servicio->getfilaB() << ";";
+    archivo << servicio->getfilaC() << endl;
+
+    archivo.close();
+}
+
+// Busca el .txt que se llame como la fecha
+void buscarServicioPorFecha(string fecha) {
+    string _origen, _fecha, _turno, _filaA, _filaB, _filaC;
+    ifstream archivo;
+
+    string ruta = "archivos/" + fecha + ".txt";
+
+    archivo.open(ruta, ios::in);
+
+    if(archivo.fail()) {
+        cout << "Error al abrir el archivo" << endl;
+        exit(1);
+    }
+
+    int cantidad = 0;
+    while (!archivo.eof()) {
+        getline(archivo, _origen, ';');
+        if (_origen != "") {
+            getline(archivo, _fecha, ';');
+            getline(archivo, _turno, ';');
+            getline(archivo, _filaA, ';');
+            getline(archivo, _filaB, ';');
+            getline(archivo, _filaC);
+
+            Servicio *servicio = new Servicio(_origen, _fecha, _turno, _filaA, _filaB, _filaC);
+
+            cantidad++;
+            cout << "Servicio " << cantidad << ": " << servicio->getOrigen() << ", " << servicio->getFecha() << ", " << servicio->getTurno() << endl;
+        }
+    }
+    cout << "Elige el servicio que mas se adecue a tus necesidades: " << endl;
+
+    archivo.close();
+}

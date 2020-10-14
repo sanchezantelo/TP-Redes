@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1602174701 source:d:\damian\mega pc\unla\tercer año\redes\trabajo practico redes\client\client.cpp
+	<iostream>
+	<winsock2.h>
+
+1602213210 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\client\client.cpp
+	<iostream>
+	<winsock2.h>
+
+1602569253 source:c:\users\damian\desktop\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602445476 source:g:\documents\git\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602444295 source:g:\documents\git\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+
+1602443072 g:\documents\git\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602559348 c:\users\damian\desktop\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602561649 source:c:\users\damian\desktop\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+
+1602517302 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602515386 e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602517462 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+
+1602550044 source:c:\users\softing\documents\unla\redes\tp-redes\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+
+1602518057 c:\users\softing\documents\unla\redes\tp-redes\client\include\servicio.h
+	<iostream>
+
+1602518057 source:c:\users\softing\documents\unla\redes\tp-redes\client\src\servicio.cpp
+	"Servicio.h"
+
+1602561649 source:c:\users\damian\desktop\tp-redes\codigo\client\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+
+1602559348 c:\users\damian\desktop\tp-redes\codigo\client\include\servicio.h
+	<iostream>
+
+1602582523 source:c:\users\damian\desktop\tp-redes\codigo\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+	"../Funciones/Funciones.h"
+
+1602581972 c:\users\damian\desktop\tp-redes\codigo\funciones\funciones.h
+	<stdio.h>
+	<iostream>
+

@@ -1,0 +1,9 @@
+Client/*.layout
+Client/*.depend
+Client/bin/
+Client/obj/
+
+Server/*.layout
+Server/*.depend
+Server/bin/
+Server/obj/

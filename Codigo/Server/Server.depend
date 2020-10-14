@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1602214167 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\server\server.cpp
+	<iostream>
+	<winsock2.h>
+
+1602214167 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\server\server-tp.cpp
+	<stdio.h>
+
+1602283199 source:c:\users\damian\desktop\tp-redes\server\server-tp.cpp
+	<stdio.h>
+	<winsock2.h>
+
+1602569302 source:c:\users\damian\desktop\tp-redes\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+
+1602510892 source:e:\sistemas\redes y comunicaciones\tpredes\tp\tp-redes\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+
+1602550774 source:c:\users\softing\documents\unla\redes\tp-redes\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+
+1602587875 source:c:\users\damian\desktop\tp-redes\codigo\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+	"../Funciones/Funciones.h"
+
+1602581972 c:\users\damian\desktop\tp-redes\codigo\funciones\funciones.h
+	<stdio.h>
+	<iostream>
+
