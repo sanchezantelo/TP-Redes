@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1602174701 source:d:\damian\mega pc\unla\tercer año\redes\trabajo practico redes\client\client.cpp
-	<iostream>
-	<winsock2.h>
-
-1602213210 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\client\client.cpp
-	<iostream>
-	<winsock2.h>
-

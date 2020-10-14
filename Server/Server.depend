@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1602214167 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\server\server.cpp
-	<iostream>
-	<winsock2.h>
-
-1602214167 source:g:\damian\audios\importante\unla\tercer año\redes\trabajo practico redes\tp-redes\server\server-tp.cpp
-	<stdio.h>
-

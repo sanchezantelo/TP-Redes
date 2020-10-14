@@ -1,8 +1,0 @@
-micro 1
-asdsad
-asdasd
-asdas
-
-micro 2
-asientos_disponibles: 10
-fila A1
