@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <pthread.h>
+#include <time.h>
+#include <Windows.h>
 #include "../Funciones/Funciones.h"
 #define PORT 54321
 #define IP "127.0.0.1"
@@ -11,7 +14,10 @@
 using namespace std;
 
 bool Login(char* usuario, char* password);
+void* recibir(void *sockClient);
+bool contar(int segundos);
 
+bool recibido = false; //variable global para usarlas con hilos.
 int main(int arg, char** argv){
     //INICIALIZAR UN SOCKET
     SOCKET sockServer = crearSocket();
@@ -52,7 +58,16 @@ int main(int arg, char** argv){
                 printf("\nEsperando Ingreso de usuario y contrase%ca...", 164);
                 memset(user,0,1000);
                 memset(pass,0,1000);
-                recv(sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
+                pthread_t tid1;
+                recibido = false;
+                pthread_create(&tid1, NULL, recibir, (void *)sockClient);
+                if(contar(5)) {
+                    printf("\n\nCliente desconectado. Pasaron 2 min.");
+                    system("pause");
+                    goto new_client;
+                }
+                pthread_join(tid1, (void**)&user);
+                //identificador/estructura/funcion/parametros funcion
                 recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
 
                 //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
@@ -83,6 +98,7 @@ int main(int arg, char** argv){
 
             //FALTA!! ACA SOFIA TENES QUE SETEAR LA VARIABLE desconectar a TRUE cuando el cliente aprete "cerrar sesion"
             //TENES QUE HACER LA LOGICA.
+            new_client:
             printf("\n\nNo apretes ninguna tecla porque se resetea a esperar a un nuevo cliente (sofia te toca esta parte que es la de cerrar sesion).");
             system("pause>nul");
         } //ACA TERMINA EL BUCLE DE UN CLIENTE EN CONCRETO
@@ -116,4 +132,29 @@ bool Login(char* usuario, char* password)
         }
     }
     return respuesta;
+}
+
+//contar() cuenta los segundos pasados por parametro, si llega a la cantidad dada de segundos
+//o la variable global "recibido" se vuelve true, entonces sale de la funcion.
+bool contar(int segundos)
+{
+    //retorna verdadero si se cumplio el ciclo o falso si se interrumpio por la variable global.
+  time_t inicio = time(NULL);;
+  int tiempo = 0;
+  bool desconectar = false;
+  printf("pase por contar.");
+  do {
+    tiempo = difftime(time(NULL),inicio);
+    if(tiempo == segundos) //Cuando pasen X segundos saldra del bucle.
+        desconectar = true;
+    Sleep(800); //espero 800ms para que no ocupe todo el procesador.
+  }while(!desconectar && recibido == true);
+  return desconectar;
+}
+
+void* recibir(void *sockClient){
+    char user[1000] = "";
+    recv((SOCKET)sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
+    recibido = true;  //variable global para indicarle al main que deje de contar.
+    pthread_exit((void*)user); //opcional
 }
