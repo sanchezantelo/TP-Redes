@@ -45,7 +45,7 @@ int main(int arg, char** argv){
         while(!desconectar){
             struct sockaddr_storage addrstorage; //storage es para guardar los datos del cliente que se va a conectar.
             int length = sizeof(addrstorage); //ya que no sabes el tamaño de la conexion del cliente (ipv4, ipv6 u otro), necesitamos hacer un sizeof.
-            system("cls");
+            //system("cls");
             printf("Esperando a un cliente...");
             SOCKET sockClient = accept(sockServer,(struct sockaddr*)&addrstorage,&length); //"en el socket sockServer, acepto la conexion proveniente de un cliente X
             //y voy a guardar los datos del cliente en addrstorage. Luego les devuelvo un socket del cliente para que puedan comunicarse entre ustedes que llamamos sockClient"
@@ -53,19 +53,18 @@ int main(int arg, char** argv){
             printf("Cliente Encontrado!.\n");
 
             //RECIBIMOS USUARIO Y CONTRASEÑA:
-            char *user = NULL, pass[1000]="", respuesta[3] = "";
+            char *user = NULL, *pass = NULL, respuesta[3] = "";
             bool salir = false;
             int numeroIntentos = 0;
             //Se sale del bucle cuando el cliente ingrese bien el usuario y contraseña o halla fallado 3 veces
             do {
                 printf("\nEsperando Ingreso de usuario y contrase%ca...", 164);
-                //memset(user,0,1000);
-                //memset(pass,0,1000);
-                user = recibir_y_contar(sockClient);
+
+                user = recibir_y_contar(sockClient); //recibo el usuario que escribio el cliente
                 if(user == NULL) goto new_client;
 
-
-                recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
+                pass = recibir_y_contar(sockClient); //recibo la contraseña que escribio el cliente
+                if(user == NULL) goto new_client;
 
                 //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
                 if( Login(user, pass) )
@@ -101,23 +100,6 @@ int main(int arg, char** argv){
     }//ACA TERMINA EL BUCLE INFINITO PARA BUSCAR INFINITOS CLIENTES
 }
 
-//recibirContar() crea un hilo en donde hace 2 cosas en paralelo, cuenta tiempo y tambien
-//espera por mensajes entrantes por parte del cliente. Recibe como parametro el socket del cliente
-//retorna un PUNTERO char, que contiene el mensaje recibido por el cliente si es que el cliente envio algo,
-//de lo contrario retornara NULL.
-char* recibir_y_contar(SOCKET sock)
-{
-    char *mensaje = NULL;
-    pthread_t hilo;
-    pthread_create(&hilo, NULL, recibir, (void *)sock);
-    if(contar(120)) {
-        printf("\n\nTimeout. Cliente desconectado.");
-        pthread_cancel(hilo); //destruyo el hilo.
-        closesocket(sock); //cierro el socket con el cliente
-    }                    }
-    pthread_join(hilo, (void**)&mensaje); //recupero el valor devuelto por el hilo.
-    return user;
-}
 bool Login(char* usuario, char* password)
 {
     //VARIABLE QUE SE VA A DEVOLVER TRUE SI EL USUARIO Y PASSWORD ESTAN OK, Y FALSE SI NO LO ESTA
@@ -163,7 +145,8 @@ bool contar(int segundos)
   }while(!desconectar && !recibido);
   return desconectar;
 }
-
+//recibir() esta funcion es ejecutada por un hilo y espera por un mensaje del cliente, si recibe un mensaje,
+//retorna ese mensaje,caso contrario si esta funcion es cancelada por timeout o cierre de socket, devuelve la variable vacia.
 void* recibir(void *sockClient){
     recibido = false;
     int n = 1000; //cantidad de bytes que voy a recibir.
@@ -172,3 +155,25 @@ void* recibir(void *sockClient){
     recibido = true;  //variable global para indicarle al main que deje de contar.
     pthread_exit((void*)mensaje);
 }
+
+
+//recibirContar() crea un hilo en donde hace 2 cosas en paralelo, cuenta tiempo y tambien
+//espera por mensajes entrantes por parte del cliente. Recibe como parametro el socket del cliente y
+//retorna un PUNTERO char, que contiene el mensaje recibido por el cliente si es que el cliente envio algo,
+//de lo contrario retornara NULL. El mensaje tiene un tamaño maximo de 1000 bytes.
+char* recibir_y_contar(SOCKET sock)
+{
+    char *mensaje = NULL;
+    pthread_t hilo;
+    bool timeout = false;
+    pthread_create(&hilo, NULL, recibir, (void *)sock); //se empieza a ejecutar el hilo
+    if(contar(10)) { //Cuento 120 segundos (2 min)
+        printf("\n\nTimeout. Cliente desconectado.\n\n");
+        closesocket(sock); //cierro el socket con el cliente (Aca el hilo deja de estar en recv y termina su ejecucion)
+        pthread_join(hilo, NULL); //aca el hilo y el main se vuelven en uno solo.
+        timeout = true;
+    }
+    if(!timeout) pthread_join(hilo, (void**)&mensaje); //termina el hilo (correctamente) y recupero el valor devuelto.
+    return mensaje;
+}
+
