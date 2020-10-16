@@ -81,9 +81,6 @@ int main(int arg, char** argv){
     } while (opcion != 4);            // opción de SALIDA
 }
 
-
-
-
 int login(SOCKET sockClient){
     char pass[1000] = "", respuesta[3] = "";
     int numeroIntentos = 0, error = 0;
@@ -105,13 +102,14 @@ int login(SOCKET sockClient){
         recv(sockClient, respuesta, sizeof(respuesta),0);
         if( strcmp( respuesta , "OK" ) != 0 ){
             cout << "\n\nNombre de usuario o Contrase\xA4" << "a incorrectos." << endl;
-            system("pause>nul");
-            system("cls");
             numeroIntentos++;
             if(numeroIntentos == 3) {
                 error = -1;
                 closesocket(sockClient);
+                cout << "\n\nSe supero la cantidad maxima de intentos de ingreso." << endl;
             }
+            system("pause>nul");
+
         }
 
     } while(error == 0 && strcmp( respuesta , "OK" ) != 0);

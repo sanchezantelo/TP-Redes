@@ -30,7 +30,7 @@
 	<iostream>
 	<sstream>
 
-1602842567 source:c:\users\damian\desktop\tp-redes\codigo\server\server final.cpp
+1602843495 source:c:\users\damian\desktop\tp-redes\codigo\server\server final.cpp
 	<stdio.h>
 	<winsock2.h>
 	<fstream>
@@ -42,7 +42,7 @@
 	<Windows.h>
 	"../Funciones/Funciones.h"
 
-1602659764 c:\users\damian\desktop\tp-redes\codigo\funciones\funciones.h
+1602843495 c:\users\damian\desktop\tp-redes\codigo\funciones\funciones.h
 	<stdio.h>
 	<iostream>
 
