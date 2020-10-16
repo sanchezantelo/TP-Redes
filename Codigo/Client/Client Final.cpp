@@ -93,12 +93,12 @@ int login(SOCKET sockClient){
         cout << "Nombre de Usuario: ";
         memset(user,0,1000);
         cin >> user;
+        enviar(sockClient, user, sizeof(user)); //envio mi nombre de usuario al Servidor
+
         //PEDIMOS LA CONTRASEÑA Y SE LO ENVIAMOS AL SERVIDOR
         cout << "Contrase\xA4"<<"a: "; // \xA4 es la letra 'ñ'
         memset(pass,0,1000);
         cin >> pass;
-
-        enviar(sockClient, user, sizeof(user)); //envio mi nombre de usuario al Servidor
         enviar(sockClient, pass, sizeof(pass)); //envio mi Contraseña al Servidor
 
         //ME QUEDO ESPERANDO PARA VER SI INGRESE BIEN EL USUARIO Y CONTRASEÑA.

@@ -10,14 +10,16 @@
 #include "../Funciones/Funciones.h"
 #define PORT 54321
 #define IP "127.0.0.1"
+bool recibido = false; //variable global para usarlas con hilos.
 
 using namespace std;
 
 bool Login(char* usuario, char* password);
 void* recibir(void *sockClient);
 bool contar(int segundos);
+char* recibir_y_contar(SOCKET sock);
 
-bool recibido = false; //variable global para usarlas con hilos.
+
 int main(int arg, char** argv){
     //INICIALIZAR UN SOCKET
     SOCKET sockServer = crearSocket();
@@ -38,6 +40,7 @@ int main(int arg, char** argv){
     while(true){
         //bucle de un cliente en concreto, cuando el cliente ponga cerrar sesion o haga 3 intentos
         //fallidos o pasen 2 min, entonces se saldra del bucle.
+        new_client: //el cliente se puede desconectar en cualquier parte del programa, asique lo mejor fue usar goto para volver al inicio
         bool desconectar = false;
         while(!desconectar){
             struct sockaddr_storage addrstorage; //storage es para guardar los datos del cliente que se va a conectar.
@@ -50,24 +53,18 @@ int main(int arg, char** argv){
             printf("Cliente Encontrado!.\n");
 
             //RECIBIMOS USUARIO Y CONTRASEÑA:
-            char user[1000] = "", pass[1000] = "", respuesta[3] = "";
+            char *user = NULL, pass[1000]="", respuesta[3] = "";
             bool salir = false;
             int numeroIntentos = 0;
             //Se sale del bucle cuando el cliente ingrese bien el usuario y contraseña o halla fallado 3 veces
             do {
                 printf("\nEsperando Ingreso de usuario y contrase%ca...", 164);
-                memset(user,0,1000);
-                memset(pass,0,1000);
-                pthread_t tid1;
-                recibido = false;
-                pthread_create(&tid1, NULL, recibir, (void *)sockClient);
-                if(contar(5)) {
-                    printf("\n\nCliente desconectado. Pasaron 2 min.");
-                    system("pause");
-                    goto new_client;
-                }
-                pthread_join(tid1, (void**)&user);
-                //identificador/estructura/funcion/parametros funcion
+                //memset(user,0,1000);
+                //memset(pass,0,1000);
+                user = recibir_y_contar(sockClient);
+                if(user == NULL) goto new_client;
+
+
                 recv(sockClient,pass,sizeof(pass),0); //recibo la contraseña que escribio el cliente y lo guardo en pass.
 
                 //COMPROBAMOS EL USUARIO Y CONTRASEÑA EN credenciales.txt:
@@ -98,13 +95,29 @@ int main(int arg, char** argv){
 
             //FALTA!! ACA SOFIA TENES QUE SETEAR LA VARIABLE desconectar a TRUE cuando el cliente aprete "cerrar sesion"
             //TENES QUE HACER LA LOGICA.
-            new_client:
             printf("\n\nNo apretes ninguna tecla porque se resetea a esperar a un nuevo cliente (sofia te toca esta parte que es la de cerrar sesion).");
             system("pause>nul");
         } //ACA TERMINA EL BUCLE DE UN CLIENTE EN CONCRETO
     }//ACA TERMINA EL BUCLE INFINITO PARA BUSCAR INFINITOS CLIENTES
 }
 
+//recibirContar() crea un hilo en donde hace 2 cosas en paralelo, cuenta tiempo y tambien
+//espera por mensajes entrantes por parte del cliente. Recibe como parametro el socket del cliente
+//retorna un PUNTERO char, que contiene el mensaje recibido por el cliente si es que el cliente envio algo,
+//de lo contrario retornara NULL.
+char* recibir_y_contar(SOCKET sock)
+{
+    char *mensaje = NULL;
+    pthread_t hilo;
+    pthread_create(&hilo, NULL, recibir, (void *)sock);
+    if(contar(120)) {
+        printf("\n\nTimeout. Cliente desconectado.");
+        pthread_cancel(hilo); //destruyo el hilo.
+        closesocket(sock); //cierro el socket con el cliente
+    }                    }
+    pthread_join(hilo, (void**)&mensaje); //recupero el valor devuelto por el hilo.
+    return user;
+}
 bool Login(char* usuario, char* password)
 {
     //VARIABLE QUE SE VA A DEVOLVER TRUE SI EL USUARIO Y PASSWORD ESTAN OK, Y FALSE SI NO LO ESTA
@@ -142,19 +155,20 @@ bool contar(int segundos)
   time_t inicio = time(NULL);;
   int tiempo = 0;
   bool desconectar = false;
-  printf("pase por contar.");
   do {
     tiempo = difftime(time(NULL),inicio);
     if(tiempo == segundos) //Cuando pasen X segundos saldra del bucle.
         desconectar = true;
     Sleep(800); //espero 800ms para que no ocupe todo el procesador.
-  }while(!desconectar && recibido == true);
+  }while(!desconectar && !recibido);
   return desconectar;
 }
 
 void* recibir(void *sockClient){
-    char user[1000] = "";
-    recv((SOCKET)sockClient,user,sizeof(user),0); //recibo el usuario que escribio el cliente y lo guardo en user.
+    recibido = false;
+    int n = 1000; //cantidad de bytes que voy a recibir.
+    char *mensaje = (char*)calloc(n, sizeof(char));
+    recv((SOCKET)sockClient, mensaje,n,0); //recibo el usuario que escribio el cliente y lo guardo en user.
     recibido = true;  //variable global para indicarle al main que deje de contar.
-    pthread_exit((void*)user); //opcional
+    pthread_exit((void*)mensaje);
 }
