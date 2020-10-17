@@ -16,9 +16,9 @@ class Servidor
         SOCKET server, client;
         SOCKADDR_IN serverAddr, clientAddr;
         char buffer[1024];
-        time_t now;
-        char* dt;
-        ofstream file;
+        time_t hora;
+        char* fecha;
+        ofstream archivo;
         Servidor();
         string Recibir();
         void Enviar();

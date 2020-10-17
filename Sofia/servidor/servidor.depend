@@ -19,15 +19,12 @@
 	<winsock2.h>
 	<Servidor.h>
 
-1602960618 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
+1602961642 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 
-1602958557 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
+1602962946 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
-	<ctime>
-	<iostream>
-	<fstream>
 

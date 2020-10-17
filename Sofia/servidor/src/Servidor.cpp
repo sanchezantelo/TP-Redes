@@ -7,8 +7,8 @@ using namespace std;
 
 Servidor::Servidor()
 {
-   this->now = time(0);
-   this->dt = ctime(&now);
+   this->hora = time(0);
+   this->fecha = ctime(&hora);
 
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
@@ -22,8 +22,8 @@ Servidor::Servidor()
    listen(server, 0);
 
    cout << "Escuchando para conexiones entrantes." << endl;
-   this->file.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
-   this->file<<"Escuchando para conexiones entrantes.";
+   this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
+   this->archivo<<"Escuchando para conexiones entrantes.";
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
@@ -39,10 +39,18 @@ Servidor::~Servidor()
 
 string Servidor::Recibir()
 {
+    char salir[1024];
    recv(client, buffer, sizeof(buffer), 0);
-   this->LogServer();
-   //
+   strcpy(salir,this->buffer);
+    this->LogServer();
+    if(strcmp(salir,"salir")==0){
+     this->CerrarSocket();
+     system("PAUSE");
+       }
+    memset(salir, 0, sizeof(salir));
 }
+//
+
 
 void Servidor::Enviar()
 {
@@ -58,16 +66,16 @@ void Servidor::CerrarSocket()
 {
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
-   this->file.close();
+   this->archivo.close();
 }
 
 void Servidor::LogServer()
 {
-   this->now = time(0);
-   this->dt=ctime(&now);
+   this->hora = time(0);
+   this->fecha=ctime(&hora);
    cout<<this->buffer<<"\n";
-   this->file<<this->dt;
-   this->file<<this->buffer<<"\n";
+   this->archivo<<this->fecha;
+   this->archivo<<this->buffer<<"\n";
    //memset(buffer, 0, sizeof(buffer));
 
 }
