@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1602951704 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\server\cliente\cliente\main.cpp
+	<windows.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdlib.h>
+	<stdio.h>
+
+1602954079 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Cliente.h>
+
+1602953996 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\include\cliente.h
+	<iostream>
+	<winsock2.h>
+

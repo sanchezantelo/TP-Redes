@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1602951601 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\server\servidor\main.cpp
+	<windows.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdlib.h>
+	<stdio.h>
+
+1602950020 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\server\servidor\src\socket.cpp
+	"Socket.h"
+	<iostream>
+
+1602950612 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\server\servidor\include\socket.h
+	<WinSock2.h>
+	<string>
+
+1602953243 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
+	<iostream>
+	<winsock2.h>
+
