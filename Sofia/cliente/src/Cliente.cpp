@@ -1,4 +1,6 @@
 #include "Cliente.h"
+#define PORT 8080
+#define IP "127.0.0.1"
 
 using namespace std;
 Cliente::Cliente()
@@ -6,9 +8,9 @@ Cliente::Cliente()
     cout<<"Conectando al servidor..."<<endl<<endl;
     WSAStartup(MAKEWORD(2,0), &WSAData);
     server = socket(AF_INET, SOCK_STREAM, 0);
-    addr.sin_addr.s_addr = inet_addr("192.168.0.7");
+    addr.sin_addr.s_addr = inet_addr(IP);
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(5555);
+    addr.sin_port = htons(PORT);
     connect(server, (SOCKADDR *)&addr, sizeof(addr));
     cout << "Conectado al Servidor!" << endl;    //ctor
 }

@@ -9,7 +9,9 @@ int main()
   Servidor *Server = new Servidor();
   while(true)
   {
+     Server->LogServer();
      Server->Recibir();
      Server->Enviar();
+
   }
 }
