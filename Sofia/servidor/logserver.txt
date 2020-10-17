@@ -1,12 +1,20 @@
-Escuchando para conexiones entrantes.Sat Oct 17 16:48:04 2020
+Escuchando para conexiones entrantes.Sat Oct 17 18:47:45 2020
 
-Sat Oct 17 16:48:05 2020
-hola
-Sat Oct 17 16:48:05 2020
-hola
-Sat Oct 17 16:48:09 2020
-chau
-Sat Oct 17 16:48:09 2020
-chau
-Sat Oct 17 16:48:14 2020
-salir
+Sat Oct 17 18:47:45 2020
+
+Sat Oct 17 18:47:47 2020
+HOLA
+Sat Oct 17 18:47:47 2020
+HOLA
+Sat Oct 17 18:48:03 2020
+CHAU
+Sat Oct 17 18:48:03 2020
+CHAU
+Sat Oct 17 18:48:33 2020
+HOLA
+Sat Oct 17 18:48:33 2020
+HOLA
+Sat Oct 17 18:48:43 2020
+FILA
+Sat Oct 17 18:48:43 2020
+FILA

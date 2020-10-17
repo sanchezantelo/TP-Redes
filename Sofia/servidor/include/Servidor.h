@@ -18,6 +18,7 @@ class Servidor
         char buffer[1024];
         time_t hora;
         char* fecha;
+        time_t ultimaconexion;
         ofstream archivo;
         Servidor();
         string Recibir();

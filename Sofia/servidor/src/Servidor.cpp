@@ -1,6 +1,7 @@
 #include "Servidor.h"
 #define PORT 8080
 #define IP "127.0.0.1"
+#define TIMEOUT 60
 
 
 using namespace std;
@@ -9,6 +10,7 @@ Servidor::Servidor()
 {
    this->hora = time(0);
    this->fecha = ctime(&hora);
+   this->ultimaconexion= time(0);
 
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
@@ -22,6 +24,7 @@ Servidor::Servidor()
    listen(server, 0);
 
    cout << "Escuchando para conexiones entrantes." << endl;
+   cout<<"hora local:"<<this->fecha<<endl;
    this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
    this->archivo<<"Escuchando para conexiones entrantes.";
 
@@ -40,14 +43,21 @@ Servidor::~Servidor()
 string Servidor::Recibir()
 {
     char salir[1024];
+    time_t hora=time(0);
+    double compara=difftime(hora,this->ultimaconexion);
+
+    this->LogServer();
+
+
+   cout<<difftime(hora,this->ultimaconexion)<<endl;
    recv(client, buffer, sizeof(buffer), 0);
    strcpy(salir,this->buffer);
-    this->LogServer();
-    if(strcmp(salir,"salir")==0){
+
+    if(strcmp(salir,"salir")==0 || TIMEOUT<compara){
      this->CerrarSocket();
      system("PAUSE");
-       }
-    memset(salir, 0, sizeof(salir));
+    }
+     memset(salir, 0, sizeof(salir));
 }
 //
 
@@ -64,6 +74,7 @@ void Servidor::Enviar()
 
 void Servidor::CerrarSocket()
 {
+   this->ultimaconexion= time(0);
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
    this->archivo.close();
@@ -79,3 +90,4 @@ void Servidor::LogServer()
    //memset(buffer, 0, sizeof(buffer));
 
 }
+
