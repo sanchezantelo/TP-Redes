@@ -46,3 +46,19 @@
 	<stdio.h>
 	<iostream>
 
+1602939765 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+	<pthread.h>
+	<time.h>
+	<Windows.h>
+	"../Funciones/Funciones.h"
+
+1602939765 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\funciones\funciones.h
+	<stdio.h>
+	<iostream>
+
