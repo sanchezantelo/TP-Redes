@@ -1,13 +1,16 @@
 #include "Servidor.h"
 #define PORT 8080
 #define IP "127.0.0.1"
-#include<ctime>
 
 
 using namespace std;
 
 Servidor::Servidor()
 {
+   this->now = time(0);
+   this->dt = ctime(&now);
+
+
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -36,9 +39,6 @@ Servidor::~Servidor()
 
 string Servidor::Recibir()
 {
-   time_t now = time(0);
-   char* dt = ctime(&now);
-
    recv(client, buffer, sizeof(buffer), 0);
    this->LogServer();
    //
@@ -63,9 +63,10 @@ void Servidor::CerrarSocket()
 
 void Servidor::LogServer()
 {
-
-
+   this->now = time(0);
+   this->dt=ctime(&now);
    cout<<this->buffer<<"\n";
+   this->file<<this->dt;
    this->file<<this->buffer<<"\n";
    //memset(buffer, 0, sizeof(buffer));
 
