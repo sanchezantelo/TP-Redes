@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-
+    while(true){
 
       Servidor *server = new Servidor();
       while(server->sesion() && !server->LogOutPorTimeOut())
@@ -31,7 +31,7 @@ int main()
          }
 
       }
-      server->LogOut();
-      server->CerrarSocket();
+      server->~Servidor();
+      }
 
 }

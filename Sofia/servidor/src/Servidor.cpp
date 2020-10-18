@@ -14,7 +14,7 @@ Servidor::Servidor()
    this->fecha = ctime(&hora);
    this->ultimaconexion= time(0);
    memset(this->buffer, 0, sizeof(this->buffer));
-
+   WSACleanup();
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
@@ -41,6 +41,10 @@ Servidor::Servidor()
 Servidor::~Servidor()
 {
     //dtor
+    this->ultimaconexion= time(0);
+    memset(this->buffer, 0, sizeof(this->buffer));
+    client = INVALID_SOCKET;
+    WSACleanup();
 }
 
 bool Servidor::Login(){
@@ -88,11 +92,10 @@ void Servidor::Enviar(string mensaje)
 void Servidor::CerrarSocket()
 {
    this->Enviar("Sesion cerrada");
-   this->ultimaconexion= time(0);
-   memset(this->buffer, 0, sizeof(this->buffer));
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
    this->archivo.close();
+   WSACleanup();
 }
 
 void Servidor::LogServer()
