@@ -7,30 +7,31 @@ using namespace std;
 int main()
 {
 
-    while(true)
-    {
+
       Servidor *server = new Servidor();
-      while(server->sesion())
+      while(server->sesion() && !server->LogOutPorTimeOut())
       {
 
          server->Recibir();
          server->Enviar("OK");
          if(server->LogOutPorTimeOut()){
             server->CerrarSocket();
+            server->~Servidor();
             system("PAUSE");
          }
 
-         if(strcmp(server->buffer,"login")==0){
-            server->Login();
+         if(server->Login()){
+            server->Enviar("Ingrese usuario y contraseñia");
          }
-         if(strcmp(server->buffer,"salir")==0){
-            server->LogOut();
+         if(server->LogOut()){
+            server->Enviar("Sesion cerrada");
             server->CerrarSocket();
+            server->~Servidor();
             system("PAUSE");
          }
 
       }
       server->LogOut();
       server->CerrarSocket();
-     }
+
 }

@@ -6,10 +6,7 @@
 
 using namespace std;
 
-Servidor::~Servidor()
-{
-    //dtor
-}
+
 
 Servidor::Servidor()
 {
@@ -41,17 +38,24 @@ Servidor::Servidor()
    }
 }
 
-void Servidor::Login(){
-   this->Enviar("Ingrese usuario y contraseñia");
+Servidor::~Servidor()
+{
+    //dtor
+}
+
+bool Servidor::Login(){
+   //recibir usuario y contraseña verificar credenciales
+   return strcmp(this->buffer,"login")==0;
 }
 
 bool Servidor::sesion(){
- return !strcmp(this->buffer,"salir")==0;
+ return client != INVALID_SOCKET;
 }
 
 
-void Servidor::LogOut(){
-    this->Enviar("Sesion cerrada");
+bool Servidor::LogOut(){
+    //this->Enviar("Sesion cerrada");
+    return strcmp(this->buffer,"salir")==0;
 }
 
 bool Servidor::LogOutPorTimeOut(){
