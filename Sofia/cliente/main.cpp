@@ -3,22 +3,21 @@
 #include <Cliente.h>
 using namespace std;
 
-void altaServicio(void);
+void altaServicio();
 void gestionarPasajes(void);
 void verRegistrosDeActividades(void);
 void cerrarSesion(void);
 void login(void);
 
+Cliente *Client = new Cliente();
+
 int main()
 {
-    Cliente *Client = new Cliente();
-    while(true)
-    {
-        Client->Enviar();
-        Client->Recibir();
-    }
+
 
      int opcion;
+
+
 
 
     do {
@@ -64,7 +63,24 @@ int main()
     return 0;
 
 }
-void login(){};
+void altaServicio(){
+
+while (true){
+    Client->Enviar();
+    Client->Recibir();
+}
+
+};
+
+
+void login(){
+while (true){
+    Client->Enviar();
+    Client->Recibir();
+}
+
+
+};
 void gestionarPasajes(void){};
 void verRegistrosDeActividades(void){};
 void cerrarSesion(void){};

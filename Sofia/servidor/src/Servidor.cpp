@@ -6,11 +6,17 @@
 
 using namespace std;
 
+Servidor::~Servidor()
+{
+    //dtor
+}
+
 Servidor::Servidor()
 {
    this->hora = time(0);
    this->fecha = ctime(&hora);
    this->ultimaconexion= time(0);
+   memset(this->buffer, 0, sizeof(this->buffer));
 
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
@@ -35,59 +41,71 @@ Servidor::Servidor()
    }
 }
 
-Servidor::~Servidor()
-{
-    //dtor
+void Servidor::Login(){
+   char status [1024];
+   strcpy(status,"Ingrese usuario y contraseña");
+   send(client, status, sizeof(buffer), 0);
 }
 
-string Servidor::Recibir()
-{
-    char salir[1024];
+bool Servidor::sesion(){
+ return !strcmp(this->buffer,"salir")==0;
+}
+
+
+void Servidor::LogOut(){
+    char status [1024];
+   strcpy(status,"Sesion cerrada");
+   send(client, status, sizeof(buffer), 0);
+}
+
+bool Servidor::LogOutPorTimeOut(){
+    int opcion=1;
     time_t hora=time(0);
     double compara=difftime(hora,this->ultimaconexion);
+    return (TIMEOUT<compara);
+}
+
+void Servidor::Recibir()
+{
+    char mensaje[1024];
 
     this->LogServer();
-
-
-   cout<<difftime(hora,this->ultimaconexion)<<endl;
-   recv(client, buffer, sizeof(buffer), 0);
-   strcpy(salir,this->buffer);
-
-    if(strcmp(salir,"salir")==0 || TIMEOUT<compara){
-     this->CerrarSocket();
-     system("PAUSE");
-    }
-     memset(salir, 0, sizeof(salir));
+   //cout<<difftime(hora,this->ultimaconexion)<<endl;
+    recv(client, buffer, sizeof(buffer), 0);
+    //memset(this->buffer, 0, sizeof(this->buffer));
 }
 //
 
 
 void Servidor::Enviar()
 {
-   //cout<<"Escribe el mensaje a enviar: ";
-   char status [1024]="Recibido";
-   //cin>>this->buffer;
+   char status [1024];
+   strcpy(status,this->buffer);
    send(client, status, sizeof(buffer), 0);
-   //memset(buffer, 0, sizeof(buffer));
-   //cout << "Mensaje enviado!" << endl;
 }
 
 void Servidor::CerrarSocket()
 {
+   char status [1024];
+   strcpy(status,"Sesion cerrada");
+   send(client, status, sizeof(buffer), 0);
    this->ultimaconexion= time(0);
+   memset(this->buffer, 0, sizeof(this->buffer));
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
    this->archivo.close();
-}
+   }
 
 void Servidor::LogServer()
 {
+
    this->hora = time(0);
    this->fecha=ctime(&hora);
    cout<<this->buffer<<"\n";
    this->archivo<<this->fecha;
    this->archivo<<this->buffer<<"\n";
    //memset(buffer, 0, sizeof(buffer));
-
 }
+
+
 

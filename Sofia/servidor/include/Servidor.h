@@ -21,8 +21,12 @@ class Servidor
         time_t ultimaconexion;
         ofstream archivo;
         Servidor();
-        string Recibir();
+        void Recibir();
         void Enviar();
+        void Login();
+        void LogOut();
+        bool sesion();
+        bool LogOutPorTimeOut();
         void LogServer();
         void CerrarSocket();
         virtual ~Servidor();
