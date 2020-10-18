@@ -30,7 +30,7 @@ Servidor::Servidor()
    listen(server, 0);
 
    cout << "Escuchando para conexiones entrantes." << endl;
-   cout<<"hora local:"<<this->fecha<<endl;
+   cout<<"Hora local: "<<this->fecha<<endl;
    this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
    this->archivo<<"Escuchando para conexiones entrantes.";
 
@@ -42,9 +42,7 @@ Servidor::Servidor()
 }
 
 void Servidor::Login(){
-   char status [1024];
-   strcpy(status,"Ingrese usuario y contraseña");
-   send(client, status, sizeof(buffer), 0);
+   this->Enviar("Ingrese usuario y contraseñia");
 }
 
 bool Servidor::sesion(){
@@ -53,9 +51,7 @@ bool Servidor::sesion(){
 
 
 void Servidor::LogOut(){
-    char status [1024];
-   strcpy(status,"Sesion cerrada");
-   send(client, status, sizeof(buffer), 0);
+    this->Enviar("Sesion cerrada");
 }
 
 bool Servidor::LogOutPorTimeOut(){
@@ -65,36 +61,35 @@ bool Servidor::LogOutPorTimeOut(){
     return (TIMEOUT<compara);
 }
 
-void Servidor::Recibir()
+string Servidor::Recibir()
 {
-    char mensaje[1024];
-
+    string mensaje;
+    char status[1024];
     this->LogServer();
-   //cout<<difftime(hora,this->ultimaconexion)<<endl;
     recv(client, buffer, sizeof(buffer), 0);
-    //memset(this->buffer, 0, sizeof(this->buffer));
+    strcpy(status,this->buffer);
+    strcpy(status,mensaje.c_str());
+    return mensaje;
 }
 //
 
 
-void Servidor::Enviar()
+void Servidor::Enviar(string mensaje)
 {
-   char status [1024];
-   strcpy(status,this->buffer);
-   send(client, status, sizeof(buffer), 0);
+   char status[1024];
+   strcpy(status,mensaje.c_str());
+   send(client, status, sizeof(status), 0);
 }
 
 void Servidor::CerrarSocket()
 {
-   char status [1024];
-   strcpy(status,"Sesion cerrada");
-   send(client, status, sizeof(buffer), 0);
+   this->Enviar("Sesion cerrada");
    this->ultimaconexion= time(0);
    memset(this->buffer, 0, sizeof(this->buffer));
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
    this->archivo.close();
-   }
+}
 
 void Servidor::LogServer()
 {

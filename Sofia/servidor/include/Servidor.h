@@ -21,8 +21,8 @@ class Servidor
         time_t ultimaconexion;
         ofstream archivo;
         Servidor();
-        void Recibir();
-        void Enviar();
+        string Recibir();
+        void Enviar(string mensaje);
         void Login();
         void LogOut();
         bool sesion();

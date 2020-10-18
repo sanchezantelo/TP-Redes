@@ -6,24 +6,31 @@ using namespace std;
 
 int main()
 {
-  Servidor *Server = new Servidor();
-  while(Server->sesion())
-  {
 
-     Server->Recibir();
-     Server->Enviar();
-     if(Server->LogOutPorTimeOut()){
-        Server->CerrarSocket();
-        system("PAUSE");
-     }
+    while(true)
+    {
+      Servidor *server = new Servidor();
+      while(server->sesion())
+      {
 
-     if(strcmp(Server->buffer,"login")==0){
-        Server->Login();
-     }
-     if(strcmp(Server->buffer,"salir")==0){
-        Server->LogOut();
-     }
+         server->Recibir();
+         server->Enviar("OK");
+         if(server->LogOutPorTimeOut()){
+            server->CerrarSocket();
+            system("PAUSE");
+         }
 
-  }
-  Server->CerrarSocket();
+         if(strcmp(server->buffer,"login")==0){
+            server->Login();
+         }
+         if(strcmp(server->buffer,"salir")==0){
+            server->LogOut();
+            server->CerrarSocket();
+            system("PAUSE");
+         }
+
+      }
+      server->LogOut();
+      server->CerrarSocket();
+     }
 }
