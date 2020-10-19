@@ -1,5 +1,6 @@
 #include "Servicio.h"
 #include <string.h>
+#include <string>
 Servicio::Servicio(int _origen, string _fecha, int _turno)
 {
     origen = _origen;
@@ -128,6 +129,29 @@ char* Servicio::mensaje(){
     strcpy(mensaje,servicio.c_str());
     cout<<mensaje<< endl;
     return mensaje;
+}
+
+string Servicio::crearServicio()
+{
+    string respuesta= "";
+    respuesta = to_string(getOrigen()) + ";" + getFecha() + ";" + to_string(getTurno())+";";
+    //FILA A
+    for (int i = 0; i < 20; i++) {
+    respuesta = respuesta + getfilaA()[i];
+    }
+    //FILA B
+    respuesta = respuesta + ";";
+    for (int i = 0; i < 20; i++) {
+    respuesta = respuesta + getfilaB()[i];
+    }
+    //FILA C
+    respuesta = respuesta + ";";
+    for (int i = 0; i < 20; i++) {
+    respuesta = respuesta + getfilaC()[i];
+    }
+    respuesta = respuesta + "\n";
+
+    return respuesta;
 }
 
 

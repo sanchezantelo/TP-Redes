@@ -46,3 +46,30 @@
 	<stdio.h>
 	<iostream>
 
+1603066984 source:c:\users\softing\documents\unla\redes\tp-redes\codigo\server\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+	<string>
+
+1603066977 c:\users\softing\documents\unla\redes\tp-redes\codigo\server\include\servicio.h
+	<iostream>
+
+1603145559 source:c:\users\softing\documents\unla\redes\tp-redes\codigo\server\server final.cpp
+	<stdio.h>
+	<winsock2.h>
+	<fstream>
+	<string>
+	<iostream>
+	<sstream>
+	<pthread.h>
+	<time.h>
+	<Windows.h>
+	"../Funciones/Funciones.h"
+	<Servicio.h>
+	<cstdlib>
+	<ctype.h>
+
+1602635736 c:\users\softing\documents\unla\redes\tp-redes\codigo\funciones\funciones.h
+	<stdio.h>
+	<iostream>
+

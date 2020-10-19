@@ -5,6 +5,7 @@
 #include "../Funciones/Funciones.h"
 using namespace std;
 char user[1000] = "";
+char messageAlta[1000] = "";
 SOCKET crearSocket();
 sockaddr_in crear_sockaddr_in(char IP[16], int PORT);
 int conexion(SOCKET sockClient, sockaddr_in sin);
@@ -162,8 +163,12 @@ void altaServicio(SOCKET sock) {
     }
 }
 void crearServicio(SOCKET sock, Servicio servicio){
-    servicio.mostrar();
-    enviar(sock,servicio.mensaje(), sizeof(servicio.mensaje()));
+    //servicio.mostrar();
+    //enviar(sock,servicio.mensaje(), sizeof(servicio.mensaje()));
+    memset(messageAlta,0,1000);
+    strcpy(messageAlta, servicio.mensaje());
+    //cout<<message<<endl;
+    enviar(sock,messageAlta, sizeof(messageAlta));
     system("PAUSE");
 }
 
