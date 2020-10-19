@@ -5,6 +5,7 @@
 using namespace std;
 Cliente::Cliente()
 {
+    memset(this->buffer, 0, sizeof(this->buffer));
     cout<<"Conectando al servidor..."<<endl<<endl;
     WSAStartup(MAKEWORD(2,0), &WSAData);
     server = socket(AF_INET, SOCK_STREAM, 0);
@@ -21,20 +22,22 @@ Cliente::~Cliente()
 }
 
 
-void Cliente::Enviar()
+void Cliente::Enviar(string mensaje)
 {
-    cout<<"Escribe el mensaje a enviar: ";
-    cin>>this->buffer;
-    send(server, buffer, sizeof(buffer), 0);
-    memset(buffer, 0, sizeof(buffer));
-    cout << "Mensaje enviado!" << endl;
+    char status[1024];
+    //cin>>this->buffer;
+    strcpy(status,mensaje.c_str());
+    send(server,status, sizeof(status), 0);
 }
 
-void Cliente::Recibir()
+string Cliente::Recibir()
 {
+    string mensaje;
+    char status[1024];
     recv(server, buffer, sizeof(buffer), 0);
-    cout << "El servidor dice: " << buffer << endl;
-    memset(buffer, 0, sizeof(buffer));
+    strcpy(status,buffer);
+    strcpy(status,mensaje.c_str());
+    return mensaje;
 }
 
 void Cliente::CerrarSocket()

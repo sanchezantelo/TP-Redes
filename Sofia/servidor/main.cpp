@@ -20,7 +20,8 @@ int main()
             system("PAUSE");
          }
 
-         if(server->Login()){
+         if(server->Recibir().find("login")){
+             server->Login();
             server->Enviar("Ingrese usuario y contraseñia");
          }
          if(server->LogOut()){

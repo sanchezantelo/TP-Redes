@@ -3,6 +3,8 @@
 #include <iostream>
 #include <winsock2.h>
 
+using namespace std;
+
 class Cliente
 {
     public:
@@ -11,8 +13,8 @@ class Cliente
         SOCKADDR_IN addr;
         char buffer[1024];
         Cliente();
-        void Enviar();
-        void Recibir();
+        void Enviar(string mensaje);
+        string Recibir();
         void CerrarSocket();
         void login();
         virtual ~Cliente();

@@ -47,9 +47,12 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
-bool Servidor::Login(){
+void Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
-   return strcmp(this->buffer,"login")==0;
+   string usuario=buffer;
+//   strcpy(usuario.c_str(),buffer);
+
+   cout<<"usuario:"<<usuario.c_str()<<endl;
 }
 
 bool Servidor::sesion(){

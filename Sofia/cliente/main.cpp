@@ -9,11 +9,13 @@ void verRegistrosDeActividades(void);
 void cerrarSesion(void);
 void login(void);
 
-Cliente *Client = new Cliente();
+
 
 int main()
 {
 
+
+     login();
 
      int opcion;
 
@@ -64,19 +66,29 @@ int main()
 
 }
 void altaServicio(){
-
-while (true){
-    Client->Enviar();
-    Client->Recibir();
-}
-
 };
 
 
 void login(){
-while (true){
-    Client->Enviar();
-    Client->Recibir();
+Cliente *Client = new Cliente();
+string usuario;
+string contrasenia;
+string mensaje;
+
+Client->Enviar("login");
+cout<<Client->Recibir();
+
+for(int i=0;i<=2;i++){
+    cout<<"Ingrese Usuario:"<<endl;
+    cin>>usuario;
+    cout<<"Ingrese contrasenia:"<<endl;
+    cin>>contrasenia;
+    mensaje="login;"+usuario+";"+contrasenia;
+    Client->Enviar(mensaje);
+
+    system("PAUSE");
+
+
 }
 
 
