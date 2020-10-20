@@ -11,12 +11,17 @@ using namespace std;
 //CONSTRUCTOR
 Servidor::Servidor()
 {
+   time (&this->hora);
+   this->timeinfo = localtime (&this->hora);
    this->hora = time(0);
-   this->fecha = ctime(&hora);
+   this->serverLog.open("serverlog.txt");
+
    this->ultimaconexion= time(0);
    this->CargalstUsuarios();
 
  //this->ImprimirlstUsuarios();
+   //fechalog=this->fecha;
+   //cout<<fechalog.substr(11,8)+"...";
 
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
@@ -35,13 +40,13 @@ Servidor::Servidor()
    cout << "Escuchando para conexiones entrantes." << endl;
    cout<<"Hora local: "<<this->fecha<<endl;
 
-     this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
-     archivo<<"Escuchando para conexiones entrantes.";
+
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
      {
       cout << "Cliente conectado!" << endl;
+      this->LogServer();
    }
 }
 
@@ -58,18 +63,24 @@ Servidor::~Servidor()
 void Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
    string usuario=buffer;
+   boolean encontrado=false;
 
    cout<<"usuario:"<<usuario.c_str()<<endl;
-
+//while(i<size){
    for (string n : this->lstUsuarios) {
-     if(n.find(usuario)==0){
-       cout<<"Encontrado"<<endl;
+     if(n.find(usuario)){
+       encontrado=true;
        usuario="";
-     }else{
-      cout<<"No se encontro"<<endl;
      }
    }
-  }
+if(encontrado==true){
+    cout<<"encontrado"<<endl;
+
+}else{
+cout<<"no encontrado"<<endl;
+}
+}
+
 
 bool Servidor::sesion(){
  return client != INVALID_SOCKET;
@@ -93,6 +104,7 @@ string Servidor::Recibir()
     string mensaje;
     char status[1024];
     this->LogServer();
+    this->LogCliente();
     recv(client, buffer, sizeof(buffer), 0);
     strcpy(status,this->buffer);
     strcpy(status,mensaje.c_str());
@@ -113,37 +125,46 @@ void Servidor::CerrarSocket()
    this->Enviar("Sesion cerrada");
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
-   this->archivo.close();
+   this->serverLog.close();
    WSACleanup();
 }
 
 void Servidor::LogServer()
 {
+   string fechalog="";
+   //ACTUALIZA LA HORA DEL SERVIDOR
+   time (&this->hora);
+   this->timeinfo = localtime (&this->hora);
+   strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
+   fechalog=this->fecha;
+   cout<<fechalog<<" :"<<this->buffer<<"\n";
+   this->serverLog<<fechalog<<": ========================"<<"\n";
+   this->serverLog<<fechalog<<": =======Inicia Servidor====="<<"\n";
+   this->serverLog<<fechalog<<": ========================"<<"\n";
+   this->serverLog<<fechalog<<this->buffer<<"\n";
+}
 
-   this->hora = time(0);
-   this->fecha=ctime(&hora);
-   cout<<this->buffer<<"\n";
-   this->archivo<<this->fecha;
-   this->archivo<<this->buffer<<"\n";
-   //memset(buffer, 0, sizeof(buffer));
+void Servidor::LogCliente()
+{
+
 }
 
 void Servidor::CargalstUsuarios(){
 char linea[128];
-ifstream usuario;
-string elemento;
+ifstream credenciales;
+string usuario;
 
-usuario.open("credenciales.txt");
-  while (!usuario.eof()) {
-      usuario.getline(linea,sizeof(linea));
-      elemento=linea;
-      lstUsuarios.push_front(elemento);
+credenciales.open("credenciales.txt");
+  while (!credenciales.eof()) {
+      credenciales.getline(linea,sizeof(linea));
+      usuario=linea;
+      lstUsuarios.push_front(usuario);
   }
-usuario.close();
+credenciales.close();
 }
 
 void Servidor::ImprimirlstUsuarios(){
-   for (string n : this->lstUsuarios){
-        std::cout << n << '\n';
+   for (string usuario : this->lstUsuarios){
+        cout << usuario << '\n';
     }
 }

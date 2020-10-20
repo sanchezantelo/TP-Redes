@@ -17,10 +17,11 @@ class Servidor
         SOCKADDR_IN serverAddr, clientAddr;
         char buffer[1024];
         time_t hora;
-        char* fecha;
+        char fecha[80];
+        struct tm * timeinfo;
         time_t ultimaconexion;
         list<string>lstUsuarios;
-        ofstream archivo;
+        ofstream serverLog;
         Servidor();
         string Recibir();
         void Enviar(string mensaje);
@@ -29,6 +30,7 @@ class Servidor
         bool sesion();
         bool LogOutPorTimeOut();
         void LogServer();
+        void LogCliente();
         void CerrarSocket();
         void CargalstUsuarios();
         void ImprimirlstUsuarios();
