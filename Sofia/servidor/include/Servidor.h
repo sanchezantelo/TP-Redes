@@ -4,7 +4,7 @@
 #include <winsock2.h>
 #include <fstream>
 #include<ctime>
-
+#include"list"
 
 using namespace std;
 
@@ -19,6 +19,7 @@ class Servidor
         time_t hora;
         char* fecha;
         time_t ultimaconexion;
+        list<string>lstUsuarios;
         ofstream archivo;
         Servidor();
         string Recibir();
@@ -29,6 +30,8 @@ class Servidor
         bool LogOutPorTimeOut();
         void LogServer();
         void CerrarSocket();
+        void CargalstUsuarios();
+        void ImprimirlstUsuarios();
         virtual ~Servidor();
 
     protected:

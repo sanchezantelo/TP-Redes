@@ -21,8 +21,8 @@ int main()
          }
 
          if(server->Recibir().find("login")){
-             server->Login();
-            server->Enviar("Ingrese usuario y contraseñia");
+            server->Login();
+            server->Enviar("Ingrese usuario y contrasenia");
          }
          if(server->LogOut()){
             server->Enviar("Sesion cerrada");

@@ -2,6 +2,9 @@
 #define PORT 8080
 #define IP "127.0.0.1"
 #define TIMEOUT 60
+#include <fstream>
+#include <sstream>
+
 
 
 using namespace std;
@@ -16,6 +19,9 @@ Servidor::Servidor()
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
 
+   this->CargalstUsuarios();
+   this->ImprimirlstUsuarios();
+
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -28,8 +34,9 @@ Servidor::Servidor()
 
    cout << "Escuchando para conexiones entrantes." << endl;
    cout<<"Hora local: "<<this->fecha<<endl;
-   this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
-   this->archivo<<"Escuchando para conexiones entrantes.";
+
+     this->archivo.open("E:/Sistemas/Redes y Comunicaciones/TPRedes/TP-Redes/Sofia/servidor/logserver.txt",fstream::ate);
+     archivo<<"Escuchando para conexiones entrantes.";
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
@@ -112,5 +119,21 @@ void Servidor::LogServer()
    //memset(buffer, 0, sizeof(buffer));
 }
 
+void Servidor::CargalstUsuarios(){
+char linea[128];
+ifstream usuario;
+string elemento;
+usuario.open("credenciales.txt");
+  while (!usuario.eof()) {
+      usuario.getline(linea,sizeof(linea));
+      elemento=linea;
+      lstUsuarios.push_front(elemento);
+  }
+usuario.close();
+}
 
-
+void Servidor::ImprimirlstUsuarios(){
+   for (string n : this->lstUsuarios) {
+        std::cout << n << '\n';
+    }
+}
