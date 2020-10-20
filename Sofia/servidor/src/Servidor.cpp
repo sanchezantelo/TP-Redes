@@ -65,7 +65,7 @@ void Servidor::Login(){
    cout<<"usuario:"<<usuario.c_str()<<endl;
 //while(i<size){
    for (string n : this->lstUsuarios) {
-     if(n.find(usuario)){
+     if(n.find(usuario)==0){
        encontrado=true;
        this->LogCliente(usuario.substr(0,5)); //MODIFICAR LONGITUD
        usuario="";
