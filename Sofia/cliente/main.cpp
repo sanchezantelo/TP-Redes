@@ -6,20 +6,17 @@ using namespace std;
 void altaServicio();
 void gestionarPasajes(void);
 void verRegistrosDeActividades(void);
-void cerrarSesion(void);
-void login(void);
-
+void cerrarSesion(Cliente &cliente);
+void login(Cliente &cliente);
 
 
 int main()
 {
 
-
-     login();
+     Cliente *Client = new Cliente();
+     login(*Client);
 
      int opcion;
-
-
 
 
     do {
@@ -57,7 +54,7 @@ int main()
 
             case 4:
                 // Lista de instrucciones de la opción 4
-                cerrarSesion();
+                cerrarSesion(*Client);
                 system("pause>nul"); // Pausa
                 break;
         }
@@ -69,14 +66,14 @@ void altaServicio(){
 };
 
 
-void login(){
-Cliente *Client = new Cliente();
+void login(Cliente &cliente){
+
 string usuario;
 string contrasenia;
 string mensaje;
 
-Client->Enviar("login");
-cout<<Client->Recibir();
+cliente.Enviar("login");
+cout<<cliente.Recibir();
 
  // for(int i=0;i<=2;i++){
     cout<<"Ingrese Usuario:"<<endl;
@@ -84,7 +81,7 @@ cout<<Client->Recibir();
     cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
     cin>>contrasenia;
     mensaje=""+usuario+";"+contrasenia;
-    Client->Enviar(mensaje);
+    cliente.Enviar(mensaje);
 
     system("PAUSE");
 
@@ -93,6 +90,9 @@ cout<<Client->Recibir();
 };
 void gestionarPasajes(void){};
 void verRegistrosDeActividades(void){};
-void cerrarSesion(void){};
+
+void cerrarSesion(Cliente &cliente){
+cliente.Enviar("salir");
+};
 
 
