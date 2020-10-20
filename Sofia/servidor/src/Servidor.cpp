@@ -5,22 +5,22 @@
 #include <fstream>
 #include <sstream>
 
-
-
 using namespace std;
 
 
-
+//CONSTRUCTOR
 Servidor::Servidor()
 {
    this->hora = time(0);
    this->fecha = ctime(&hora);
    this->ultimaconexion= time(0);
+   this->CargalstUsuarios();
+
+ //this->ImprimirlstUsuarios();
+
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
 
-   this->CargalstUsuarios();
-   this->ImprimirlstUsuarios();
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
@@ -45,6 +45,7 @@ Servidor::Servidor()
    }
 }
 
+//DESTRUCTOR
 Servidor::~Servidor()
 {
     //dtor
@@ -57,10 +58,18 @@ Servidor::~Servidor()
 void Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
    string usuario=buffer;
-//   strcpy(usuario.c_str(),buffer);
 
    cout<<"usuario:"<<usuario.c_str()<<endl;
-}
+
+   for (string n : this->lstUsuarios) {
+     if(n.find(usuario)==0){
+       cout<<"Encontrado"<<endl;
+       usuario="";
+     }else{
+      cout<<"No se encontro"<<endl;
+     }
+   }
+  }
 
 bool Servidor::sesion(){
  return client != INVALID_SOCKET;
@@ -123,6 +132,7 @@ void Servidor::CargalstUsuarios(){
 char linea[128];
 ifstream usuario;
 string elemento;
+
 usuario.open("credenciales.txt");
   while (!usuario.eof()) {
       usuario.getline(linea,sizeof(linea));
@@ -133,7 +143,7 @@ usuario.close();
 }
 
 void Servidor::ImprimirlstUsuarios(){
-   for (string n : this->lstUsuarios) {
+   for (string n : this->lstUsuarios){
         std::cout << n << '\n';
     }
 }

@@ -78,20 +78,18 @@ string mensaje;
 Client->Enviar("login");
 cout<<Client->Recibir();
 
-for(int i=0;i<=2;i++){
+ // for(int i=0;i<=2;i++){
     cout<<"Ingrese Usuario:"<<endl;
     cin>>usuario;
-    cout<<"Ingrese contrasenia:"<<endl;
+    cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
     cin>>contrasenia;
-    mensaje="login;"+usuario+";"+contrasenia;
+    mensaje=""+usuario+";"+contrasenia;
     Client->Enviar(mensaje);
 
     system("PAUSE");
 
 
-}
-
-
+//}
 };
 void gestionarPasajes(void){};
 void verRegistrosDeActividades(void){};

@@ -6,12 +6,12 @@
 	<stdlib.h>
 	<stdio.h>
 
-1603064590 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
+1603209171 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Cliente.h>
 
-1603061298 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\include\cliente.h
+1603068588 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\include\cliente.h
 	<iostream>
 	<winsock2.h>
 
