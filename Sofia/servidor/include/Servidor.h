@@ -22,6 +22,7 @@ class Servidor
         time_t ultimaconexion;
         list<string>lstUsuarios;
         ofstream serverLog;
+        ofstream clienteLog;
         Servidor();
         string Recibir();
         void Enviar(string mensaje);
@@ -30,7 +31,7 @@ class Servidor
         bool sesion();
         bool LogOutPorTimeOut();
         void LogServer();
-        void LogCliente();
+        void LogCliente(string usuario);
         void CerrarSocket();
         void CargalstUsuarios();
         void ImprimirlstUsuarios();

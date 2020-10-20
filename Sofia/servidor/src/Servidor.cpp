@@ -38,9 +38,6 @@ Servidor::Servidor()
    listen(server, 0);
 
    cout << "Escuchando para conexiones entrantes." << endl;
-   cout<<"Hora local: "<<this->fecha<<endl;
-
-
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
@@ -70,11 +67,13 @@ void Servidor::Login(){
    for (string n : this->lstUsuarios) {
      if(n.find(usuario)){
        encontrado=true;
+       this->LogCliente(usuario.substr(0,5)); //MODIFICAR LONGITUD
        usuario="";
      }
    }
 if(encontrado==true){
     cout<<"encontrado"<<endl;
+
 
 }else{
 cout<<"no encontrado"<<endl;
@@ -104,7 +103,6 @@ string Servidor::Recibir()
     string mensaje;
     char status[1024];
     this->LogServer();
-    this->LogCliente();
     recv(client, buffer, sizeof(buffer), 0);
     strcpy(status,this->buffer);
     strcpy(status,mensaje.c_str());
@@ -126,6 +124,7 @@ void Servidor::CerrarSocket()
    closesocket(client);
    cout << "Socket cerrado, cliente desconectado." << endl;
    this->serverLog.close();
+   this->clienteLog.close();
    WSACleanup();
 }
 
@@ -138,15 +137,27 @@ void Servidor::LogServer()
    strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
    fechalog=this->fecha;
    cout<<fechalog<<" :"<<this->buffer<<"\n";
-   this->serverLog<<fechalog<<": ========================"<<"\n";
-   this->serverLog<<fechalog<<": =======Inicia Servidor====="<<"\n";
-   this->serverLog<<fechalog<<": ========================"<<"\n";
+   this->serverLog<<fechalog<<": ==========================="<<"\n";
+   this->serverLog<<fechalog<<":        Inicia Servidor     "<<"\n";
+   this->serverLog<<fechalog<<": ==========================="<<"\n";
    this->serverLog<<fechalog<<this->buffer<<"\n";
 }
 
-void Servidor::LogCliente()
+void Servidor::LogCliente(string usuario)
 {
+ string fechalog="";
 
+   this->clienteLog.open(usuario+".txt");
+   //ACTUALIZA LA HORA DEL SERVIDOR
+   time (&this->hora);
+   this->timeinfo = localtime (&this->hora);
+   strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
+   fechalog=this->fecha;
+   cout<<fechalog<<" :"<<this->buffer<<"\n";
+   this->clienteLog<<fechalog<<": ==========================="<<"\n";
+   this->clienteLog<<fechalog<<":        Inicia Sesion       "<<"\n";
+   this->clienteLog<<fechalog<<": ==========================="<<"\n";
+   this->clienteLog<<fechalog<<this->buffer<<"\n";
 }
 
 void Servidor::CargalstUsuarios(){
