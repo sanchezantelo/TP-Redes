@@ -18,3 +18,24 @@
 1603064941 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\cliente.cpp
 	"Cliente.h"
 
+1603241826 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Cliente.h>
+
+1603241826 c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\include\cliente.h
+	<iostream>
+	<winsock2.h>
+
+1603245127 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+
+1603245178 c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\include\servicio.h
+	<iostream>
+
+1603293218 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\src\cliente.cpp
+	"Cliente.h"
+	<winsock2.h>
+	<Servicio.h>
+

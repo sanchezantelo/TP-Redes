@@ -1,10 +1,11 @@
 #include <iostream>
 #include <winsock2.h>
 #include <Cliente.h>
+#include <Servicio.h>
 using namespace std;
 
-void altaServicio();
-void gestionarPasajes(void);
+void altaServicio(Cliente &cliente, Servicio &servicio);
+void gestionarPasajes(Cliente &cliente, Servicio &servicio);
 void verRegistrosDeActividades(void);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
@@ -14,6 +15,7 @@ int main()
 {
 
      Cliente *Client = new Cliente();
+     Servicio *Serv = new Servicio(0,"",0);
      login(*Client);
 
      int opcion;
@@ -36,13 +38,13 @@ int main()
         switch (opcion) {
             case 1:
                 // Lista de instrucciones de la opción 1
-                altaServicio();
+                altaServicio(*Client, *Serv);
                 system("pause>nul"); // Pausa
                 break;
 
             case 2:
                 // Lista de instrucciones de la opción 2
-                gestionarPasajes();
+                gestionarPasajes(*Client, *Serv);
                 system("pause>nul"); // Pausa
                 break;
 
@@ -62,7 +64,48 @@ int main()
     return 0;
 
 }
-void altaServicio(){
+void altaServicio(Cliente &cliente, Servicio &servicio){
+    int seguir = 1;
+    char opcion;
+    int origen;
+    string fecha;
+    int turno;
+    char origen_string[3][20] = {"Buenos Aires", "Mar del Plata"};
+    char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
+
+
+    while (seguir) {
+        do {
+            system("cls");
+            cout << "Ingresar origen (1. Buenos Aires, 2. Mar del Plata)" << endl;
+            cin >> origen;
+            servicio.setOrigen(origen);
+        } while (origen != 1 && origen != 2);
+
+        system("cls");
+        cout << "Ingresar fecha (aaaa-mm-dd)" << endl;
+        cin >> fecha;
+        servicio.setFecha(fecha);
+
+        do {
+            system("cls");
+            cout << "Ingresar turno (1. manana, 2. tarde, 3. noche)" << endl;
+            cin >> turno;
+            servicio.setTurno(turno);
+        } while (turno < 1 || turno > 3);
+
+        system("cls");
+        cout << "Elegiste origen: " << origen_string[origen - 1] << ", fecha: " << fecha << ", turno: " << turno_string[turno - 1] << endl << "Los datos son correctos?" << endl;
+        cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
+        cin >> opcion;
+        switch (opcion) {
+            case '1':
+                seguir = 0;
+                cliente.Enviar(string(servicio.mensaje()));
+            default: seguir = 0; break;
+        }
+        system("cls");
+    }
 };
 
 
@@ -88,11 +131,56 @@ cout<<cliente.Recibir();
 
 //}
 };
-void gestionarPasajes(void){};
+void gestionarPasajes(Cliente &cliente, Servicio &servicio){
+    int seguir = 1;
+    char opcion;
+    int origen;
+    string fecha;
+    int turno;
+    char origen_string[3][20] = {"Vacio", "Buenos Aires", "Mar del Plata"};
+    char turno_string[4][20] = {"Vacio", "Manana", "Tarde", "Noche"};
+
+    while (seguir) {
+        do {
+            system("cls");
+            cout << "Buscar por origen (1. Buenos Aires, 2. Mar del Plata). [Si no desea buscar por origen ingrese 0]" << endl;
+           cin >> origen;
+           servicio.setOrigen(origen);
+        } while (origen < 0 || origen > 2);
+
+        system("cls");
+        cout << "Buscar por fecha (aaaa-mm-dd). [Si no desea buscar por fecha ingrese 0]" << endl;
+        cin >> fecha;
+        servicio.setFecha(fecha);
+
+        do {
+            system("cls");
+            cout << "Buscar por turno (1. manana, 2. tarde, 3. noche). [Si no desea buscar por turno ingrese 0]" << endl;
+            cin >> turno;
+            servicio.setTurno(turno);
+        } while (turno < 0 || turno > 3);
+
+        system("cls");
+        cout << "Elegiste origen: " << origen_string[origen] << ", fecha: " << fecha << ", turno: " << turno_string[turno] << endl << "Los datos son correctos?" << endl;
+        cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
+        cin >> opcion;
+        switch (opcion) {
+            case '1': seguir = 0;/*crearServicio(origen, fecha, turno);*/ break;
+            case '2': break;
+            case '\n': break;
+            default: seguir = 0; break;
+        }
+        system("cls");
+    }
+}
+
+;
 void verRegistrosDeActividades(void){};
 
 void cerrarSesion(Cliente &cliente){
 cliente.Enviar("salir");
 };
+
+
 
 
