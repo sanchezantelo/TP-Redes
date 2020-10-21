@@ -49,9 +49,8 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
-void Servidor::Login(){
+void Servidor::Login(string usuario){
    //recibir usuario y contraseña verificar credenciales
-   string usuario=buffer;
    boolean encontrado=false;
 
    cout<<"usuario:"<<usuario.c_str()<<endl;
@@ -97,7 +96,8 @@ string Servidor::Recibir()
     this->LogServer();
     recv(client, buffer, sizeof(buffer), 0);
     strcpy(status,this->buffer);
-    strcpy(status,mensaje.c_str());
+    //strcpy(status,mensaje.c_str());
+    mensaje = status;
     return mensaje;
 }
 

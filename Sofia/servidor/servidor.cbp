@@ -34,8 +34,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Servicio.h" />
 		<Unit filename="include/Servidor.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Servicio.cpp" />
 		<Unit filename="src/Servidor.cpp" />
 		<Extensions />
 	</Project>

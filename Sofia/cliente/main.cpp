@@ -101,7 +101,7 @@ void altaServicio(Cliente &cliente, Servicio &servicio){
         switch (opcion) {
             case '1':
                 seguir = 0;
-                cliente.Enviar(string(servicio.mensaje()));
+                cliente.Enviar(string("G1;" + servicio.mensaje()));
             default: seguir = 0; break;
         }
         system("cls");
@@ -115,15 +115,12 @@ string usuario;
 string contrasenia;
 string mensaje;
 
-cliente.Enviar("login");
-cout<<cliente.Recibir();
-
  // for(int i=0;i<=2;i++){
     cout<<"Ingrese Usuario:"<<endl;
     cin>>usuario;
     cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
     cin>>contrasenia;
-    mensaje=""+usuario+";"+contrasenia;
+    mensaje="L1;"+usuario+";"+contrasenia;
     cliente.Enviar(mensaje);
 
     system("PAUSE");

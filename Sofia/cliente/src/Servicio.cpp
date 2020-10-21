@@ -114,18 +114,6 @@ void Servicio::mostrar()
     cout << endl <<"###########################################" << endl;
     cout << endl << endl;
 }
-char* Servicio::mensaje(){
-    char origen_string[3][20] = {"Buenos Aires", "Mar del Plata"};
-    char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
-    string servicio;
-    string delimitador=";";
-    char mensaje[1000] = {};
-    servicio+=origen_string[getOrigen() - 1];
-    servicio+=delimitador;
-    servicio+=getFecha();
-    servicio+=delimitador;
-    servicio+=turno_string[getTurno() - 1];
-    strcpy(mensaje,servicio.c_str());
-    cout<<mensaje<< endl;
-    return mensaje;
+string Servicio::mensaje(){
+    return to_string(getOrigen()) + ";" + getFecha() + ";" + to_string(getTurno());
 }

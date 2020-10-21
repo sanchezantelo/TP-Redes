@@ -39,7 +39,8 @@ string Cliente::Recibir()
     char status[1024];
     recv(server, buffer, sizeof(buffer), 0);
     strcpy(status,buffer);
-    strcpy(status,mensaje.c_str());
+    //strcpy(status,mensaje.c_str());
+    mensaje = status;
     return mensaje;
 }
 
