@@ -12,8 +12,6 @@ int main()
       while(server->sesion() && !server->LogOutPorTimeOut())
       {
 
-         server->Recibir();
-         server->Enviar("OK");
          if(server->LogOutPorTimeOut()){
             server->CerrarSocket();
             server->~Servidor();
@@ -22,7 +20,6 @@ int main()
 
          if(server->Recibir().find("login")){
             server->Login();
-            server->Enviar("Ingrese usuario y contrasenia");
          }
          if(server->LogOut()){
             server->Enviar("Sesion cerrada");

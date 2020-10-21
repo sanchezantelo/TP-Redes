@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 //CONSTRUCTOR
 Servidor::Servidor()
 {
@@ -15,17 +14,10 @@ Servidor::Servidor()
    this->timeinfo = localtime (&this->hora);
    this->hora = time(0);
    this->serverLog.open("serverlog.txt");
-
    this->ultimaconexion= time(0);
    this->CargalstUsuarios();
-
- //this->ImprimirlstUsuarios();
-   //fechalog=this->fecha;
-   //cout<<fechalog.substr(11,8)+"...";
-
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
-
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
@@ -73,18 +65,12 @@ void Servidor::Login(){
    }
 if(encontrado==true){
     cout<<"encontrado"<<endl;
-
+    this->Enviar("credenciales validas");
 
 }else{
 cout<<"no encontrado"<<endl;
 }
 }
-
-
-bool Servidor::sesion(){
- return client != INVALID_SOCKET;
-}
-
 
 bool Servidor::LogOut(){
     //this->Enviar("Sesion cerrada");
@@ -98,6 +84,12 @@ bool Servidor::LogOutPorTimeOut(){
     return (TIMEOUT<compara);
 }
 
+
+bool Servidor::sesion(){
+ return client != INVALID_SOCKET;
+}
+
+//RECIBIR
 string Servidor::Recibir()
 {
     string mensaje;
@@ -108,9 +100,8 @@ string Servidor::Recibir()
     strcpy(status,mensaje.c_str());
     return mensaje;
 }
-//
 
-
+//ENVIAR
 void Servidor::Enviar(string mensaje)
 {
    char status[1024];
@@ -128,6 +119,8 @@ void Servidor::CerrarSocket()
    WSACleanup();
 }
 
+
+//LOG SERVER
 void Servidor::LogServer()
 {
    string fechalog="";
@@ -143,6 +136,7 @@ void Servidor::LogServer()
    this->serverLog<<fechalog<<this->buffer<<"\n";
 }
 
+//LOG CLIENTE
 void Servidor::LogCliente(string usuario)
 {
  string fechalog="";
@@ -160,6 +154,8 @@ void Servidor::LogCliente(string usuario)
    this->clienteLog<<fechalog<<this->buffer<<"\n";
 }
 
+
+//ADMINISTRACION USUARIOS
 void Servidor::CargalstUsuarios(){
 char linea[128];
 ifstream credenciales;
