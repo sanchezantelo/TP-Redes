@@ -34,7 +34,7 @@ Servidor::Servidor()
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
      {
-      cout << "Cliente conectado!" << endl;
+      strcpy(this->buffer,"cliente conectado");
       this->LogServer();
    }
 }
@@ -49,32 +49,25 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
-void Servidor::Login(){
+bool Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
    string usuario=buffer;
-   boolean encontrado=false;
-
-   cout<<"usuario:"<<usuario.c_str()<<endl;
+   bool autenticado=false;
+   string fechalog=this->fecha;
+   cout<<fechalog<<" :"<<usuario.substr(6,usuario.size())<<endl;
 //while(i<size){
    for (string n : this->lstUsuarios) {
-     if(n.find(usuario)==0){
-       encontrado=true;
+     if(n.find(usuario.substr(6,usuario.size()))==0){
+       autenticado=true;
        this->LogCliente(usuario.substr(0,5)); //MODIFICAR LONGITUD
-       usuario="";
      }
    }
-if(encontrado==true){
-    cout<<"encontrado"<<endl;
-    this->Enviar("credenciales validas");
-
-}else{
-cout<<"no encontrado"<<endl;
-}
+return autenticado;
 }
 
 bool Servidor::LogOut(){
     //this->Enviar("Sesion cerrada");
-    return strcmp(this->buffer,"salir")==0;
+    return strcmp(this->buffer,"salir;")==0;
 }
 
 bool Servidor::LogOutPorTimeOut(){
@@ -94,7 +87,6 @@ string Servidor::Recibir()
 {
     string mensaje;
     char status[1024];
-    this->LogServer();
     recv(client, buffer, sizeof(buffer), 0);
     strcpy(status,this->buffer);
     strcpy(status,mensaje.c_str());

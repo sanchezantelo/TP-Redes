@@ -26,7 +26,7 @@ class Servidor
         Servidor();
         string Recibir();
         void Enviar(string mensaje);
-        void Login();
+        bool Login();
         bool LogOut();
         bool sesion();
         bool LogOutPorTimeOut();

@@ -11,7 +11,7 @@ int main()
       Servidor *server = new Servidor();
       while(server->sesion() && !server->LogOutPorTimeOut())
       {
-
+         server->Enviar("");
          if(server->LogOutPorTimeOut()){
             server->CerrarSocket();
             server->~Servidor();
@@ -19,13 +19,20 @@ int main()
          }
 
          if(server->Recibir().find("login")){
-            server->Login();
+            if(server->Login()==true){
+                server->Enviar("autenticado");
+            }else{
+                server->Enviar("no autorizado");
+                server->CerrarSocket();
+                break;
+            }
          }
+
          if(server->LogOut()){
             server->Enviar("Sesion cerrada");
             server->CerrarSocket();
-            server->~Servidor();
             system("PAUSE");
+            break;
          }
 
       }
