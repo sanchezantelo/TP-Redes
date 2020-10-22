@@ -49,17 +49,18 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
+
 bool Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
-   string usuario=buffer;
+   string usuario=this->buffer;
    bool autenticado=false;
    string fechalog=this->fecha;
-   cout<<fechalog<<" :"<<usuario.substr(6,usuario.size())<<endl;
+   cout<<fechalog<<" :"<<usuario<<endl;
 //while(i<size){
    for (string n : this->lstUsuarios) {
      if(n.find(usuario.substr(6,usuario.size()))==0){
        autenticado=true;
-       this->LogCliente(usuario.substr(0,5)); //MODIFICAR LONGITUD
+       this->LogCliente(usuario.substr(6,9)); //MODIFICAR LONGITUD
      }
    }
 return autenticado;
@@ -86,19 +87,15 @@ bool Servidor::sesion(){
 string Servidor::Recibir()
 {
     string mensaje;
-    char status[1024];
-    recv(client, buffer, sizeof(buffer), 0);
-    strcpy(status,this->buffer);
-    strcpy(status,mensaje.c_str());
+    recv(client, this->buffer, sizeof(this->buffer), 0);
+    mensaje = this->buffer;
     return mensaje;
 }
 
 //ENVIAR
 void Servidor::Enviar(string mensaje)
 {
-   char status[1024];
-   strcpy(status,mensaje.c_str());
-   send(client, status, sizeof(status), 0);
+   send(client, mensaje.c_str(), mensaje.size(), 0);
 }
 
 void Servidor::CerrarSocket()

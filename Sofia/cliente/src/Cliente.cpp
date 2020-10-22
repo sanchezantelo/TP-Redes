@@ -1,8 +1,11 @@
 #include "Cliente.h"
 #define PORT 8080
 #define IP "127.0.0.1"
+#include<winsock2.h>
+#include <Servicio.h>
 
 using namespace std;
+
 Cliente::Cliente()
 {
     memset(this->buffer, 0, sizeof(this->buffer));
@@ -36,10 +39,7 @@ Cliente::~Cliente()
 
 void Cliente::Enviar(string mensaje)
 {
-    char status[1024];
-    //cin>>this->buffer;
-    strcpy(status,mensaje.c_str());
-    send(server,status, sizeof(status), 0);
+    send(server, mensaje.c_str(), mensaje.size(), 0);
 }
 
 string Cliente::Recibir()

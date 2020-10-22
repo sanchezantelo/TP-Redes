@@ -6,15 +6,68 @@
 	<stdlib.h>
 	<stdio.h>
 
-1603325554 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
+1603333085 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Cliente.h>
+	<Servicio.h>
 
 1603068588 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\include\cliente.h
 	<iostream>
 	<winsock2.h>
 
-1603327144 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\cliente.cpp
+1603332972 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\cliente.cpp
 	"Cliente.h"
+	<winsock2.h>
+	<Servicio.h>
+
+1603241826 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Cliente.h>
+
+1603241826 c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\include\cliente.h
+	<iostream>
+	<winsock2.h>
+
+1603245127 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+
+1603245178 c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\include\servicio.h
+	<iostream>
+
+1603293218 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\cliente\src\cliente.cpp
+	"Cliente.h"
+	<winsock2.h>
+	<Servicio.h>
+
+1603316846 source:g:\documents\git\tp-redes\sofia\cliente\src\cliente.cpp
+	"Cliente.h"
+	<winsock2.h>
+	<Servicio.h>
+
+1603311038 g:\documents\git\tp-redes\sofia\cliente\include\cliente.h
+	<iostream>
+	<winsock2.h>
+
+1603311683 g:\documents\git\tp-redes\sofia\cliente\include\servicio.h
+	<iostream>
+
+1603312023 source:g:\documents\git\tp-redes\sofia\cliente\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+
+1603316945 source:g:\documents\git\tp-redes\sofia\cliente\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Cliente.h>
+	<Servicio.h>
+
+1603328476 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\include\servicio.h
+	<iostream>
+
+1603328476 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
 

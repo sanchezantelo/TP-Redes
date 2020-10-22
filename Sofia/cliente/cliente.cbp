@@ -35,8 +35,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Cliente.h" />
+		<Unit filename="include/Servicio.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Cliente.cpp" />
+		<Unit filename="src/Servicio.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

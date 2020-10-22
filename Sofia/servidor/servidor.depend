@@ -14,20 +14,67 @@
 	<WinSock2.h>
 	<string>
 
-1603327672 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
+1603332300 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>
+	<Servicio.h>
 
-1603323298 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
+1603328991 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 	"list"
 
-1603326298 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
+1603331476 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
+
+1603241826 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\servidor\src\servidor.cpp
+	"Servidor.h"
+	<fstream>
+	<sstream>
+
+1603241826 c:\users\softing\documents\unla\redes\tp-redes\sofia\servidor\include\servidor.h
+	<iostream>
+	<winsock2.h>
+	<fstream>
+	<ctime>
+	"list"
+
+1603311038 source:g:\documents\git\tp-redes\sofia\servidor\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+	<string>
+
+1603311038 g:\documents\git\tp-redes\sofia\servidor\include\servicio.h
+	<iostream>
+
+1603316781 source:g:\documents\git\tp-redes\sofia\servidor\src\servidor.cpp
+	"Servidor.h"
+	<fstream>
+	<sstream>
+
+1603311038 g:\documents\git\tp-redes\sofia\servidor\include\servidor.h
+	<iostream>
+	<winsock2.h>
+	<fstream>
+	<ctime>
+	"list"
+
+1603316726 source:g:\documents\git\tp-redes\sofia\servidor\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Servidor.h>
+	<Servicio.h>
+
+1603328476 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+	<string>
+
+1603328476 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servicio.h
+	<iostream>
 
