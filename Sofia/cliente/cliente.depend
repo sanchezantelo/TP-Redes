@@ -42,23 +42,23 @@
 	<winsock2.h>
 	<Servicio.h>
 
-1603316846 source:g:\documents\git\tp-redes\sofia\cliente\src\cliente.cpp
+1603389960 source:g:\documents\git\tp-redes\sofia\cliente\src\cliente.cpp
 	"Cliente.h"
 	<winsock2.h>
 	<Servicio.h>
 
-1603311038 g:\documents\git\tp-redes\sofia\cliente\include\cliente.h
+1603386225 g:\documents\git\tp-redes\sofia\cliente\include\cliente.h
 	<iostream>
 	<winsock2.h>
 
-1603311683 g:\documents\git\tp-redes\sofia\cliente\include\servicio.h
+1603386225 g:\documents\git\tp-redes\sofia\cliente\include\servicio.h
 	<iostream>
 
-1603312023 source:g:\documents\git\tp-redes\sofia\cliente\src\servicio.cpp
+1603386225 source:g:\documents\git\tp-redes\sofia\cliente\src\servicio.cpp
 	"Servicio.h"
 	<string.h>
 
-1603316945 source:g:\documents\git\tp-redes\sofia\cliente\main.cpp
+1603399163 source:g:\documents\git\tp-redes\sofia\cliente\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Cliente.h>

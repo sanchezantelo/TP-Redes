@@ -149,7 +149,6 @@ string Servicio::crearServicio()
     for (int i = 0; i < 20; i++) {
     respuesta = respuesta + getfilaC()[i];
     }
-    respuesta = respuesta + "\n";
 
     return respuesta;
 }

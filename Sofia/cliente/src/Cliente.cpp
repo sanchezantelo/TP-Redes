@@ -39,6 +39,7 @@ Cliente::~Cliente()
 
 void Cliente::Enviar(string mensaje)
 {
+    memset(this->buffer,0,sizeof(this->buffer));
     send(server, mensaje.c_str(), mensaje.size(), 0);
 }
 

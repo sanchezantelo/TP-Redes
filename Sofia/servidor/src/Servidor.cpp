@@ -95,6 +95,7 @@ string Servidor::Recibir()
 //ENVIAR
 void Servidor::Enviar(string mensaje)
 {
+   memset(this->buffer,0,sizeof(this->buffer));
    send(client, mensaje.c_str(), mensaje.size(), 0);
 }
 

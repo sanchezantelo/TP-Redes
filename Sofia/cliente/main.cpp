@@ -163,7 +163,8 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
         cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
         cin >> opcion;
         switch (opcion) {
-            case '1': seguir = 0;/*crearServicio(origen, fecha, turno);*/ break;
+            case '1': seguir = 0;
+            cliente.Enviar(string("G2;" + servicio.mensaje()));
             case '2': break;
             case '\n': break;
             default: seguir = 0; break;

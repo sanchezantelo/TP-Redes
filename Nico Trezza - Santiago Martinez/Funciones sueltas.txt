@@ -56,3 +56,16 @@ void buscarServicioPorFecha(string fecha) {
 
     archivo.close();
 }
+
+-----------------------------------------------
+
+list<Servicio> lista;
+list<Servicio> :: iterator it = lista.begin();
+
+Servicio s = Servicio(5,"",1);
+lista.insert(it, s);
+
+for (it=lista.begin(); it!=lista.end(); ++it) {
+    cout << ((Servicio)* it).getOrigen();
+}
+cout << '\n';
