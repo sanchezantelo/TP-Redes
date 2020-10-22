@@ -81,3 +81,21 @@
 1602635736 c:\users\softing\documents\unla\redes\tp-redes\codigo\client\include\servicio.h
 	<iostream>
 
+1602939764 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\client\client final.cpp
+	<stdio.h>
+	<iostream>
+	<winsock2.h>
+	<Servicio.h>
+	"../Funciones/Funciones.h"
+
+1602939765 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\client\include\servicio.h
+	<iostream>
+
+1602939765 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\funciones\funciones.h
+	<stdio.h>
+	<iostream>
+
+1602939765 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\codigo\client\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+

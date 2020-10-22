@@ -67,21 +67,21 @@ void altaServicio(){
 
 
 void login(Cliente &cliente){
+    string usuario;
+    string contrasenia;
+    string mensaje;
+    string autenticacion;
 
-string usuario;
-string contrasenia;
-string mensaje;
-
-cliente.Enviar("login");
-cout<<cliente.Recibir();
-
+    cout<<cliente.Recibir();
  // for(int i=0;i<=2;i++){
     cout<<"Ingrese Usuario:"<<endl;
     cin>>usuario;
     cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
     cin>>contrasenia;
-    mensaje=""+usuario+";"+contrasenia;
+    mensaje="login;"+usuario+";"+contrasenia;
     cliente.Enviar(mensaje);
+    autenticacion=cliente.Recibir();
+    cout<<autenticacion<<endl;
 
     system("PAUSE");
 
@@ -92,7 +92,8 @@ void gestionarPasajes(void){};
 void verRegistrosDeActividades(void){};
 
 void cerrarSesion(Cliente &cliente){
-cliente.Enviar("salir");
+cliente.Enviar("salir;");
+cliente.CerrarSocket();
 };
 
 

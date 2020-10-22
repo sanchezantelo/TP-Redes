@@ -19,7 +19,6 @@ void* recibir(void *sockClient);
 bool contar(int segundos);
 char* recibir_y_contar(SOCKET sock);
 
-
 int main(int arg, char** argv){
     //INICIALIZAR UN SOCKET
     SOCKET sockServer = crearSocket();
