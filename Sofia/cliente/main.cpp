@@ -115,19 +115,33 @@ void login(Cliente &cliente){
     string usuario;
     string contrasenia;
     string mensaje;
- // for(int i=0;i<=2;i++){
+
+    bool ingresa=false;
+    int contador=0;
+
+
+do{
     cout<<"Ingrese Usuario:"<<endl;
     cin>>usuario;
     cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
     cin>>contrasenia;
     mensaje="login;"+usuario+";"+contrasenia;
     cliente.Enviar(mensaje);
-    cout<<cliente.Recibir()<<endl;
 
-    system("PAUSE");
+  //  cout<<cliente.Recibir()<<endl;
 
+    if(cliente.Recibir().compare("autenticado")==0){
+        ingresa=true;
+        cout<<"correcto"<<endl;
+    }else{
+      cout<<"no ingreso"<<endl;
+      usuario="";
+      contrasenia="";
+       contador++;
+          }
 
-//}
+}while(ingresa==false && contador< 3);
+system("PAUSE");
 };
 void gestionarPasajes(Cliente &cliente, Servicio &servicio){
     int seguir = 1;

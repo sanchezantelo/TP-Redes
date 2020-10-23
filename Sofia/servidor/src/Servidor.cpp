@@ -13,7 +13,6 @@ Servidor::Servidor()
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
    this->hora = time(0);
-   this->serverLog.open("serverlog.txt");
    this->ultimaconexion= time(0);
    this->CargalstUsuarios();
    memset(this->buffer, 0, sizeof(this->buffer));
@@ -114,6 +113,7 @@ void Servidor::CerrarSocket()
 void Servidor::LogServer()
 {
    string fechalog="";
+   this->serverLog.open("serverlog.txt");
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
@@ -123,7 +123,7 @@ void Servidor::LogServer()
    this->serverLog<<fechalog<<": ==========================="<<"\n";
    this->serverLog<<fechalog<<":        Inicia Servidor     "<<"\n";
    this->serverLog<<fechalog<<": ==========================="<<"\n";
-   this->serverLog<<fechalog<<this->buffer<<"\n";
+   this->serverLog<<fechalog<<": "<<this->buffer<<"\n";
 }
 
 //LOG CLIENTE
@@ -141,7 +141,7 @@ void Servidor::LogCliente(string usuario)
    this->clienteLog<<fechalog<<": ==========================="<<"\n";
    this->clienteLog<<fechalog<<":        Inicia Sesion       "<<"\n";
    this->clienteLog<<fechalog<<": ==========================="<<"\n";
-   this->clienteLog<<fechalog<<this->buffer<<"\n";
+   this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
 }
 
 
