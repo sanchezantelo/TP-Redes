@@ -30,8 +30,9 @@ int main()
                 server->Enviar("no autorizado");
                 server->CerrarSocket();
                 break;
+                }
             }
-         }
+
 
          if(server->LogOutPorTimeOut()){
             server->CerrarSocket();

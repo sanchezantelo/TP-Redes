@@ -1,7 +1,7 @@
 #include "Servidor.h"
 #define PORT 8080
 #define IP "127.0.0.1"
-#define TIMEOUT 60
+#define TIMEOUT 120
 #include <fstream>
 #include <sstream>
 

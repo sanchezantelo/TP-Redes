@@ -128,18 +128,21 @@ do{
     mensaje="login;"+usuario+";"+contrasenia;
     cliente.Enviar(mensaje);
 
-  //  cout<<cliente.Recibir()<<endl;
+//cout<<cliente.Recibir()<<endl;
 
     if(cliente.Recibir().compare("autenticado")==0){
         ingresa=true;
+        cout<<cliente.Recibir()<<endl;
         cout<<"correcto"<<endl;
     }else{
       cout<<"no ingreso"<<endl;
+      cout<<cliente.Recibir()<<endl;
+      Cliente *nuevocliente= new Cliente();
+      cliente=*nuevocliente;
       usuario="";
       contrasenia="";
        contador++;
           }
-
 }while(ingresa==false && contador< 3);
 system("PAUSE");
 };
