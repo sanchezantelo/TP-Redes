@@ -113,7 +113,7 @@ void Servidor::CerrarSocket()
 void Servidor::LogServer()
 {
    string fechalog="";
-   this->serverLog.open("serverlog.txt");
+   this->serverLog.open("serverlog.txt",fstream::app);
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
@@ -131,7 +131,7 @@ void Servidor::LogCliente(string usuario)
 {
  string fechalog="";
 
-   this->clienteLog.open(usuario+".txt");
+   this->clienteLog.open(usuario+".txt",fstream::app);
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
