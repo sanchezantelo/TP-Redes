@@ -25,13 +25,15 @@ int main()
     do {
         system("cls");        // Para limpiar la pantalla
 
-        // Texto del menú que se verá cada vez
+        // Texto del menú que se verá cada vez despues de loguearse
 
-        cout << "\n******RESERVA DE PASAJES*********\n\n" << endl;
-        cout << "1. Alta servicio" << endl;
-        cout << "2. Gestionar pasajes" << endl;
-        cout << "3. Ver registro de actividades" << endl;
-        cout << "4. Cerrar sesion" << endl;
+        cout << "\n*********************************"<< endl;
+        cout << "      RESERVA DE PASAJES         "  << endl;
+        cout << "*********************************"  << endl;
+        cout << "\n1. Alta servicio" << endl;
+        cout << "\n2. Gestionar pasajes" << endl;
+        cout << "\n3. Ver registro de actividades" << endl;
+        cout << "\n4. Cerrar sesion" << endl;
 
         cout << "\nIngrese una opcion: ";
         cin >> opcion;
@@ -131,7 +133,6 @@ do{
 
     if(cliente.Recibir().compare("autenticado")==0){
          ingresa=true;
-         contador=3;
          cout<<"\nBienvenido al sistema"<<endl;
     }
     if(cliente.Recibir().compare("no autenticado")==0){
@@ -146,11 +147,13 @@ do{
      if(contador==3){
       cliente.Enviar("salir;");
       cliente.CerrarSocket();
-     }
+      exit(-1);
+      }
 
 }while(ingresa==false && contador< 3);
 system("PAUSE");
 };
+
 void gestionarPasajes(Cliente &cliente, Servicio &servicio){
     int seguir = 1;
     char opcion;

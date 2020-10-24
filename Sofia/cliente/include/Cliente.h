@@ -11,6 +11,7 @@ class Cliente
         WSADATA WSAData;
         SOCKET server;
         SOCKADDR_IN addr;
+        bool ingresa;
         char buffer[1024];
         Cliente();
         void Enviar(string mensaje);
