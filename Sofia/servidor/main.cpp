@@ -2,7 +2,7 @@
 #include <winsock2.h>
 #include <Servidor.h>
 #include <Servicio.h>
-
+#include <dirent.h>
 using namespace std;
 
 int CrearServicio(char * message);
@@ -138,7 +138,7 @@ int buscarServicio(char * message) {
     list<Servicio> listaServicios;
     list<Servicio> :: iterator it = listaServicios.begin();
 
-    if (fecha != 0) {
+    if (string(fecha) != "0") {
         listaServicios = buscarServicioPorFecha(fecha);
         if (origen != 0) {
             listaServicios = buscarServicioPorOrigen(listaServicios, origen);
@@ -148,8 +148,19 @@ int buscarServicio(char * message) {
         }
     }
     else {
-        // Aca iria un while para buscar todos los archivos.
-        //listaServicios = buscarServicioPorFecha(fecha);
+        DIR *pDIR;
+        struct dirent *entry;
+        if( pDIR = opendir("servicios/") ) {
+            while(entry = readdir(pDIR)) {
+                if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 ) {
+                    list<Servicio> lista;
+                    list<Servicio> :: iterator it = lista.begin();
+                    lista = buscarServicioPorFecha(string(entry->d_name).substr(0,10));
+                    listaServicios.splice(listaServicios.end(), lista);
+                }
+            }
+            closedir(pDIR);
+        }
         if (origen != 0) {
             listaServicios = buscarServicioPorOrigen(listaServicios, origen);
         }
