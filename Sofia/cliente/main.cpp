@@ -119,7 +119,6 @@ void login(Cliente &cliente){
     bool ingresa=false;
     int contador=0;
 
-
 do{
     cout<<"Ingrese Usuario:"<<endl;
     cin>>usuario;
@@ -131,18 +130,17 @@ do{
 //cout<<cliente.Recibir()<<endl;
 
     if(cliente.Recibir().compare("autenticado")==0){
-        ingresa=true;
-        cout<<cliente.Recibir()<<endl;
-        cout<<"correcto"<<endl;
-    }else{
-      cout<<"no ingreso"<<endl;
-      cout<<cliente.Recibir()<<endl;
-      Cliente *nuevocliente= new Cliente();
-      cliente=*nuevocliente;
-      usuario="";
-      contrasenia="";
-       contador++;
-          }
+         ingresa=true;
+         contador=3;
+         cout<<"correcto"<<endl;
+    }
+    if(cliente.Recibir().compare("no autenticado")==0){
+        cout<<"no ingreso"<<endl;
+        Cliente *nuevocliente= new Cliente();
+        cliente=*nuevocliente;
+        contador++;
+     }
+
 }while(ingresa==false && contador< 3);
 system("PAUSE");
 };
