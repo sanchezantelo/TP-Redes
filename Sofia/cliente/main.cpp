@@ -145,9 +145,10 @@ do{
      }
 
      if(contador==3){
+      cout<<"Se supero la cantidad maxima de intentos de ingreso"<<endl;
       cliente.Enviar("salir;");
       cliente.CerrarSocket();
-      exit(-1);
+      exit(1);
       }
 
 }while(ingresa==false && contador< 3);

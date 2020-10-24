@@ -56,10 +56,10 @@ bool Servidor::Login(){
    string fechalog=this->fecha;
    cout<<fechalog<<" :"<<usuario<<endl;
 //while(i<size){
-   for (string n : this->lstUsuarios) {
-     if(n.find(usuario.substr(6,usuario.size()))==0){
+   for (string user : this->lstUsuarios) {
+     if(user.compare(usuario.substr(6,usuario.size()))==0){
        autenticado=true;
-       this->LogCliente(usuario.substr(6,9)); //MODIFICAR LONGITUD
+      this->LogCliente(usuario.substr(6,20)); //MODIFICAR LONGITUD
      }
    }
 return autenticado;
@@ -106,7 +106,6 @@ void Servidor::CerrarSocket()
    this->Enviar("Sesion cerrada");
    closesocket(client);
    strcpy(this->buffer,"Socket cerrado, cliente desconectado.");
-
 //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
@@ -125,7 +124,7 @@ void Servidor::CerrarSocket()
 void Servidor::LogServer()
 {
    string fechalog="";
-   this->serverLog.open("serverlog.txt",fstream::app);
+   this->serverLog.open("serverlog.log",fstream::app);
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
@@ -144,7 +143,7 @@ void Servidor::LogCliente(string usuario)
 {
  string fechalog="";
 
-   this->clienteLog.open(usuario+".txt",fstream::app);
+   this->clienteLog.open(usuario+".log",fstream::app);
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);

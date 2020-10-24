@@ -6,7 +6,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1603556177 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
+1603572151 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Cliente.h>
@@ -16,7 +16,7 @@
 	<iostream>
 	<winsock2.h>
 
-1603561796 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\cliente.cpp
+1603570831 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\cliente\src\cliente.cpp
 	"Cliente.h"
 	<winsock2.h>
 	<Servicio.h>
