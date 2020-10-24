@@ -100,9 +100,21 @@ void Servidor::Enviar(string mensaje)
 
 void Servidor::CerrarSocket()
 {
+
+   string fechalog="";
+
    this->Enviar("Sesion cerrada");
    closesocket(client);
-   cout << "Socket cerrado, cliente desconectado." << endl;
+   strcpy(this->buffer,"Socket cerrado, cliente desconectado.");
+
+//ACTUALIZA LA HORA DEL SERVIDOR
+   time (&this->hora);
+   this->timeinfo = localtime (&this->hora);
+   strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
+   fechalog=this->fecha;
+
+   this->serverLog<<fechalog<<": "<<this->buffer<<"\n";
+   this->LogServer();
    this->serverLog.close();
    this->clienteLog.close();
    WSACleanup();
@@ -124,6 +136,7 @@ void Servidor::LogServer()
    this->serverLog<<fechalog<<":        Inicia Servidor     "<<"\n";
    this->serverLog<<fechalog<<": ==========================="<<"\n";
    this->serverLog<<fechalog<<": "<<this->buffer<<"\n";
+
 }
 
 //LOG CLIENTE
@@ -142,6 +155,7 @@ void Servidor::LogCliente(string usuario)
    this->clienteLog<<fechalog<<":        Inicia Sesion       "<<"\n";
    this->clienteLog<<fechalog<<": ==========================="<<"\n";
    this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
+
 }
 
 
