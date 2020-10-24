@@ -132,15 +132,16 @@ do{
     if(cliente.Recibir().compare("autenticado")==0){
          ingresa=true;
          contador=3;
-         cout<<"correcto"<<endl;
+         cout<<"\nBienvenido al sistema"<<endl;
     }
     if(cliente.Recibir().compare("no autenticado")==0){
-        cout<<"no ingreso"<<endl;
         Cliente *nuevocliente= new Cliente();
         cliente=*nuevocliente;
+     }
+     if(!ingresa){
+        cout<<"Usuario y contrase\xA4"<<"a incorrectos"<<endl;
         contador++;
      }
-
 }while(ingresa==false && contador< 3);
 system("PAUSE");
 };
