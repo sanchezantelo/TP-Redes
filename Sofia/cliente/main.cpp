@@ -137,11 +137,17 @@ do{
     if(cliente.Recibir().compare("no autenticado")==0){
         Cliente *nuevocliente= new Cliente();
         cliente=*nuevocliente;
-     }
+    }
      if(!ingresa){
         cout<<"Usuario y contrase\xA4"<<"a incorrectos"<<endl;
         contador++;
      }
+
+     if(contador==3){
+      cliente.Enviar("salir;");
+      cliente.CerrarSocket();
+     }
+
 }while(ingresa==false && contador< 3);
 system("PAUSE");
 };

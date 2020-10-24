@@ -28,8 +28,8 @@ int main()
                 server->Enviar("autenticado");
             }else{
                 server->Enviar("no autorizado");
-             //   server->CerrarSocket();
-             //   break;
+                server->CerrarSocket();
+                break;
                 }
             }
 
