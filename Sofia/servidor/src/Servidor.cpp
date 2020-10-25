@@ -4,6 +4,7 @@
 #define TIMEOUT 120
 #include <fstream>
 #include <sstream>
+#include<ostream>
 
 using namespace std;
 
@@ -52,14 +53,20 @@ Servidor::~Servidor()
 bool Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
    string usuario=this->buffer;
+   string contrasenia;
    bool autenticado=false;
    string fechalog=this->fecha;
+
    cout<<fechalog<<" :"<<usuario<<endl;
-//while(i<size){
+   contrasenia=usuario.substr(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";")); //contraseña
+   usuario.replace(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";"),"");
+   usuario.replace(0,usuario.find_first_of(";"),""); //corta login
+   cout<<fechalog<<" :"<<usuario.replace(0,1,"")<<";"<<contrasenia.replace(0,1,"")<<endl; //longitud 12 usuario
+
    for (string user : this->lstUsuarios) {
-     if(user.compare(usuario.substr(6,usuario.size()))==0){
+     if(user.compare(usuario+";"+contrasenia)==0){
        autenticado=true;
-      this->LogCliente(usuario.substr(6,20)); //MODIFICAR LONGITUD
+      this->LogCliente(usuario.replace(0,1,"")); //MODIFICAR LONGITUD
      }
    }
 return autenticado;
@@ -111,8 +118,8 @@ void Servidor::CerrarSocket()
    this->timeinfo = localtime (&this->hora);
    strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
    fechalog=this->fecha;
-
-   this->serverLog<<fechalog<<": "<<this->buffer<<"\n";
+   this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
+   this->serverLog <<fechalog<<": "<<this->buffer<<"\n";
    this->LogServer();
    this->serverLog.close();
    this->clienteLog.close();

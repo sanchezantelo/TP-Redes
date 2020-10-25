@@ -27,10 +27,11 @@
 	<ctime>
 	"list"
 
-1603572692 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
+1603587233 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
+	<ostream>
 
 1603241826 source:c:\users\softing\documents\unla\redes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
