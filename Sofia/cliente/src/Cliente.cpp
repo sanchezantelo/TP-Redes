@@ -17,19 +17,20 @@ Cliente::Cliente()
     addr.sin_family = AF_INET;
     addr.sin_port = htons(PORT);
     status=connect(server, (SOCKADDR *)&addr, sizeof(addr));
+
     if (status == SOCKET_ERROR) {
         wprintf(L"No se pudo conectar con el servidor status: %ld\n", WSAGetLastError());
         status = closesocket(this->server);
-        if (status == SOCKET_ERROR)
-            wprintf(L"No se pudo cerrar socket: %ld\n", WSAGetLastError());
-        WSACleanup();
+        exit(0);
         system("PAUSE");
+        WSACleanup();
+
+
     }else{
     cout << "Conectado al Servidor!" << endl;    //ctor
-
     }
-
 }
+
 
 Cliente::~Cliente()
 {
@@ -55,5 +56,5 @@ void Cliente::CerrarSocket()
 {
     closesocket(server);
     WSACleanup();
-    cout << "Socket cerrado." << endl << endl;
+    cout << "\nSesion cerrada" << endl << endl;
 }

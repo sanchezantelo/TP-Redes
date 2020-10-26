@@ -17,7 +17,6 @@ class Cliente
         void Enviar(string mensaje);
         string Recibir();
         void CerrarSocket();
-        void login();
         virtual ~Cliente();
 
     protected:

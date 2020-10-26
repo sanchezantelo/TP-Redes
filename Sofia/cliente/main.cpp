@@ -6,7 +6,7 @@ using namespace std;
 
 void altaServicio(Cliente &cliente, Servicio &servicio);
 void gestionarPasajes(Cliente &cliente, Servicio &servicio);
-void verRegistrosDeActividades(void);
+void verRegistrosDeActividades(Cliente &cliente);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 
@@ -53,7 +53,7 @@ int main()
 
             case 3:
                 // Lista de instrucciones de la opción 3
-                verRegistrosDeActividades();
+                verRegistrosDeActividades(*Client);
                 system("pause>nul"); // Pausa
                 break;
 
@@ -65,8 +65,55 @@ int main()
         }
     } while (opcion != 4);            // opción de SALIDA
     return 0;
-
 }
+
+
+void login(Cliente &cliente){
+    cliente.Recibir();
+    string usuario;
+    string contrasenia;
+    string mensaje;
+    bool ingresa=false;
+    int contador=0;
+
+do{
+    cout<<"\nIngrese Usuario:";
+    cin>>usuario;
+    cout<<"\nIngrese contrase\xA4"<<"a: "; // \xA4 es la letra 'ñ'
+    cin>>contrasenia;
+    mensaje="login;"+usuario+";"+contrasenia;
+    cliente.Enviar(mensaje);
+
+//cout<<cliente.Recibir()<<endl;
+
+    if(cliente.Recibir().compare("autenticado")==0){
+         ingresa=true;
+         cout<<"\nBienvenido al sistema!"<<endl;
+    }
+    if(cliente.Recibir().compare("no autenticado")==0){
+        Cliente *nuevocliente= new Cliente();
+        cliente=*nuevocliente;
+    }
+
+     if(!ingresa){
+        cout<<"\nUsuario y contrase\xA4"<<"a incorrectos o supera maximo permitido de caracteres"<<endl;
+        contador++;
+     }
+
+     if(contador==3){
+      cout<<"\nSe supero la cantidad maxima de intentos de ingreso"<<endl;
+      cliente.Enviar("salir;");
+      cliente.CerrarSocket();
+      system("pause>null");
+      exit(0);
+      }
+
+}while(ingresa==false && contador<3);
+system("PAUSE");
+};
+
+
+
 void altaServicio(Cliente &cliente, Servicio &servicio){
     int seguir = 1;
     char opcion;
@@ -112,49 +159,6 @@ void altaServicio(Cliente &cliente, Servicio &servicio){
 };
 
 
-void login(Cliente &cliente){
-    cliente.Recibir();
-    string usuario;
-    string contrasenia;
-    string mensaje;
-
-    bool ingresa=false;
-    int contador=0;
-
-do{
-    cout<<"Ingrese Usuario:"<<endl;
-    cin>>usuario;
-    cout<<"Ingrese contrase\xA4"<<"a: "<<endl; // \xA4 es la letra 'ñ'
-    cin>>contrasenia;
-    mensaje="login;"+usuario+";"+contrasenia;
-    cliente.Enviar(mensaje);
-
-//cout<<cliente.Recibir()<<endl;
-
-    if(cliente.Recibir().compare("autenticado")==0){
-         ingresa=true;
-         cout<<"\nBienvenido al sistema"<<endl;
-    }
-    if(cliente.Recibir().compare("no autenticado")==0){
-        Cliente *nuevocliente= new Cliente();
-        cliente=*nuevocliente;
-    }
-     if(!ingresa){
-        cout<<"Usuario y contrase\xA4"<<"a incorrectos"<<endl;
-        contador++;
-     }
-
-     if(contador==3){
-      cout<<"Se supero la cantidad maxima de intentos de ingreso"<<endl;
-      cliente.Enviar("salir;");
-      cliente.CerrarSocket();
-      exit(1);
-      }
-
-}while(ingresa==false && contador< 3);
-system("PAUSE");
-};
-
 void gestionarPasajes(Cliente &cliente, Servicio &servicio){
     int seguir = 1;
     char opcion;
@@ -197,10 +201,10 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
         }
         system("cls");
     }
-}
+};
 
-;
-void verRegistrosDeActividades(void){};
+void verRegistrosDeActividades(Cliente &cliente){
+}
 
 void cerrarSesion(Cliente &cliente){
 cliente.Enviar("salir;");

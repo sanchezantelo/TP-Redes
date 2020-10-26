@@ -64,9 +64,9 @@ bool Servidor::Login(){
    cout<<fechalog<<" :"<<usuario.replace(0,1,"")<<";"<<contrasenia.replace(0,1,"")<<endl; //longitud 12 usuario
 
    for (string user : this->lstUsuarios) {
-     if(user.compare(usuario+";"+contrasenia)==0){
+     if(user.compare(usuario+";"+contrasenia)==0 && usuario.length()!=12){
        autenticado=true;
-      this->LogCliente(usuario.replace(0,1,"")); //MODIFICAR LONGITUD
+      this->LogCliente(usuario.replace(0,0,"")); //MODIFICAR LONGITUD
      }
    }
 return autenticado;
