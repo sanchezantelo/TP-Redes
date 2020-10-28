@@ -16,18 +16,22 @@ int main()
 {
     while(true){
       Servidor *server = new Servidor();
+      bool logueado = false;
 
       while(server->sesion() && !server->LogOutPorTimeOut())
       {
          char message[100] = "";
-         server->Enviar("ok");
+         if (!logueado)
+            server->Enviar("ok");
          string recibido = server->Recibir();
 
          if(recibido.find("login")==0){
             if(server->Login()==true){
                 server->Enviar("autenticado");
+                logueado = true;
             }else{
                 server->Enviar("no autorizado");
+                logueado = false;
                // server->CerrarSocket();
                 }
             }
@@ -139,12 +143,6 @@ int buscarServicio(char * message) {
 
     if (string(fecha) != "0") {
         listaServicios = buscarServicioPorFecha(fecha);
-        if (origen != 0) {
-            listaServicios = buscarServicioPorOrigen(listaServicios, origen);
-        }
-        if (turno != 0) {
-            listaServicios = buscarServicioPorTurno(listaServicios, turno);
-        }
     }
     else {
         DIR *pDIR;
@@ -160,12 +158,12 @@ int buscarServicio(char * message) {
             }
             closedir(pDIR);
         }
-        if (origen != 0) {
-            listaServicios = buscarServicioPorOrigen(listaServicios, origen);
-        }
-        if (turno != 0) {
-            listaServicios = buscarServicioPorTurno(listaServicios, turno);
-        }
+    }
+    if (origen != 0) {
+        listaServicios = buscarServicioPorOrigen(listaServicios, origen);
+    }
+    if (turno != 0) {
+        listaServicios = buscarServicioPorTurno(listaServicios, turno);
     }
 
     // Hay que devolverlo al cliente

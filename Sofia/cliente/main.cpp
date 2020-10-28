@@ -90,7 +90,7 @@ do{
          ingresa=true;
          cout<<"\nBienvenido al sistema!"<<endl;
     }
-    if(cliente.Recibir().compare("no autenticado")==0){
+    else if(cliente.Recibir().compare("no autenticado")==0){
         Cliente *nuevocliente= new Cliente();
         cliente=*nuevocliente;
     }
@@ -149,9 +149,20 @@ void altaServicio(Cliente &cliente, Servicio &servicio){
         cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
         cin >> opcion;
         switch (opcion) {
-            case '1':
+            case '1': {
                 seguir = 0;
                 cliente.Enviar(string("G1;" + servicio.mensaje()));
+                string recibido = cliente.Recibir();
+                if (recibido == "1")
+                    cout << "El servicio se guardo correctamente" << endl;
+                else if (recibido == "2")
+                    cout << "El servicio ya existe" << endl;
+                else if (recibido == "3")
+                    cout << "No se pudo crear el servicio" << endl;
+                system("pause");
+                break;
+            }
+            case '2': break;
             default: seguir = 0; break;
         }
         system("cls");
@@ -193,8 +204,13 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
         cout << "1. Si" << endl << "2. No, ingresarlos nuevamente" << endl;
         cin >> opcion;
         switch (opcion) {
-            case '1': seguir = 0;
-            cliente.Enviar(string("G2;" + servicio.mensaje()));
+            case '1': {
+                seguir = 0;
+                cliente.Enviar(string("G2;" + servicio.mensaje()));
+                string recibido = cliente.Recibir();
+                system("pause");
+                break;
+            }
             case '2': break;
             case '\n': break;
             default: seguir = 0; break;

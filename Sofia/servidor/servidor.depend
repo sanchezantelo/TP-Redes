@@ -46,27 +46,28 @@
 	<ctime>
 	"list"
 
-1603581214 source:g:\documents\git\tp-redes\sofia\servidor\src\servicio.cpp
+1603909675 source:g:\documents\git\tp-redes\sofia\servidor\src\servicio.cpp
 	"Servicio.h"
 	<string.h>
 	<string>
 
-1603581214 g:\documents\git\tp-redes\sofia\servidor\include\servicio.h
+1603909675 g:\documents\git\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
 
-1603581214 source:g:\documents\git\tp-redes\sofia\servidor\src\servidor.cpp
+1603909675 source:g:\documents\git\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
+	<ostream>
 
-1603581214 g:\documents\git\tp-redes\sofia\servidor\include\servidor.h
+1603909675 g:\documents\git\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 	"list"
 
-1603581389 source:g:\documents\git\tp-redes\sofia\servidor\main.cpp
+1603910858 source:g:\documents\git\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>
