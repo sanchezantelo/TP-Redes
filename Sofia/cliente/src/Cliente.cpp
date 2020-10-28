@@ -8,6 +8,7 @@ using namespace std;
 
 Cliente::Cliente()
 {
+    this->sesion=false;
     memset(this->buffer, 0, sizeof(this->buffer));
     cout<<"Conectando al servidor..."<<endl<<endl;
     int status;
@@ -34,7 +35,7 @@ Cliente::Cliente()
 
 Cliente::~Cliente()
 {
-    //dtor
+ this->sesion=false;
 }
 
 
@@ -57,4 +58,12 @@ void Cliente::CerrarSocket()
     closesocket(server);
     WSACleanup();
     cout << "\nSesion cerrada" << endl << endl;
+}
+
+bool Cliente::getSesion(){
+return this->sesion;
+}
+
+void Cliente::setSesion(bool sesion){
+this->sesion=sesion;
 }

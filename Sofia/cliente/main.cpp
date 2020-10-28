@@ -9,34 +9,22 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio);
 void verRegistrosDeActividades(Cliente &cliente);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
+void menuEncabezado(void);
 
+int main(){
 
-int main()
-{
 
      Cliente *Client = new Cliente();
-     login(*Client);
      Servicio *Serv = new Servicio(0,"",0);
+     login(*Client);
 
+int opcion=0;
 
-     int opcion;
+    while(opcion!=4 || Client->getSesion()) {
 
-
-    do {
-        system("cls");        // Para limpiar la pantalla
-
-        // Texto del menú que se verá cada vez despues de loguearse
-
-        cout << "\n*********************************"<< endl;
-        cout << "      RESERVA DE PASAJES         "  << endl;
-        cout << "*********************************"  << endl;
-        cout << "\n1. Alta servicio" << endl;
-        cout << "\n2. Gestionar pasajes" << endl;
-        cout << "\n3. Ver registro de actividades" << endl;
-        cout << "\n4. Cerrar sesion" << endl;
-
-        cout << "\nIngrese una opcion: ";
+        menuEncabezado();
         cin >> opcion;
+
 
         switch (opcion) {
             case 1:
@@ -60,11 +48,30 @@ int main()
             case 4:
                 // Lista de instrucciones de la opción 4
                 cerrarSesion(*Client);
+                Client->setSesion(false);
                 system("pause>nul"); // Pausa
                 break;
         }
-    } while (opcion != 4);            // opción de SALIDA
+    };            // opción de SALIDA
     return 0;
+}
+
+void menuEncabezado(void){
+
+  system("cls");        // Para limpiar la pantalla
+
+        // Texto del menú que se verá cada vez despues de loguearse
+
+        cout << "\n*********************************"<< endl;
+        cout << "      RESERVA DE PASAJES         "  << endl;
+        cout << "*********************************"  << endl;
+        cout << "\n1. Alta servicio" << endl;
+        cout << "\n2. Gestionar pasajes" << endl;
+        cout << "\n3. Ver registro de actividades" << endl;
+        cout << "\n4. Cerrar sesion" << endl;
+
+        cout << "\nIngrese una opcion: ";
+
 }
 
 
@@ -73,7 +80,6 @@ void login(Cliente &cliente){
     string usuario;
     string contrasenia;
     string mensaje;
-    bool ingresa=false;
     int contador=0;
 
 do{
@@ -87,7 +93,7 @@ do{
 //cout<<cliente.Recibir()<<endl;
 
     if(cliente.Recibir().compare("autenticado")==0){
-         ingresa=true;
+         cliente.setSesion(true);
          cout<<"\nBienvenido al sistema!"<<endl;
     }
     else if(cliente.Recibir().compare("no autenticado")==0){
@@ -95,7 +101,7 @@ do{
         cliente=*nuevocliente;
     }
 
-     if(!ingresa){
+     if(!cliente.getSesion()){
         cout<<"\nUsuario y contrase\xA4"<<"a incorrectos o supera maximo permitido de caracteres"<<endl;
         contador++;
      }
@@ -104,12 +110,12 @@ do{
       cout<<"\nSe supero la cantidad maxima de intentos de ingreso"<<endl;
       cliente.Enviar("salir;");
       cliente.CerrarSocket();
-      system("pause>null");
+      system("PAUSE");
       exit(0);
       }
 
-}while(ingresa==false && contador<3);
-system("PAUSE");
+}while(!cliente.getSesion() && contador<3);
+ system("PAUSE");
 };
 
 
