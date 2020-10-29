@@ -167,15 +167,8 @@ string buscarServicio(char * message) {
         listaServicios = buscarServicioPorTurno(listaServicios, turno);
     }
 
-    // Hay que devolverlo al cliente
     for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
-        /*char a [0];
-        itoa ((((Servicio)* it).getOrigen()), a, 10 );
-        char b [0];
-        itoa ((((Servicio)* it).getTurno()), b, 10 );*/
-        lst = ((Servicio)* it).getOrigen() + ";" + ((Servicio)* it).getFecha() + ";" + ((Servicio)* it).getTurno();
-        cout << ((Servicio)* it).getOrigen() << ";" << ((Servicio)* it).getFecha() << ";" << ((Servicio)* it).getTurno() << endl;
-        //cout << a << ";" << b << endl;
+        lst = lst + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|";
         cout << lst << endl;
     }
     return lst;

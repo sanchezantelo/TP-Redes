@@ -103,7 +103,7 @@
 	<ctime>
 	"list"
 
-1604008195 source:d:\tp-redes\sofia\servidor\main.cpp
+1604010105 source:d:\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>
