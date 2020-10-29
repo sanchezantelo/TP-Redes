@@ -172,7 +172,8 @@ int buscarServicio(char * message) {
 
     // Hay que devolverlo al cliente
     for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
-        cout << ((Servicio)* it).getOrigen() << ";" << ((Servicio)* it).getFecha() << ";" << ((Servicio)* it).getTurno() << endl;
+        lst = lst + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|\n";
+        cout << lst << endl;
     }
 
     return respuesta;
