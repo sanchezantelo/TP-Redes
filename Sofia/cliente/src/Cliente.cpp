@@ -61,6 +61,9 @@ void Cliente::CerrarSocket()
 }
 
 bool Cliente::getSesion(){
+    if(server == INVALID_SOCKET || server == SOCKET_ERROR){
+        this->sesion=false;
+    }
 return this->sesion;
 }
 

@@ -20,7 +20,15 @@ class Servidor
         char fecha[80];
         struct tm * timeinfo;
         time_t ultimaconexion;
+        int  i, len, rc, on = 1;
+        int  max_sd, new_sd;
+        int  desc_ready, end_server = FALSE;
+        int    close_conn;
+        struct timeval  timeout;
+        fd_set master_set, working_set;
+
         list<string>lstUsuarios;
+        list<string>lstActividades;
         ofstream serverLog;
         ofstream clienteLog;
         Servidor();
@@ -35,6 +43,8 @@ class Servidor
         void CerrarSocket();
         void CargalstUsuarios();
         void ImprimirlstUsuarios();
+        void ImprimirlstActividades();
+        string mostrarActividades(string usuario);
         virtual ~Servidor();
 
     protected:

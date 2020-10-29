@@ -1,7 +1,7 @@
 #include "Servidor.h"
 #define PORT 8080
 #define IP "127.0.0.1"
-#define TIMEOUT 120
+#define TIMEOUT 60
 #include <fstream>
 #include <sstream>
 #include<ostream>
@@ -21,7 +21,6 @@ Servidor::Servidor()
 
    WSAStartup(MAKEWORD(2,0), &WSAData);
    server = socket(AF_INET, SOCK_STREAM, 0);
-
    serverAddr.sin_addr.s_addr = INADDR_ANY;
    serverAddr.sin_family = AF_INET;
    serverAddr.sin_port = htons(PORT);
@@ -38,6 +37,7 @@ Servidor::Servidor()
       this->LogServer();
    }
 }
+
 
 //DESTRUCTOR
 Servidor::~Servidor()
@@ -183,5 +183,35 @@ credenciales.close();
 void Servidor::ImprimirlstUsuarios(){
    for (string usuario : this->lstUsuarios){
         cout << usuario << '\n';
+    }
+}
+
+string Servidor:: mostrarActividades(string usuario){
+char linea[500];
+ifstream archivo;
+
+string cliente,filename;
+
+filename=usuario.substr(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";"))+".log";
+cout<<filename<<endl;
+
+archivo.open(filename.replace(0,1,"").c_str(),ios::in);
+  if(archivo.fail()){
+    cout<<"No se pudo abrir el archivo"<<endl;
+  }
+
+  while (!archivo.eof()) {
+      archivo.getline(linea,sizeof(linea));
+      cliente=cliente+linea;
+      //this->lstActividades.push_front(cliente);
+
+  }
+archivo.close();
+return cliente;
+}
+
+void Servidor::ImprimirlstActividades(){
+   for (string cliente : this->lstActividades){
+        cout << cliente << '\n';
     }
 }

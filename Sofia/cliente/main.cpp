@@ -17,13 +17,14 @@ int main(){
      Cliente *Client = new Cliente();
      Servicio *Serv = new Servicio(0,"",0);
      login(*Client);
+     int opcion=0;
 
-int opcion=0;
 
     while(opcion!=4 || Client->getSesion()) {
 
         menuEncabezado();
         cin >> opcion;
+
 
 
         switch (opcion) {
@@ -130,7 +131,7 @@ void altaServicio(Cliente &cliente, Servicio &servicio){
     char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
 
 
-    while (seguir) {
+    while (seguir && cliente.getSesion()) {
         do {
             system("cls");
             cout << "Ingresar origen (1. Buenos Aires, 2. Mar del Plata)" << endl;
@@ -226,6 +227,12 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
 };
 
 void verRegistrosDeActividades(Cliente &cliente){
+cout<<"hola"<<endl;
+
+cliente.Enviar("MostrarActividad;sofia");
+                string recibido = cliente.Recibir();
+                cout<<recibido<<endl;
+                system("PAUSE");
 }
 
 void cerrarSesion(Cliente &cliente){
