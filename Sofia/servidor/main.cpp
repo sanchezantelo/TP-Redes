@@ -6,7 +6,7 @@
 using namespace std;
 
 int CrearServicio(char * message);
-int buscarServicio(char * message);
+string buscarServicio(char * message);
 list<Servicio> buscarServicioPorFecha(string fecha);
 list<Servicio> buscarServicioPorOrigen(list<Servicio> lista, int origen);
 list<Servicio> buscarServicioPorTurno(list<Servicio> lista, int turno);
@@ -53,8 +53,8 @@ int main()
 
          if(recibido.find("G2") == 0){
             strcpy(message, recibido.erase(0,3).c_str());
-            int respuesta = buscarServicio(message);
-            server->Enviar(to_string(respuesta));
+            string respuesta = buscarServicio(message);
+            server->Enviar(respuesta);
          }
 
          if(server->LogOut()){
@@ -125,7 +125,7 @@ int CrearServicio(char * message)
     return respuesta;
 }
 
-int buscarServicio(char * message) {
+string buscarServicio(char * message) {
     int respuesta = 0;
     char c_origen[5] = "";
     char fecha[15] = "";
@@ -138,6 +138,7 @@ int buscarServicio(char * message) {
     int origen = atoi(c_origen);
     int turno = atoi(c_turno);
 
+    string lst="prueba";
     list<Servicio> listaServicios;
     list<Servicio> :: iterator it = listaServicios.begin();
 
@@ -171,7 +172,7 @@ int buscarServicio(char * message) {
         cout << ((Servicio)* it).getOrigen() << ";" << ((Servicio)* it).getFecha() << ";" << ((Servicio)* it).getTurno() << endl;
     }
 
-    return respuesta;
+    return lst;
 }
 
 list<Servicio> buscarServicioPorFecha(string fecha) {
