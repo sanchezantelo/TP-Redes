@@ -138,7 +138,7 @@ string buscarServicio(char * message) {
     int origen = atoi(c_origen);
     int turno = atoi(c_turno);
 
-    string lst="prueba";
+    string lst = "";
     list<Servicio> listaServicios;
     list<Servicio> :: iterator it = listaServicios.begin();
 
@@ -169,9 +169,15 @@ string buscarServicio(char * message) {
 
     // Hay que devolverlo al cliente
     for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
+        /*char a [0];
+        itoa ((((Servicio)* it).getOrigen()), a, 10 );
+        char b [0];
+        itoa ((((Servicio)* it).getTurno()), b, 10 );*/
+        lst = ((Servicio)* it).getOrigen() + ";" + ((Servicio)* it).getFecha() + ";" + ((Servicio)* it).getTurno();
         cout << ((Servicio)* it).getOrigen() << ";" << ((Servicio)* it).getFecha() << ";" << ((Servicio)* it).getTurno() << endl;
+        //cout << a << ";" << b << endl;
+        cout << lst << endl;
     }
-
     return lst;
 }
 
