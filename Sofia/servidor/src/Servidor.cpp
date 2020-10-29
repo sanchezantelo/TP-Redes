@@ -187,7 +187,7 @@ void Servidor::ImprimirlstUsuarios(){
 }
 
 string Servidor:: mostrarActividades(string usuario){
-char linea[500];
+char linea[150];
 ifstream archivo;
 
 string cliente,filename;
@@ -202,7 +202,7 @@ archivo.open(filename.replace(0,1,"").c_str(),ios::in);
 
   while (!archivo.eof()) {
       archivo.getline(linea,sizeof(linea));
-      cliente=cliente+linea;
+      cliente=cliente;linea;
       //this->lstActividades.push_front(cliente);
 
   }
