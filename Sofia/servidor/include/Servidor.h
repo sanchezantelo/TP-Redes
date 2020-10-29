@@ -15,7 +15,7 @@ class Servidor
         WSADATA WSAData;
         SOCKET server, client;
         SOCKADDR_IN serverAddr, clientAddr;
-        char buffer[1024];
+        char buffer[2048];
         time_t hora;
         char fecha[80];
         struct tm * timeinfo;

@@ -202,7 +202,7 @@ archivo.open(filename.replace(0,1,"").c_str(),ios::in);
 
   while (!archivo.eof()) {
       archivo.getline(linea,sizeof(linea));
-      cliente=cliente;linea;
+      cliente=""+cliente+";"+linea;
       //this->lstActividades.push_front(cliente);
 
   }
