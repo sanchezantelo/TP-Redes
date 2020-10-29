@@ -14,7 +14,7 @@
 	<WinSock2.h>
 	<string>
 
-1604010433 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
+1604010800 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>
@@ -28,7 +28,7 @@
 	<ctime>
 	"list"
 
-1604010288 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
+1604010556 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
@@ -81,4 +81,32 @@
 
 1603328476 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
+
+1603996425 source:d:\tp-redes\sofia\servidor\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+	<string>
+
+1603996425 d:\tp-redes\sofia\servidor\include\servicio.h
+	<iostream>
+
+1603996425 source:d:\tp-redes\sofia\servidor\src\servidor.cpp
+	"Servidor.h"
+	<fstream>
+	<sstream>
+	<ostream>
+
+1603996425 d:\tp-redes\sofia\servidor\include\servidor.h
+	<iostream>
+	<winsock2.h>
+	<fstream>
+	<ctime>
+	"list"
+
+1604010105 source:d:\tp-redes\sofia\servidor\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Servidor.h>
+	<Servicio.h>
+	<dirent.h>
 

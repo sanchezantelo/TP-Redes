@@ -215,6 +215,7 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 seguir = 0;
                 cliente.Enviar(string("G2;" + servicio.mensaje()));
                 string recibido = cliente.Recibir();
+                cout << recibido << endl;
                 system("pause");
                 break;
             }
@@ -227,7 +228,6 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
 };
 
 void verRegistrosDeActividades(Cliente &cliente){
-cout<<"hola"<<endl;
 
 cliente.Enviar("MostrarActividad;sofia");
                 string recibido = cliente.Recibir();

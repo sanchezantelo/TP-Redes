@@ -43,7 +43,6 @@ int main()
             system("PAUSE");
          }
          if(recibido.find("MostrarActividad")==0){
-            cout<<server->mostrarActividades(recibido)<<endl;
             server->Enviar(server->mostrarActividades(recibido));
          }
 

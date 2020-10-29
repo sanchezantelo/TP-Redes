@@ -222,13 +222,35 @@
 2020-10-28_17:36: ===========================
 2020-10-28_17:36: cliente conectado
 2020-10-28_17:38: Socket cerrado, cliente desconectado.
+<<<<<<< HEAD
+=======
+2020-10-29_16:00: ===========================
+2020-10-29_16:00:        Inicia Servidor     
+2020-10-29_16:00: ===========================
+2020-10-29_16:00: cliente conectado
+2020-10-29_16:02: Socket cerrado, cliente desconectado.
+2020-10-29_16:03: ===========================
+2020-10-29_16:03:        Inicia Servidor     
+2020-10-29_16:03: ===========================
+2020-10-29_16:03: cliente conectado
+2020-10-29_16:04: Socket cerrado, cliente desconectado.
+>>>>>>> aaf1525a4087af83fd53edf4163c4b506cd1cc2b
 2020-10-29_16:08: ===========================
 2020-10-29_16:08:        Inicia Servidor     
 2020-10-29_16:08: ===========================
 2020-10-29_16:08: cliente conectado
+<<<<<<< HEAD
 2020-10-29_16:09: Socket cerrado, cliente desconectado.
 2020-10-29_19:29: ===========================
 2020-10-29_19:29:        Inicia Servidor     
 2020-10-29_19:29: ===========================
 2020-10-29_19:29: cliente conectado
 2020-10-29_19:30: Socket cerrado, cliente desconectado.
+=======
+2020-10-29_16:10: Socket cerrado, cliente desconectado.
+2020-10-29_18:20: ===========================
+2020-10-29_18:20:        Inicia Servidor     
+2020-10-29_18:20: ===========================
+2020-10-29_18:20: cliente conectado
+2020-10-29_18:21: Socket cerrado, cliente desconectado.
+>>>>>>> aaf1525a4087af83fd53edf4163c4b506cd1cc2b
