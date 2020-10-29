@@ -234,6 +234,8 @@ cliente.Enviar("salir;");
 cliente.CerrarSocket();
 };
 
-
+void menu(string recibido) {
+    int destino =
+}
 
 

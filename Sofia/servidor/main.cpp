@@ -168,7 +168,7 @@ string buscarServicio(char * message) {
     }
 
     for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
-        lst = lst + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|";
+        lst = lst + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|\n";
         cout << lst << endl;
     }
     return lst;
