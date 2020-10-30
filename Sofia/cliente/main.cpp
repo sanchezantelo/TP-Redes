@@ -221,10 +221,6 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 string recibido = cliente.Recibir();
                 cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
                 cout << recibido << endl;
-                cout << "Ingrese el numero de servicio que desea elegir: " << endl;
-                cin >> opcion;
-                cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
-                cout << recibido << endl;
                 cout << "Ingrese el numero de servicio que desea elegir: 0 para salir" << endl;
                 cin >> opcion;
                 if (opcion=='0'){
@@ -276,14 +272,17 @@ string service (char opcion, string recibido){
     char * aux = strtok (cstr, ")");
 
     while (aux != 0){
-            cout << aux << '\n';
+            //cout << aux << endl;
             char *pOpcion = &opcion;
-            /*if (strcmp(aux, pOpcion) == 0){
+            if (strcmp(aux, pOpcion)==0){
                 aux = strtok(NULL, "|");
+                //cout << aux << endl;
                 prueba = aux;
-            }*/
-            aux = strtok(NULL, "|"); //Aunque no sea igual, debo "cortarlo" para que siga el mismo formato. Solo se guarda cuando n) es igual a opcion.
-            cout << aux << '\n';
+            }else{
+                aux = strtok(NULL, "|");
+            }//Aunque no sea igual, debo "cortarlo" para que siga el mismo formato. Solo se guarda cuando n) es igual a opcion.
+
+            //cout << aux << endl;
             aux = strtok(NULL, ")");
     }
     return prueba;

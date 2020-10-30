@@ -84,10 +84,12 @@
 	<iostream>
 	"list"
 
-1603996425 source:d:\tp-redes\sofia\servidor\src\servicio.cpp
+1604081627 source:d:\tp-redes\sofia\servidor\src\servicio.cpp
 	"Servicio.h"
 	<string.h>
 	<string>
+	<fstream>
+	<dirent.h>
 
 1604081001 d:\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
