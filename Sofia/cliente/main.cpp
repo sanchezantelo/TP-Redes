@@ -12,7 +12,6 @@ void mostrarActividades(string actividades);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 void menuEncabezado(void);
-//string toText(string recibido);
 string service (char opcion, string recibido);
 
 int main(){
@@ -224,7 +223,15 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 cout << recibido << endl;
                 cout << "Ingrese el numero de servicio que desea elegir: " << endl;
                 cin >> opcion;
-                //string recibido1 = service (opcion, recibido);
+                cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
+                cout << recibido << endl;
+                cout << "Ingrese el numero de servicio que desea elegir: 0 para salir" << endl;
+                cin >> opcion;
+                if (opcion=='0'){
+                        break;}else{
+                        string respuesta = service (opcion, recibido);
+                        cout << respuesta << endl;
+                };
                 system("pause");
                 break;
             }
@@ -260,43 +267,24 @@ void mostrarActividades(string actividades){
   }
 }
 
-/*string service (char opcion, string recibido){
-    int i = 0;
-    string n = "";
-    string eleccion = "";
-    for (i=0; i<=recibido.size(); i++){
-        if (recibido[i]=="("){
-            while (recibido[i]!=")"){
-                n = n + recibido[i];
-            i++;
-            }
-        }
-        if (n == opcion){
-            while (recibido[i]!='|'){
-                eleccion = eleccion + recibido[i];
-            }
-        }
+string service (char opcion, string recibido){
+
+    string prueba = "prueba";
+    char * cstr = new char [recibido.size()+1];
+    strcpy (cstr, recibido.c_str());
+
+    char * aux = strtok (cstr, ")");
+
+    while (aux != 0){
+            cout << aux << '\n';
+            char *pOpcion = &opcion;
+            /*if (strcmp(aux, pOpcion) == 0){
+                aux = strtok(NULL, "|");
+                prueba = aux;
+            }*/
+            aux = strtok(NULL, "|"); //Aunque no sea igual, debo "cortarlo" para que siga el mismo formato. Solo se guarda cuando n) es igual a opcion.
+            cout << aux << '\n';
+            aux = strtok(NULL, ")");
     }
-    return eleccion;
-}*/
-
-/*string toText(string recibido){
-    string origen = "";
-    string turno = "";
-    string resultado = "";
-    origen = recibido.substr(recibido.find_first_of(")", recibido.find_last_of(";")), recibido.find_last_of(";")); //origen
-    turno = recibido.substr(recibido.find_last_of(";", recibido.find_last_of("|")), recibido.find_last_of("|")); //turno
-    if (origen=="1"){
-        origen = "Buenos Aires";
-    }else if (origen=="2"){
-        origen = "Mar del Plata";
-        }
-        return origen;
-}*/
-
-    //contrasenia=usuario.substr(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";")); //contraseña
-    //usuario.replace(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";"),"");
-    //usuario.replace(0,usuario.find_first_of(";"),""); //corta login
-    //cout<<fechalog<<" :"<<usuario.replace(0,1,"")<<";"<<contrasenia.replace(0,1,"")<<endl; //longitud 12 usuario
-
-
+    return prueba;
+}
