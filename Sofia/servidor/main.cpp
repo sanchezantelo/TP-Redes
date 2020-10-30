@@ -63,7 +63,6 @@ int main()
          if(server->LogOut()){
             server->Enviar("Sesion cerrada");
             server->CerrarSocket();
-            system("PAUSE");
             break;
          }
 

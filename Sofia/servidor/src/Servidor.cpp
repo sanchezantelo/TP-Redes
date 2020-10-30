@@ -160,7 +160,11 @@ void Servidor::LogCliente(string usuario)
    this->clienteLog<<fechalog<<": ==========================="<<"\n";
    this->clienteLog<<fechalog<<":        Inicia Sesion       "<<"\n";
    this->clienteLog<<fechalog<<": ==========================="<<"\n";
+    string mensaje=this->buffer;
+   if(mensaje.find("login;")!=0){
    this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
+    }
+
 
 }
 
@@ -193,7 +197,6 @@ ifstream archivo;
 string cliente,filename;
 
 filename=usuario.substr(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";"))+".log";
-cout<<filename<<endl;
 
 archivo.open(filename.replace(0,1,"").c_str(),ios::in);
   if(archivo.fail()){
@@ -203,10 +206,9 @@ archivo.open(filename.replace(0,1,"").c_str(),ios::in);
   while (!archivo.eof()) {
       archivo.getline(linea,sizeof(linea));
       cliente=""+cliente+";"+linea;
-      //this->lstActividades.push_front(cliente);
-
   }
 archivo.close();
+cliente=cliente+";";
 return cliente;
 }
 
