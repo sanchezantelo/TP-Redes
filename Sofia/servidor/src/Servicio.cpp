@@ -264,7 +264,7 @@ string Servicio:: buscarServicio(char * message) {
     int i=0;
     for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
         i++;
-        lst = lst + "(" + to_string(i) + ")" + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|\n";
+        lst = lst + to_string(i) + ")" + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + "|\n";
     }
     cout << lst << endl;
     return lst;
