@@ -90,20 +90,20 @@
 1603996425 d:\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
 
-1603996425 source:d:\tp-redes\sofia\servidor\src\servidor.cpp
+1604025145 source:d:\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
 	<ostream>
 
-1603996425 d:\tp-redes\sofia\servidor\include\servidor.h
+1604025145 d:\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 	"list"
 
-1604011219 source:d:\tp-redes\sofia\servidor\main.cpp
+1604029195 source:d:\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>

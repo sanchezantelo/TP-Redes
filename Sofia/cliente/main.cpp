@@ -12,6 +12,8 @@ void mostrarActividades(string actividades);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 void menuEncabezado(void);
+//string toText(string recibido);
+string service (char opcion, string recibido);
 
 int main(){
 
@@ -218,7 +220,11 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 seguir = 0;
                 cliente.Enviar(string("G2;" + servicio.mensaje()));
                 string recibido = cliente.Recibir();
+                cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
                 cout << recibido << endl;
+                cout << "Ingrese el numero de servicio que desea elegir: " << endl;
+                cin >> opcion;
+                //string recibido1 = service (opcion, recibido);
                 system("pause");
                 break;
             }
@@ -254,8 +260,43 @@ void mostrarActividades(string actividades){
   }
 }
 
-/*void menu(string recibido) {
-    int destino =
+/*string service (char opcion, string recibido){
+    int i = 0;
+    string n = "";
+    string eleccion = "";
+    for (i=0; i<=recibido.size(); i++){
+        if (recibido[i]=="("){
+            while (recibido[i]!=")"){
+                n = n + recibido[i];
+            i++;
+            }
+        }
+        if (n == opcion){
+            while (recibido[i]!='|'){
+                eleccion = eleccion + recibido[i];
+            }
+        }
+    }
+    return eleccion;
 }*/
+
+/*string toText(string recibido){
+    string origen = "";
+    string turno = "";
+    string resultado = "";
+    origen = recibido.substr(recibido.find_first_of(")", recibido.find_last_of(";")), recibido.find_last_of(";")); //origen
+    turno = recibido.substr(recibido.find_last_of(";", recibido.find_last_of("|")), recibido.find_last_of("|")); //turno
+    if (origen=="1"){
+        origen = "Buenos Aires";
+    }else if (origen=="2"){
+        origen = "Mar del Plata";
+        }
+        return origen;
+}*/
+
+    //contrasenia=usuario.substr(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";")); //contraseña
+    //usuario.replace(usuario.find_first_of(";",usuario.find_last_of(";")),usuario.find_last_of(";"),"");
+    //usuario.replace(0,usuario.find_first_of(";"),""); //corta login
+    //cout<<fechalog<<" :"<<usuario.replace(0,1,"")<<";"<<contrasenia.replace(0,1,"")<<endl; //longitud 12 usuario
 
 
