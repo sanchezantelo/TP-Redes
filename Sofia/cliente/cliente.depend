@@ -72,7 +72,7 @@
 	"Servicio.h"
 	<string.h>
 
-1604084306 source:d:\tp-redes\sofia\cliente\main.cpp
+1604098398 source:d:\tp-redes\sofia\cliente\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Cliente.h>

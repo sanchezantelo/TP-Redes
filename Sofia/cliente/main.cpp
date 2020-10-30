@@ -223,11 +223,22 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 cout << recibido << endl;
                 cout << "Ingrese el numero de servicio que desea elegir: 0 para salir" << endl;
                 cin >> opcion;
+                string respuesta = "";
                 if (opcion=='0'){
                         break;}else{
-                        string respuesta = service (opcion, recibido);
+                        respuesta = service (opcion, recibido);
                         cout << respuesta << endl;
                 };
+                cout << "El servicio elegido es: " << respuesta << ", desea continuar? 1.Si 2.No" << endl;
+                cin >> opcion;
+                switch (opcion){
+                    case '1': {
+                        seguir = 0;
+                        //ir al menu reservar pasaje y pasar respuesta.
+                    }
+                    case '2': break;
+                    default: seguir = 0; break;
+                }
                 system("pause");
                 break;
             }
@@ -270,19 +281,17 @@ string service (char opcion, string recibido){
     strcpy (cstr, recibido.c_str());
 
     char * aux = strtok (cstr, ")");
-
     while (aux != 0){
-            //cout << aux << endl;
-            char *pOpcion = &opcion;
-            if (strcmp(aux, pOpcion)==0){
+            //cout << aux << '\n';
+            //char * pOpcion = &opcion;
+            if (strcmp(aux, &opcion)<0){
                 aux = strtok(NULL, "|");
-                //cout << aux << endl;
-                prueba = aux;
+                //cout << "entro" << endl;
+                prueba=aux;
             }else{
                 aux = strtok(NULL, "|");
             }//Aunque no sea igual, debo "cortarlo" para que siga el mismo formato. Solo se guarda cuando n) es igual a opcion.
-
-            //cout << aux << endl;
+            //cout << aux << '\n';
             aux = strtok(NULL, ")");
     }
     return prueba;
