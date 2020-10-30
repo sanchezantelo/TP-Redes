@@ -13,12 +13,15 @@ class Cliente
         SOCKADDR_IN addr;
         bool ingresa;
         bool sesion;
-        char buffer[1024];
+        char buffer[2048];
+        string userName;
         Cliente();
         void Enviar(string mensaje);
         string Recibir();
         void setSesion(bool sesion);
         bool getSesion();
+        string getuserName();
+        void setuserName(string userName);
         void CerrarSocket();
         virtual ~Cliente();
 

@@ -2,11 +2,13 @@
 #include <winsock2.h>
 #include <Cliente.h>
 #include <Servicio.h>
+#include <cstring>
 using namespace std;
 
 void altaServicio(Cliente &cliente, Servicio &servicio);
 void gestionarPasajes(Cliente &cliente, Servicio &servicio);
 void verRegistrosDeActividades(Cliente &cliente);
+void mostrarActividades(string actividades);
 void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 void menuEncabezado(void);
@@ -95,6 +97,7 @@ do{
 
     if(cliente.Recibir().compare("autenticado")==0){
          cliente.setSesion(true);
+         cliente.setuserName(usuario);
          cout<<"\nBienvenido al sistema!"<<endl;
     }
     else if(cliente.Recibir().compare("no autenticado")==0){
@@ -228,11 +231,10 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
 };
 
 void verRegistrosDeActividades(Cliente &cliente){
-
-cliente.Enviar("MostrarActividad;sofia");
-                string recibido = cliente.Recibir();
-                cout<<recibido<<endl;
-                system("PAUSE");
+  cliente.Enviar("MostrarActividad;"+cliente.getuserName());
+  string recibido = cliente.Recibir();
+   mostrarActividades(recibido);
+  system("PAUSE");
 }
 
 void cerrarSesion(Cliente &cliente){
@@ -240,8 +242,20 @@ cliente.Enviar("salir;");
 cliente.CerrarSocket();
 };
 
-void menu(string recibido) {
-    int destino =
+void mostrarActividades(string actividades){
+   char * cstr = new char [actividades.size()+1];
+   strcpy (cstr, actividades.c_str());
+
+  char * p = strtok (cstr,";");
+  while (p!=0)
+  {
+    cout << p << '\n';
+    p = strtok(NULL,";");
+  }
 }
+
+/*void menu(string recibido) {
+    int destino =
+}*/
 
 

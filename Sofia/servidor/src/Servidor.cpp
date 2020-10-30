@@ -211,9 +211,3 @@ archivo.close();
 cliente=cliente+";";
 return cliente;
 }
-
-void Servidor::ImprimirlstActividades(){
-   for (string cliente : this->lstActividades){
-        cout << cliente << '\n';
-    }
-}

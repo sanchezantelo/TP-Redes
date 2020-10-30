@@ -70,3 +70,10 @@ return this->sesion;
 void Cliente::setSesion(bool sesion){
 this->sesion=sesion;
 }
+
+string Cliente::getuserName(){
+return this->userName;
+}
+void Cliente:: setuserName(string userName){
+this->userName=userName;
+}
