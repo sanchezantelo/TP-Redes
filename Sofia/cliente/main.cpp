@@ -13,6 +13,7 @@ void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 void menuEncabezado(void);
 string service (char opcion, string recibido);
+string menuReserva(string respuesta);
 
 int main(){
 
@@ -234,7 +235,8 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 switch (opcion){
                     case '1': {
                         seguir = 0;
-                        //ir al menu reservar pasaje y pasar respuesta.
+                        menuReserva(respuesta);
+                        //cliente.Enviar(string("G3;" + servicio.mensaje()));
                     }
                     case '2': break;
                     default: seguir = 0; break;
@@ -298,4 +300,26 @@ string service (char opcion, string recibido){
             }
     }
     return prueba;
+}
+
+string menuReserva(string respuesta){
+    char * cstr = new char [respuesta.size()+1];
+    strcpy (cstr, respuesta.c_str());
+
+    char * aux = strtok (cstr, ";");
+    string origen="";
+    string fecha="";
+    string turno="";
+    while (aux != 0){
+        origen = aux;
+        fecha = strtok(NULL, ";");
+        turno = strtok(NULL, "");
+        break;
+    };
+    int _orig = stoi(origen);
+    int _turn = stoi(turno);
+    Servicio *servicio = new Servicio(_orig, fecha, _turn);
+    servicio->mostrar();
+    system("pause");
+    return respuesta;
 }
