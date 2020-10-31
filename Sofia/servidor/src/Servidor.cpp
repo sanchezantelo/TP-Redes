@@ -160,7 +160,7 @@ void Servidor::CerrarSocket()
    this->timeinfo = localtime (&this->hora);
    strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
    fechalog=this->fecha;
-   this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
+   this->clienteLog<<fechalog<<": Cierra Sesion\n";
    this->serverLog <<fechalog<<": Socket cerrado, cliente desconectado.\n";
    this->serverLog.close();
    this->clienteLog.close();
