@@ -15,7 +15,13 @@ class Cliente
         bool sesion;
         char buffer[2048];
         string userName;
-        Cliente();
+        string ip;
+        int puerto;
+        Cliente(string ip, int puerto);
+        void setPuerto(int puerto);
+        int getPuerto();
+        void setIp(string ip);
+        string getIp();
         void Enviar(string mensaje);
         string Recibir();
         void setSesion(bool sesion);

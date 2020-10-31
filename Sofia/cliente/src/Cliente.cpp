@@ -1,26 +1,26 @@
 #include "Cliente.h"
-#define PORT 5000
-#define IP "127.0.0.1"
 #include<winsock2.h>
 #include <Servicio.h>
 
 using namespace std;
 
-Cliente::Cliente()
+Cliente::Cliente(string ip, int puerto)
 {
+    this->ip=ip;
+    this->puerto=puerto;
     this->sesion=false;
     memset(this->buffer, 0, sizeof(this->buffer));
     cout<<"Conectando al servidor..."<<endl<<endl;
     int status;
     WSAStartup(MAKEWORD(2,0), &WSAData);
     server = socket(AF_INET, SOCK_STREAM, 0);
-    addr.sin_addr.s_addr = inet_addr(IP);
+    addr.sin_addr.s_addr = inet_addr(this->ip.c_str());
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(PORT);
+    addr.sin_port = htons(this->puerto);
     status=connect(server, (SOCKADDR *)&addr, sizeof(addr));
 
     if (status == SOCKET_ERROR) {
-        cout<<"No se pudo conectar con el servidor: "<<IP<<", Puerto: "<<PORT<<", Codigo de error: "<<WSAGetLastError()<<endl;
+        cout<<"No se pudo conectar con el servidor: "<<this->ip<<", Puerto: "<<to_string(this->puerto)<<", Codigo de error: "<<WSAGetLastError()<<endl;
         status = closesocket(this->server);
         system("PAUSE");
         exit(0);
@@ -36,6 +36,19 @@ Cliente::Cliente()
 Cliente::~Cliente()
 {
  this->sesion=false;
+}
+
+void Cliente::setPuerto(int puerto){
+    this->puerto=puerto;
+}
+int Cliente::getPuerto(){
+    return this->puerto;
+}
+void Cliente::setIp(string ip){
+    this->ip=ip;
+}
+string Cliente::getIp(){
+    return this->ip;
 }
 
 

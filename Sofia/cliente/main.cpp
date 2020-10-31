@@ -17,8 +17,14 @@ string menuReserva(Cliente &cliente, string respuesta);
 
 int main(){
 
+     int puerto;
+     string ip;
+     cout<<"Ingrese direccion ip del servidor: ";
+     cin>>ip;
+     cout<<"Ingrese puerto: ";
+     cin>>puerto;
 
-     Cliente *Client = new Cliente();
+     Cliente *Client = new Cliente(ip,puerto);
      Servicio *Serv = new Servicio(0,"",0);
      login(*Client);
      int opcion=0;
@@ -103,7 +109,7 @@ do{
          cout<<"\nBienvenido al sistema!"<<endl;
     }
     else if(cliente.Recibir().compare("no autenticado")==0){
-        Cliente *nuevocliente= new Cliente();
+        Cliente *nuevocliente= new Cliente(cliente.getIp(),cliente.getPuerto());
         cliente=*nuevocliente;
     }
 
