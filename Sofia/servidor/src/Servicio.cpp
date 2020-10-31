@@ -219,13 +219,8 @@ int Servicio:: CrearServicio(char * message)
     return respuesta;
 }
 
-void Servicio:: reservarAsiento(char *message){
-    int resp = CrearServicio(message);
-    if (resp == 1){
-        cout << "servicio creado" << endl;
-    }
-    string p = "hasta aca llego";
-    cout << p << endl;
+string Servicio:: reservarAsiento(char *message){
+
 }
 
 string Servicio:: buscarServicio(char * message) {

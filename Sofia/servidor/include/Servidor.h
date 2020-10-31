@@ -45,6 +45,7 @@ class Servidor
         void ImprimirlstUsuarios();
         void ImprimirlstActividades();
         string mostrarActividades(string usuario);
+        string reservarAsiento();
         virtual ~Servidor();
 
     protected:

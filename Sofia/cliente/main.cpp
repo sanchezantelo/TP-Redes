@@ -13,7 +13,7 @@ void cerrarSesion(Cliente &cliente);
 void login(Cliente &cliente);
 void menuEncabezado(void);
 string service (char opcion, string recibido);
-string menuReserva(string respuesta);
+string menuReserva(Cliente &cliente, string respuesta);
 
 int main(){
 
@@ -234,9 +234,9 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 cin >> opcion;
                 switch (opcion){
                     case '1': {
+                        system("cls");
                         seguir = 0;
-                        menuReserva(respuesta);
-                        //cliente.Enviar(string("G3;" + servicio.mensaje()));
+                        menuReserva(cliente, respuesta);
                     }
                     case '2': break;
                     default: seguir = 0; break;
@@ -302,7 +302,7 @@ string service (char opcion, string recibido){
     return prueba;
 }
 
-string menuReserva(string respuesta){
+string menuReserva(Cliente &cliente, string respuesta){
     char * cstr = new char [respuesta.size()+1];
     strcpy (cstr, respuesta.c_str());
 
@@ -316,10 +316,26 @@ string menuReserva(string respuesta){
         turno = strtok(NULL, "");
         break;
     };
+    string asiento = "";
+    int opc = 0;
     int _orig = stoi(origen);
     int _turn = stoi(turno);
     Servicio *servicio = new Servicio(_orig, fecha, _turn);
     servicio->mostrar();
+    cout << "Ingrese asiento a reservar o liberar: " << endl;
+    cin >> asiento;
+    cout << "1. Reservar. 2. Liberar" << endl;
+    cin >> opc;
+    switch (opc){
+        case 1 : respuesta = respuesta + ";" + asiento + ";" + "x";
+        break;
+        case 2 : respuesta = respuesta + ";" + asiento + ";" + "o";
+        break;
+        default: break;
+    }
+    cliente.Enviar(string("G3;" + respuesta));
+    string p = cliente.Recibir();
+    cout << p << endl;
     system("pause");
     return respuesta;
 }

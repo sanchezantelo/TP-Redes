@@ -41,6 +41,7 @@ class Servicio
         list<Servicio> buscarServicioPorOrigen(list<Servicio> lista, int origen);
         list<Servicio> buscarServicioPorTurno(list<Servicio> lista, int turno);
         bool ServicioExiste(Servicio servicio);
+        string reservarAsiento(char *message);
 
 
     protected:
