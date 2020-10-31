@@ -1,6 +1,4 @@
 #include "Servidor.h"
-#define PORT 8080
-#define IP "127.0.0.1"
 #define TIMEOUT 60
 #include <fstream>
 #include <sstream>
@@ -154,7 +152,7 @@ void Servidor::CerrarSocket()
 
    this->Enviar("Sesion cerrada");
    closesocket(client);
-   //strcpy(this->buffer,"Socket cerrado, cliente desconectado.");
+
 //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
