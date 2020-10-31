@@ -11,10 +11,12 @@ using namespace std;
 //CONSTRUCTOR
 Servidor::Servidor()
 {
+   this->configuraciones();
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
    this->hora = time(0);
    this->ultimaconexion= time(0);
+   this->logueado=false;
    this->CargalstUsuarios();
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
@@ -23,18 +25,18 @@ Servidor::Servidor()
    server = socket(AF_INET, SOCK_STREAM, 0);
    serverAddr.sin_addr.s_addr = INADDR_ANY;
    serverAddr.sin_family = AF_INET;
-   serverAddr.sin_port = htons(PORT);
+   serverAddr.sin_port = htons(this->getPuerto());
 
    bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));
    listen(server, 0);
 
-   cout << "Escuchando para conexiones entrantes." << endl;
+   cout << "Escuchando en el puerto: "<<to_string(this->getPuerto())<< endl;
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
      {
-      strcpy(this->buffer,"cliente conectado");
-      this->LogServer();
+      //strcpy(this->buffer,"Socket creado. Puerto de escucha: ");
+      this->LogServer("Socket creado. Puerto de escucha: "+to_string(this->getPuerto()));
    }
 }
 
@@ -49,6 +51,46 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
+string Servidor::configuraciones(){
+char linea[128];
+ifstream configuraciones;
+string cadena;
+
+
+configuraciones.open("configuraciones.txt");
+  while (!configuraciones.eof()) {
+      configuraciones.getline(linea,sizeof(linea));
+      cadena=linea;
+      this->ip=cadena;
+      configuraciones.getline(linea,sizeof(linea));
+      cadena=linea;
+      stringstream intValue(cadena);
+      intValue>>this->puerto;
+      break;
+  }
+configuraciones.close();
+
+}
+
+void Servidor::setLogueado(bool logueado){
+    this->logueado=logueado;
+}
+
+bool Servidor::getLogueado(){
+    return this->logueado;
+}
+void Servidor::setPuerto(int puerto){
+    this->puerto=puerto;
+}
+int Servidor::getPuerto(){
+    return this->puerto;
+}
+void Servidor::setIp(string ip){
+    this->ip=ip;
+}
+string Servidor::getIp(){
+    return this->ip;
+}
 
 bool Servidor::Login(){
    //recibir usuario y contraseña verificar credenciales
@@ -112,15 +154,14 @@ void Servidor::CerrarSocket()
 
    this->Enviar("Sesion cerrada");
    closesocket(client);
-   strcpy(this->buffer,"Socket cerrado, cliente desconectado.");
+   //strcpy(this->buffer,"Socket cerrado, cliente desconectado.");
 //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
    strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
    fechalog=this->fecha;
    this->clienteLog<<fechalog<<": "<<this->buffer<<"\n";
-   this->serverLog <<fechalog<<": "<<this->buffer<<"\n";
-   this->LogServer();
+   this->serverLog <<fechalog<<": Socket cerrado, cliente desconectado.\n";
    this->serverLog.close();
    this->clienteLog.close();
    WSACleanup();
@@ -128,26 +169,28 @@ void Servidor::CerrarSocket()
 
 
 //LOG SERVER
-void Servidor::LogServer()
-{
-   string fechalog="";
+
+void Servidor::LogServer(string mensaje){
+
+string fechalog="";
+
    this->serverLog.open("serverlog.log",fstream::app);
    //ACTUALIZA LA HORA DEL SERVIDOR
    time (&this->hora);
    this->timeinfo = localtime (&this->hora);
    strftime(this->fecha,80,"%Y-%m-%d_%H:%M",this->timeinfo);
    fechalog=this->fecha;
-   cout<<fechalog<<" :"<<this->buffer<<"\n";
+   cout<<fechalog<<" :"<<mensaje<<"\n";
    this->serverLog<<fechalog<<": ==========================="<<"\n";
    this->serverLog<<fechalog<<":        Inicia Servidor     "<<"\n";
    this->serverLog<<fechalog<<": ==========================="<<"\n";
-   this->serverLog<<fechalog<<": "<<this->buffer<<"\n";
-
+   this->serverLog<<fechalog<<": "<<mensaje<<"\n";
 }
 
+
 //LOG CLIENTE
-void Servidor::LogCliente(string usuario)
-{
+void Servidor::LogCliente(string usuario){
+
  string fechalog="";
 
    this->clienteLog.open(usuario+".log",fstream::app);
@@ -167,7 +210,6 @@ void Servidor::LogCliente(string usuario)
 
 
 }
-
 
 //ADMINISTRACION USUARIOS
 void Servidor::CargalstUsuarios(){

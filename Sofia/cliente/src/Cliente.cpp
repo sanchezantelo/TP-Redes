@@ -1,5 +1,5 @@
 #include "Cliente.h"
-#define PORT 8080
+#define PORT 5000
 #define IP "127.0.0.1"
 #include<winsock2.h>
 #include <Servicio.h>
@@ -20,10 +20,10 @@ Cliente::Cliente()
     status=connect(server, (SOCKADDR *)&addr, sizeof(addr));
 
     if (status == SOCKET_ERROR) {
-        wprintf(L"No se pudo conectar con el servidor status: %ld\n", WSAGetLastError());
+        cout<<"No se pudo conectar con el servidor: "<<IP<<", Puerto: "<<PORT<<", Codigo de error: "<<WSAGetLastError()<<endl;
         status = closesocket(this->server);
-        exit(0);
         system("PAUSE");
+        exit(0);
         WSACleanup();
 
 

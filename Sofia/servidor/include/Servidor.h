@@ -16,6 +16,7 @@ class Servidor
         SOCKET server, client;
         SOCKADDR_IN serverAddr, clientAddr;
         char buffer[2048];
+        bool logueado;
         time_t hora;
         char fecha[80];
         struct tm * timeinfo;
@@ -26,7 +27,8 @@ class Servidor
         int    close_conn;
         struct timeval  timeout;
         fd_set master_set, working_set;
-
+        int puerto;
+        string ip;
         list<string>lstUsuarios;
         list<string>lstActividades;
         ofstream serverLog;
@@ -34,11 +36,12 @@ class Servidor
         Servidor();
         string Recibir();
         void Enviar(string mensaje);
+        string configuraciones();
         bool Login();
         bool LogOut();
         bool sesion();
         bool LogOutPorTimeOut();
-        void LogServer();
+        void LogServer(string mensaje);
         void LogCliente(string usuario);
         void CerrarSocket();
         void CargalstUsuarios();
@@ -46,6 +49,12 @@ class Servidor
         void ImprimirlstActividades();
         string mostrarActividades(string usuario);
         string reservarAsiento();
+        void setLogueado(bool logueado);
+        bool getLogueado();
+        void setPuerto(int puerto);
+        int getPuerto();
+        void setIp(string ip);
+        string getIp();
         virtual ~Servidor();
 
     protected:

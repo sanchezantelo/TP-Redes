@@ -10,23 +10,21 @@ int main()
     while(true){
       Servidor *server = new Servidor();
       Servicio *servicio= new Servicio();
-      bool logueado = false;
 
       while(server->sesion() && !server->LogOutPorTimeOut())
       {
          char message[100] = "";
-         if (!logueado)
+         if (!server->getLogueado())
             server->Enviar("ok");
          string recibido = server->Recibir();
 
          if(recibido.find("login")==0){
             if(server->Login()==true){
                 server->Enviar("autenticado");
-                logueado = true;
+                server->setLogueado(true);
             }else{
                 server->Enviar("no autorizado");
-                logueado = false;
-               // server->CerrarSocket();
+                server->setLogueado(false);
                 }
             }
 
