@@ -17,7 +17,9 @@ class Cliente
         string userName;
         string ip;
         int puerto;
+        Cliente();
         Cliente(string ip, int puerto);
+        bool conectar();
         void setPuerto(int puerto);
         int getPuerto();
         void setIp(string ip);

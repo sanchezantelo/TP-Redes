@@ -10,25 +10,31 @@ Cliente::Cliente(string ip, int puerto)
     this->puerto=puerto;
     this->sesion=false;
     memset(this->buffer, 0, sizeof(this->buffer));
+}
+
+Cliente::Cliente(){
+}
+
+bool Cliente::conectar(){
+    bool conectado=false;
     cout<<"Conectando al servidor..."<<endl<<endl;
-    int status;
     WSAStartup(MAKEWORD(2,0), &WSAData);
     server = socket(AF_INET, SOCK_STREAM, 0);
     addr.sin_addr.s_addr = inet_addr(this->ip.c_str());
     addr.sin_family = AF_INET;
     addr.sin_port = htons(this->puerto);
-    status=connect(server, (SOCKADDR *)&addr, sizeof(addr));
+    int status=connect(server, (SOCKADDR *)&addr, sizeof(addr));
 
     if (status == SOCKET_ERROR) {
         cout<<"No se pudo conectar con el servidor: "<<this->ip<<", Puerto: "<<to_string(this->puerto)<<", Codigo de error: "<<WSAGetLastError()<<endl;
         status = closesocket(this->server);
         system("PAUSE");
-        exit(0);
         WSACleanup();
 
 
     }else{
     cout << "Conectado al Servidor!" << endl;    //ctor
+    conectado=true;
     }
 }
 
