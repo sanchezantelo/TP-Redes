@@ -293,6 +293,9 @@ string service (char opcion, string recibido){
             }//Aunque no sea igual, debo "cortarlo" para que siga el mismo formato. Solo se guarda cuando n) es igual a opcion.
             //cout << aux << '\n';
             aux = strtok(NULL, ")");
+            if (strcmp(aux, &opcion)>0 && !prueba.empty()){
+                break;
+            }
     }
     return prueba;
 }
