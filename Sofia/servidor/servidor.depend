@@ -84,14 +84,14 @@
 	<iostream>
 	"list"
 
-1604114600 source:d:\tp-redes\sofia\servidor\src\servicio.cpp
+1604186027 source:d:\tp-redes\sofia\servidor\src\servicio.cpp
 	"Servicio.h"
 	<string.h>
 	<string>
 	<fstream>
 	<dirent.h>
 
-1604081001 d:\tp-redes\sofia\servidor\include\servicio.h
+1604119161 d:\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
 	"list"
 
@@ -101,14 +101,14 @@
 	<sstream>
 	<ostream>
 
-1604025145 d:\tp-redes\sofia\servidor\include\servidor.h
+1604119181 d:\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 	"list"
 
-1604081001 source:d:\tp-redes\sofia\servidor\main.cpp
+1604108242 source:d:\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>

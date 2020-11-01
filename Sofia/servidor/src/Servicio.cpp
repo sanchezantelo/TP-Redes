@@ -220,6 +220,75 @@ int Servicio:: CrearServicio(char * message)
 }
 
 string Servicio:: reservarAsiento(char *message){
+    char c_origen[5] = "";
+    char fecha[15] = "";
+    char c_turno[5] = "";
+    char asiento[62][4] = {};
+
+    char filas[70] = "";
+    strcpy(c_origen, strtok(message , ";"));
+    strcpy(fecha, strtok(NULL, ";"));
+    strcpy(c_turno, strtok(NULL, ";"));
+
+    strcpy(filas, strtok(NULL, ";"));
+    strcpy(filas, strtok(NULL, ";"));
+    strcpy(filas, strtok(NULL, ";")); //filas de asiento.
+
+    char* aux = strtok(NULL, ";");
+    int i = 0;
+    int pos = 0;
+
+    while (aux != 0) {
+        if (i % 2 == 0) {
+            asiento[pos][0] = aux[0];
+            asiento[pos][1] = aux[1]; // aca seria todo menos aux[0]
+            asiento[pos][2] = aux[2];
+            cout << "PAR: " << asiento[pos][0] << " " << asiento[pos][1] << asiento[pos][2] << endl;
+        }
+        else {
+            asiento[pos][3] = aux[0];
+            cout << "IMPAR: " << asiento[pos][3] << endl;
+            pos++;
+        }
+        aux = strtok(NULL, ";|");
+        i++;
+    }
+
+    int origen = atoi(c_origen);
+    int turno = atoi(c_turno);
+
+    Servicio* serv = new Servicio(origen, fecha, turno);
+
+    if ((ServicioExiste((Servicio(*serv)))==true))
+        {
+            list<Servicio> listaServicios;
+            list<Servicio> :: iterator it = listaServicios.begin();
+            listaServicios = buscarServicioPorFecha(fecha);
+            listaServicios = buscarServicioPorOrigen(listaServicios, origen);
+            listaServicios = buscarServicioPorTurno(listaServicios, turno);
+            i = 0;
+            while (asiento[i][0] != NULL) {
+                cout << "FILA: " << asiento[i][0] << " COLUMNA: " << asiento[i][1] << asiento[i][2] << " RESERVAR/LIBERA: " << asiento[i][3] << endl;
+                string filaA = serv->getfilaA();
+                string filaB = serv->getfilaB();
+                string filaC = serv->getfilaC();
+
+                if (asiento[i][0] == 'A') {
+                    filaA[asiento[i][1] - 1] = asiento[i][2];
+                } else if (asiento[i][0] == 'B') {
+                    filaB[asiento[i][1] - 1] = asiento[i][2];
+                } else if (asiento[i][0] == 'C') {
+                    filaC[asiento[i][1] - 1] = asiento[i][2];
+                }
+
+            setfilaA(filaA);
+            setfilaB(filaB);
+            setfilaC(filaC);
+            i++;
+            }
+        }
+        cout << "unbelievable" << endl;
+        system("pause");
 
 }
 
