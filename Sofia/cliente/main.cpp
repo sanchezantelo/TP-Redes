@@ -294,27 +294,28 @@ void toText (string recibido){
     string mostrar = "";
     char * aux = strtok (cstr, ")");
     while (aux != 0){
-        cout << aux << endl;
+        cout << aux << ")" << endl;
         aux = strtok(NULL, ";");
-        if(aux == "1")
+        if(stricmp("1", aux))
         {
-            mostrar = mostrar + " Buenos Aires ";
+            mostrar = mostrar + " Mar del Plata ";
         }else
             {
-                mostrar = mostrar + " Mar del Plata ";
+                mostrar = mostrar + " Buenos Aires ";
             }
         aux = strtok(NULL, ";");
         mostrar = mostrar + ";" + aux;
         aux = strtok(NULL, "|");
-        if(aux == "1")
-            {
-                mostrar = mostrar + ";" + "Manana";
-            } else if(aux == "2")
-                {
-                    mostrar = mostrar + ";" + "Tarde";
-                    } else if(aux == "3") {
-                        mostrar = mostrar + ";" + "Noche";
-                        }
+        int x = atoi(aux);
+        switch (x){
+            case 1: mostrar = mostrar + ";" + "Manana";
+            break;
+            case 2: mostrar = mostrar + ";" + "Tarde";
+            break;
+            case 3: mostrar = mostrar + ";" + "Noche";
+            break;
+            default: mostrar = mostrar + ";" + "Ni idea";
+        }
         cout << mostrar << '\n';
         mostrar = "";
         aux = strtok(NULL,")");
