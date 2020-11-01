@@ -15,7 +15,6 @@ void menuEncabezado(void);
 void toText (string recibido);
 string service (char opcion, string recibido);
 string menuReserva(Cliente &cliente, string respuesta);
-string toTextService(char* servicio);
 
 int main(){
     bool status=false;
@@ -292,62 +291,34 @@ void toText (string recibido){
     char * cstr = new char [recibido.size()+1];
     strcpy (cstr, recibido.c_str());
 
-    char * aux = strtok (cstr, "|");
+    string mostrar = "";
+    char * aux = strtok (cstr, ")");
     while (aux != 0){
-        string p = toTextService(aux);
-        cout << p << '\n';
+        cout << aux << endl;
+        aux = strtok(NULL, ";");
+        if(aux == "1")
+        {
+            mostrar = mostrar + " Buenos Aires ";
+        }else
+            {
+                mostrar = mostrar + " Mar del Plata ";
+            }
+        aux = strtok(NULL, ";");
+        mostrar = mostrar + ";" + aux;
         aux = strtok(NULL, "|");
+        if(aux == "1")
+            {
+                mostrar = mostrar + ";" + "Manana";
+            } else if(aux == "2")
+                {
+                    mostrar = mostrar + ";" + "Tarde";
+                    } else if(aux == "3") {
+                        mostrar = mostrar + ";" + "Noche";
+                        }
+        cout << mostrar << '\n';
+        mostrar = "";
+        aux = strtok(NULL,")");
     }
-}
-
-string toTextService(char* servicio)
-{
-    string servString = string(servicio);
-    string numServicio = servString.substr(0,2);
-
-    servString.erase(0,2);
-
-
-    char * servSinNum = new char [servString.size()+1];
-    strcpy (servSinNum, servString.c_str());
-
-    char origen[2] = "";
-    char fecha[13] = "";
-    char turno[2] = "";
-
-
-    string servicioARetornar;
-    strcpy(origen, strtok(servSinNum, ";"));
-    strcpy(fecha, strtok(NULL, ";"));
-    strcpy(turno, strtok(NULL, ";"));
-
-    servicioARetornar = numServicio;
-
-    if(stricmp("1", origen))
-    {
-        servicioARetornar = servicioARetornar + " Buenos Aires ";
-    }
-    else
-    {
-        servicioARetornar = servicioARetornar + " Mar del Plata ";
-    }
-
-    servicioARetornar = servicioARetornar + fecha;
-
-    if(stricmp("1", turno))
-    {
-        servicioARetornar = servicioARetornar + " Manana";
-    }
-    else if(stricmp("2", turno))
-    {
-        servicioARetornar = servicioARetornar + " Tarde";
-    }
-    else if(stricmp("3",turno))
-    {
-        servicioARetornar = servicioARetornar + " Noche";
-    }
-
-    return servicioARetornar;
 }
 
 

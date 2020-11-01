@@ -79,14 +79,14 @@
 	<Servicio.h>
 	<cstring>
 
-1604025145 d:\tp-redes\sofia\cliente\include\cliente.h
+1604191692 d:\tp-redes\sofia\cliente\include\cliente.h
 	<iostream>
 	<winsock2.h>
 
 1603996425 d:\tp-redes\sofia\cliente\include\servicio.h
 	<iostream>
 
-1604025145 source:d:\tp-redes\sofia\cliente\src\cliente.cpp
+1604191692 source:d:\tp-redes\sofia\cliente\src\cliente.cpp
 	"Cliente.h"
 	<winsock2.h>
 	<Servicio.h>
