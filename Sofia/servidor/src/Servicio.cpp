@@ -256,6 +256,7 @@ string Servicio:: reservarAsiento(char *message){
 
     int origen = atoi(c_origen);
     int turno = atoi(c_turno);
+    //char *msj = origen + ";" + fecha + ";" + turno;
 
     Servicio* serv = new Servicio(origen, fecha, turno);
 
@@ -287,7 +288,7 @@ string Servicio:: reservarAsiento(char *message){
             i++;
             }
         }
-        cout << "unbelievable" << endl;
+        cout << "prueba" << endl;
         system("pause");
 
 }
@@ -343,6 +344,57 @@ string Servicio:: buscarServicio(char * message) {
     return lst;
 }
 
+string Servicio:: encontradoServicio(char * message) {
+    int respuesta = 0;
+    char c_origen[5] = "";
+    char fecha[15] = "";
+    char c_turno[5] = "";
+
+    strcpy(c_origen, strtok(message , ";"));
+    strcpy(fecha, strtok(NULL, ";"));
+    strcpy(c_turno, strtok(NULL, ";"));
+
+    int origen = atoi(c_origen);
+    int turno = atoi(c_turno);
+
+    string lst = "";
+    list<Servicio> listaServicios;
+    list<Servicio> :: iterator it = listaServicios.begin();
+
+    if (string(fecha) != "0") {
+        listaServicios = buscarServicioPorFecha(fecha);
+    }
+    else {
+        DIR *pDIR;
+        struct dirent *entry;
+        if( pDIR = opendir("servicios/") ) {
+            while(entry = readdir(pDIR)) {
+                if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 ) {
+                    list<Servicio> lista;
+                    list<Servicio> :: iterator it = lista.begin();
+                    lista = buscarServicioPorFecha(string(entry->d_name).substr(0,10));
+                    listaServicios.splice(listaServicios.end(), lista);
+                }
+            }
+            closedir(pDIR);
+        }
+    }
+    if (origen != 0) {
+        listaServicios = buscarServicioPorOrigen(listaServicios, origen);
+    }
+    if (turno != 0) {
+        listaServicios = buscarServicioPorTurno(listaServicios, turno);
+    }
+
+    int i=0;
+    for (it = listaServicios.begin(); it != listaServicios.end(); ++it) {
+        i++;
+        lst = lst + to_string(i) + ")" + to_string(((Servicio)* it).getOrigen()) + ";" + ((Servicio)* it).getFecha() + ";" + to_string(((Servicio)* it).getTurno()) + ";"
+        + ((Servicio)* it).getfilaA() + ";" + ((Servicio)* it).getfilaB() + ";" + ((Servicio)* it).getfilaC() + "|";
+    }
+    cout << lst << endl;
+    return lst;
+}
 
 list<Servicio> Servicio:: buscarServicioPorFecha(string fecha) {
     list<Servicio> lista;

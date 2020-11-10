@@ -49,6 +49,7 @@ class Servidor
         void ImprimirlstActividades();
         string mostrarActividades(string usuario);
         string reservarAsiento();
+        string encontradoServicio();
         void setLogueado(bool logueado);
         bool getLogueado();
         void setPuerto(int puerto);

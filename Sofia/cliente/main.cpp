@@ -314,7 +314,7 @@ void toText (string recibido){
             break;
             case 3: mostrar = mostrar + ";" + "Noche";
             break;
-            default: mostrar = mostrar + ";" + "Ni idea";
+            default: mostrar = mostrar + ";" + "Error";
         }
         cout << mostrar << '\n';
         mostrar = "";
@@ -325,7 +325,7 @@ void toText (string recibido){
 
 string service (char opcion, string recibido){
 
-    string prueba = "prueba";
+    string prueba = "error";
     char * cstr = new char [recibido.size()+1];
     strcpy (cstr, recibido.c_str());
 
@@ -369,6 +369,8 @@ string menuReserva(Cliente &cliente, string respuesta){
     int _orig = stoi(origen);
     int _turn = stoi(turno);
     Servicio *servicio = new Servicio(_orig, fecha, _turn);
+    cliente.Enviar(string("G3;" + respuesta));
+    string resp = cliente.Recibir();
     servicio->mostrar();
     while (a==1)
     {
@@ -386,7 +388,7 @@ string menuReserva(Cliente &cliente, string respuesta){
         cout << "Desea reservar o liberar otro asiento? 1.Si 2.No" << endl;
         cin >> a;
     }
-    cliente.Enviar(string("G3;" + respuesta));
+    cliente.Enviar(string("G4;" + resp));
     string p = cliente.Recibir();
     cout << p << endl;
     system("pause");
