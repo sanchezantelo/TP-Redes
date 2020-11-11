@@ -25,8 +25,10 @@ int main(){
      cout<<"Ingrese direccion ip del servidor: ";
      cin>>ip;
      Client->setIp(ip);
+     system("cls");
      cout<<"Ingrese puerto: ";
      cin>>puerto;
+     system("cls");
      Client->setPuerto(puerto);
      status=Client->conectar();
      }while(!status);
@@ -66,8 +68,8 @@ int main(){
                 // Lista de instrucciones de la opción 4
                 cerrarSesion(*Client);
                 Client->setSesion(false);
-                system("pause>nul"); // Pausa
-                break;
+                system("cls");
+                main();
         }
     };            // opción de SALIDA
     return 0;
@@ -106,7 +108,6 @@ do{
     cin>>contrasenia;
     mensaje="login;"+usuario+";"+contrasenia;
     cliente.Enviar(mensaje);
-
 //cout<<cliente.Recibir()<<endl;
 
     if(cliente.Recibir().compare("autenticado")==0){
@@ -119,7 +120,9 @@ do{
     }
 
      if(!cliente.getSesion()){
-        cout<<"\nUsuario y contrase\xA4"<<"a incorrectos o supera maximo permitido de caracteres"<<endl;
+        cout<<"\nUsuario y contrase\xA4"<<"a incorrectos"<<endl;
+        system("PAUSE");
+        system("cls");
         contador++;
      }
 
@@ -128,7 +131,8 @@ do{
       cliente.Enviar("salir;");
       cliente.CerrarSocket();
       system("PAUSE");
-      exit(0);
+      system("cls");
+      main();
       }
 
 }while(!cliente.getSesion() && contador<3);
@@ -264,15 +268,17 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
 };
 
 void verRegistrosDeActividades(Cliente &cliente){
+  system("cls");
   cliente.Enviar("MostrarActividad;"+cliente.getuserName());
   string recibido = cliente.Recibir();
-   mostrarActividades(recibido);
+  mostrarActividades(recibido);
   system("PAUSE");
 }
 
 void cerrarSesion(Cliente &cliente){
 cliente.Enviar("salir;");
 cliente.CerrarSocket();
+system("PAUSE");
 };
 
 void mostrarActividades(string actividades){

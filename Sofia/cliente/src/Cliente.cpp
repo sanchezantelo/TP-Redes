@@ -30,9 +30,9 @@ bool Cliente::conectar(){
         status = closesocket(this->server);
         system("PAUSE");
         WSACleanup();
+        system("cls");
 
-
-    }else{
+        }else{
     cout << "Conectado al Servidor!" << endl;    //ctor
     conectado=true;
     }

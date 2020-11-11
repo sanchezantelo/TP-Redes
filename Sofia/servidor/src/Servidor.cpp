@@ -1,5 +1,5 @@
 #include "Servidor.h"
-#define TIMEOUT 60
+#define TIMEOUT 1740
 #include <fstream>
 #include <sstream>
 #include<ostream>
@@ -18,26 +18,29 @@ Servidor::Servidor()
    this->CargalstUsuarios();
    memset(this->buffer, 0, sizeof(this->buffer));
    WSACleanup();
-
    WSAStartup(MAKEWORD(2,0), &WSAData);
-   server = socket(AF_INET, SOCK_STREAM, 0);
+
+   server= socket(AF_INET, SOCK_STREAM, 0);
+   rc = setsockopt(server, SOL_SOCKET,  SO_REUSEADDR,(char *)&on, sizeof(on));
+
    serverAddr.sin_addr.s_addr = INADDR_ANY;
    serverAddr.sin_family = AF_INET;
    serverAddr.sin_port = htons(this->getPuerto());
 
-   bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));
-   listen(server, 0);
+   rc=bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));
+   rc=listen(server, 0);
 
    cout << "Escuchando en el puerto: "<<to_string(this->getPuerto())<< endl;
+
 
    int clientAddrSize = sizeof(clientAddr);
    if((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
      {
-      //strcpy(this->buffer,"Socket creado. Puerto de escucha: ");
+        //strcpy(this->buffer,"Socket creado. Puerto de escucha: ");
       this->LogServer("Socket creado. Puerto de escucha: "+to_string(this->getPuerto()));
-   }
-}
 
+     }
+}
 
 //DESTRUCTOR
 Servidor::~Servidor()
@@ -49,7 +52,7 @@ Servidor::~Servidor()
     WSACleanup();
 }
 
-string Servidor::configuraciones(){
+void Servidor::configuraciones(){
 char linea[128];
 ifstream configuraciones;
 string cadena;
@@ -224,11 +227,6 @@ credenciales.open("credenciales.txt");
 credenciales.close();
 }
 
-void Servidor::ImprimirlstUsuarios(){
-   for (string usuario : this->lstUsuarios){
-        cout << usuario << '\n';
-    }
-}
 
 string Servidor:: mostrarActividades(string usuario){
 char linea[150];

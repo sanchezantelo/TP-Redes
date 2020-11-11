@@ -31,9 +31,8 @@ int main()
 
          if(server->LogOutPorTimeOut()){
             server->CerrarSocket();
-            server->~Servidor();
-            system("PAUSE");
-         }
+            break;
+            }
          if(recibido.find("MostrarActividad")==0){
             server->Enviar(server->mostrarActividades(recibido));
          }

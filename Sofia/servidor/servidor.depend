@@ -14,20 +14,20 @@
 	<WinSock2.h>
 	<string>
 
-1604165805 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
+1605036866 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\main.cpp
 	<iostream>
 	<winsock2.h>
 	<Servidor.h>
 	<Servicio.h>
 
-1604166253 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
+1605036816 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servidor.h
 	<iostream>
 	<winsock2.h>
 	<fstream>
 	<ctime>
 	"list"
 
-1604178000 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
+1605038165 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servidor.cpp
 	"Servidor.h"
 	<fstream>
 	<sstream>
@@ -73,14 +73,14 @@
 	<Servicio.h>
 	<dirent.h>
 
-1604159017 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servicio.cpp
+1605040240 source:e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\src\servicio.cpp
 	"Servicio.h"
 	<string.h>
 	<string>
 	<fstream>
 	<dirent.h>
 
-1604159017 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servicio.h
+1605040236 e:\sistemas\redes y comunicaciones\tpredes\tp-redes\sofia\servidor\include\servicio.h
 	<iostream>
 	"list"
 
