@@ -158,8 +158,6 @@ class Servidor
 */
 
 
-        string reservarAsiento();
-        string encontradoServicio();
 
         void setLogueado(bool logueado);
 /*
@@ -203,6 +201,13 @@ class Servidor
     RETORNO: int ip.
 */
         string getIp();
+
+/*
+    PRE:  El servidor debe ser crado con servidor().
+    POST: Adiciona 2 minutos mas a la sesion del cliente.
+    ATRIBUTOS: No posee .
+    RETORNO: No posee.
+*/
 
         void ActualizarTimer();
         virtual ~Servidor();
