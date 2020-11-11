@@ -1,5 +1,5 @@
 #include "Servidor.h"
-#define TIMEOUT 20
+#define TIMEOUT 120
 #include<time.h>
 #include <fstream>
 #include <sstream>
