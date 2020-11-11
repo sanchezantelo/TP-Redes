@@ -611,6 +611,7 @@
 2020-11-01_02:28: ===========================
 2020-11-01_02:28: Socket creado. Puerto de escucha: 5000
 2020-11-01_02:28: Socket cerrado, cliente desconectado.
+<<<<<<< HEAD
 2020-11-10_17:57: ===========================
 2020-11-10_17:57:        Inicia Servidor     
 2020-11-10_17:57: ===========================
@@ -751,3 +752,10 @@
 2020-11-10_19:14: ===========================
 2020-11-10_19:14: Socket creado. Puerto de escucha: 5000
 2020-11-10_19:14: Socket cerrado, cliente desconectado.
+=======
+2020-11-01_14:03: ===========================
+2020-11-01_14:03:        Inicia Servidor     
+2020-11-01_14:03: ===========================
+2020-11-01_14:03: Socket creado. Puerto de escucha: 5000
+2020-11-01_14:04: Socket cerrado, cliente desconectado.
+>>>>>>> 2e8f34e9f733c28fba954345c007ff3c0bf4fadc

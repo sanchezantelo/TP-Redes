@@ -149,12 +149,17 @@ class Servidor
 */
         string mostrarActividades(string usuario);
 
+
 /*
     PRE:  El servidor debe ser crado con servidor(). Debe existir un socket.
     POST: Setea el atributo estado en true o false.
     ATRIBUTOS: Estado true para logueado false para no logueado .
     RETORNO: No posee.
 */
+
+
+        string reservarAsiento();
+        string encontradoServicio();
 
         void setLogueado(bool logueado);
 /*
