@@ -3,6 +3,8 @@
 #include <Cliente.h>
 #include <Servicio.h>
 #include <cstring>
+
+
 using namespace std;
 
 void altaServicio(Cliente &cliente, Servicio &servicio);
@@ -37,13 +39,11 @@ int main(){
      login(*Client);
      int opcion=0;
 
-
     while(opcion!=4 || Client->getSesion()) {
 
         menuEncabezado();
+
         cin >> opcion;
-
-
 
         switch (opcion) {
             case 1:

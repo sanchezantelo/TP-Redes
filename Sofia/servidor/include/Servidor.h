@@ -203,6 +203,8 @@ class Servidor
     RETORNO: int ip.
 */
         string getIp();
+
+        void ActualizarTimer();
         virtual ~Servidor();
 
     protected:

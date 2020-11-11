@@ -1,5 +1,6 @@
 #include "Servidor.h"
-#define TIMEOUT 1740
+#define TIMEOUT 20
+#include<time.h>
 #include <fstream>
 #include <sstream>
 #include<ostream>
@@ -127,6 +128,9 @@ bool Servidor::LogOutPorTimeOut(){
     return (TIMEOUT<compara);
 }
 
+void Servidor::ActualizarTimer(){
+this->ultimaconexion= time(0);
+}
 
 bool Servidor::sesion(){
  return client != INVALID_SOCKET;

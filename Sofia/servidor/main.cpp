@@ -30,9 +30,18 @@ int main()
 
 
          if(server->LogOutPorTimeOut()){
+            cout<<"Expiro tiempo de sesion"<<endl;
+            server->Enviar("Expiro tiempo de sesion");
             server->CerrarSocket();
             break;
             }
+
+        if(!recibido.empty()){
+            server->ActualizarTimer();
+         }
+
+
+
          if(recibido.find("MostrarActividad")==0){
             server->Enviar(server->mostrarActividades(recibido));
          }
@@ -66,7 +75,6 @@ int main()
             server->CerrarSocket();
             break;
          }
-
       }
       server->~Servidor();
       servicio->~Servicio();
