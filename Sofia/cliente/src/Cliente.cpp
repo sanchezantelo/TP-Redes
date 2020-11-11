@@ -96,3 +96,7 @@ return this->userName;
 void Cliente:: setuserName(string userName){
 this->userName=userName;
 }
+
+bool Cliente:: timeOut(){
+return strcmp(this->buffer,"Expiro tiempo de sesion")==0;
+}

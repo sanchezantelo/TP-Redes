@@ -31,6 +31,7 @@ class Cliente
         string getuserName();
         void setuserName(string userName);
         void CerrarSocket();
+        bool timeOut();
         virtual ~Cliente();
 
     protected:

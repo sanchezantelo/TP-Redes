@@ -18,6 +18,7 @@ void toText (string recibido);
 string service (char opcion, string recibido);
 string menuReserva(Cliente &cliente, string respuesta);
 
+
 int main(){
     bool status=false;
     int puerto=0;
@@ -41,10 +42,13 @@ int main(){
 
     while(opcion!=4 || Client->getSesion()) {
 
+        if(!Client->timeOut()){
         menuEncabezado();
 
         cin >> opcion;
-
+        }else{
+        opcion=4;
+        }
         switch (opcion) {
             case 1:
                 // Lista de instrucciones de la opción 1
