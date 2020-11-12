@@ -1,38 +1,36 @@
 #include "Servicio.h"
-#include <string.h>
 #include <string>
 #include <fstream>
 #include <dirent.h>
-
+#include <cstring>
 
 using namespace std;
 
 
 Servicio::Servicio(){}
 
-Servicio::Servicio(int _origen, string _fecha, int _turno)
-{
-    origen = _origen;
-    fecha = _fecha;
-    turno = _turno;
-    filaA = "OOOOOOOOOOOOOOOOOOOO";
-    filaB = "OOOOOOOOOOOOOOOOOOOO";
-    filaC = "OOOOOOOOOOOOOOOOOOOO";
-}
-
 Servicio::~Servicio(){}
 
-Servicio::Servicio(int _idServicio, int _origen, string _fecha, int _turno, string _filaA, string _filaB, string _filaC)
+Servicio::Servicio(int _origen, char _fecha[21], int _turno)
+{
+    origen = _origen;
+    strcpy(fecha, _fecha);
+    turno = _turno;
+    strcpy(filaA, "OOOOOOOOOOOOOOOOOOOO");
+    strcpy(filaB, "OOOOOOOOOOOOOOOOOOOO");
+    strcpy(filaC, "OOOOOOOOOOOOOOOOOOOO");
+}
+
+Servicio::Servicio(int _idServicio, int _origen, char _fecha[21], int _turno, char _filaA[21], char _filaB[21], char _filaC[21])
 {
     idServicio = _idServicio;
     origen = _origen;
-    fecha = _fecha;
+    strcpy(fecha, _fecha);
     turno = _turno;
-    filaA = _filaA;
-    filaB = _filaB;
-    filaC = _filaC;
+    strcpy(filaA, _filaA);
+    strcpy(filaB, _filaB);
+    strcpy(filaC, _filaC);
 }
-
 
 void Servicio::setOrigen(int _origen)
 {
@@ -43,13 +41,13 @@ int Servicio::getOrigen()
 {
     return origen;
 }
-void Servicio::setFecha(string _fecha)
 
+void Servicio::setFecha(char _fecha[21])
 {
-    fecha = _fecha;
+    strcpy(fecha, _fecha);
 }
 
-string Servicio::getFecha()
+char* Servicio::getFecha()
 {
     return fecha;
 }
@@ -64,32 +62,32 @@ int Servicio::getTurno()
     return turno;
 }
 
-void Servicio::setfilaA(string _filaA)
+void Servicio::setfilaA(char _filaA[21])
 {
-    filaA = _filaA;
+    strcpy(filaA, _filaA);
 }
 
-string Servicio::getfilaA()
+char* Servicio::getfilaA()
 {
     return filaA;
 }
 
-void Servicio::setfilaB(string _filaB)
+void Servicio::setfilaB(char _filaB[21])
 {
-    filaB = _filaB;
+    strcpy(filaB, _filaB);
 }
 
-string Servicio::getfilaB()
+char* Servicio::getfilaB()
 {
     return filaB;
 }
 
-void Servicio::setfilaC(string _filaC)
+void Servicio::setfilaC(char _filaC[21])
 {
-    filaC = _filaC;
+    strcpy(filaC, _filaC);
 }
 
-string Servicio::getfilaC()
+char* Servicio::getfilaC()
 {
     return filaC;
 }
@@ -185,13 +183,13 @@ int Servicio:: CrearServicio(char * message)
 
     //setea variables del servicio
     serv.setOrigen(atoi(origen));
-    serv.setFecha(string(fecha));
+    serv.setFecha(fecha);
     serv.setTurno(atoi(turno));
 
-    string nombreArchivo = "servicios/" + serv.getFecha() + ".txt";
+    string nombreArchivo = "servicios/" + string(serv.getFecha()) + ".data";
     fstream servicios;
 
-    servicios.open(nombreArchivo, fstream::app);
+    servicios.open(nombreArchivo, fstream::app | ios::binary);
 
     //Si no existe, arroja error
     if(!servicios)
@@ -209,8 +207,7 @@ int Servicio:: CrearServicio(char * message)
             respuesta = 2;
         }
         else {
-            servicioAGuardar = serv.crearServicio();
-            servicios << servicioAGuardar << endl;
+            servicios.write((char*)&serv, sizeof(Servicio));
             respuesta = 1;
         }
 
@@ -219,79 +216,79 @@ int Servicio:: CrearServicio(char * message)
     return respuesta;
 }
 
-string Servicio:: reservarAsiento(char *message){
-    char c_origen[5] = "";
-    char fecha[15] = "";
-    char c_turno[5] = "";
-    char asiento[62][4] = {};
-
-    char filas[70] = "";
-    strcpy(c_origen, strtok(message , ";"));
-    strcpy(fecha, strtok(NULL, ";"));
-    strcpy(c_turno, strtok(NULL, ";"));
-
-    strcpy(filas, strtok(NULL, ";"));
-    strcpy(filas, strtok(NULL, ";"));
-    strcpy(filas, strtok(NULL, ";")); //filas de asiento.
-
-    char* aux = strtok(NULL, ";");
-    int i = 0;
-    int pos = 0;
-
-    while (aux != 0) {
-        if (i % 2 == 0) {
-            asiento[pos][0] = aux[0];
-            asiento[pos][1] = aux[1]; // aca seria todo menos aux[0]
-            asiento[pos][2] = aux[2];
-            cout << "PAR: " << asiento[pos][0] << " " << asiento[pos][1] << asiento[pos][2] << endl;
-        }
-        else {
-            asiento[pos][3] = aux[0];
-            cout << "IMPAR: " << asiento[pos][3] << endl;
-            pos++;
-        }
-        aux = strtok(NULL, ";|");
-        i++;
-    }
-
-    int origen = atoi(c_origen);
-    int turno = atoi(c_turno);
-    //char *msj = origen + ";" + fecha + ";" + turno;
-
-    Servicio* serv = new Servicio(origen, fecha, turno);
-
-    if ((ServicioExiste((Servicio(*serv)))==true))
-        {
-            list<Servicio> listaServicios;
-            list<Servicio> :: iterator it = listaServicios.begin();
-            listaServicios = buscarServicioPorFecha(fecha);
-            listaServicios = buscarServicioPorOrigen(listaServicios, origen);
-            listaServicios = buscarServicioPorTurno(listaServicios, turno);
-            i = 0;
-            while (asiento[i][0] != NULL) {
-                cout << "FILA: " << asiento[i][0] << " COLUMNA: " << asiento[i][1] << asiento[i][2] << " RESERVAR/LIBERA: " << asiento[i][3] << endl;
-                string filaA = serv->getfilaA();
-                string filaB = serv->getfilaB();
-                string filaC = serv->getfilaC();
-
-                if (asiento[i][0] == 'A') {
-                    filaA[asiento[i][1] - 1] = asiento[i][2];
-                } else if (asiento[i][0] == 'B') {
-                    filaB[asiento[i][1] - 1] = asiento[i][2];
-                } else if (asiento[i][0] == 'C') {
-                    filaC[asiento[i][1] - 1] = asiento[i][2];
-                }
-
-            setfilaA(filaA);
-            setfilaB(filaB);
-            setfilaC(filaC);
-            i++;
-            }
-        }
-        cout << "prueba" << endl;
-        system("pause");
-
-}
+//string Servicio:: reservarAsiento(char *message){
+//    char c_origen[5] = "";
+//    char fecha[15] = "";
+//    char c_turno[5] = "";
+//    char asiento[62][4] = {};
+//
+//    char filas[70] = "";
+//    strcpy(c_origen, strtok(message , ";"));
+//    strcpy(fecha, strtok(NULL, ";"));
+//    strcpy(c_turno, strtok(NULL, ";"));
+//
+//    strcpy(filas, strtok(NULL, ";"));
+//    strcpy(filas, strtok(NULL, ";"));
+//    strcpy(filas, strtok(NULL, ";")); //filas de asiento.
+//
+//    char* aux = strtok(NULL, ";");
+//    int i = 0;
+//    int pos = 0;
+//
+//    while (aux != 0) {
+//        if (i % 2 == 0) {
+//            asiento[pos][0] = aux[0];
+//            asiento[pos][1] = aux[1]; // aca seria todo menos aux[0]
+//            asiento[pos][2] = aux[2];
+//            cout << "PAR: " << asiento[pos][0] << " " << asiento[pos][1] << asiento[pos][2] << endl;
+//        }
+//        else {
+//            asiento[pos][3] = aux[0];
+//            cout << "IMPAR: " << asiento[pos][3] << endl;
+//            pos++;
+//        }
+//        aux = strtok(NULL, ";|");
+//        i++;
+//    }
+//
+//    int origen = atoi(c_origen);
+//    int turno = atoi(c_turno);
+//    //char *msj = origen + ";" + fecha + ";" + turno;
+//
+//    Servicio* serv = new Servicio(origen, fecha, turno);
+//
+//    if ((ServicioExiste((Servicio(*serv)))==true))
+//        {
+//            list<Servicio> listaServicios;
+//            list<Servicio> :: iterator it = listaServicios.begin();
+//            listaServicios = buscarServicioPorFecha(fecha);
+//            listaServicios = buscarServicioPorOrigen(listaServicios, origen);
+//            listaServicios = buscarServicioPorTurno(listaServicios, turno);
+//            i = 0;
+//            while (asiento[i][0] != NULL) {
+//                cout << "FILA: " << asiento[i][0] << " COLUMNA: " << asiento[i][1] << asiento[i][2] << " RESERVAR/LIBERA: " << asiento[i][3] << endl;
+//                string filaA = serv->getfilaA();
+//                string filaB = serv->getfilaB();
+//                string filaC = serv->getfilaC();
+//
+//                if (asiento[i][0] == 'A') {
+//                    filaA[asiento[i][1] - 1] = asiento[i][2];
+//                } else if (asiento[i][0] == 'B') {
+//                    filaB[asiento[i][1] - 1] = asiento[i][2];
+//                } else if (asiento[i][0] == 'C') {
+//                    filaC[asiento[i][1] - 1] = asiento[i][2];
+//                }
+//
+//            setfilaA(filaA);
+//            setfilaB(filaB);
+//            setfilaC(filaC);
+//            i++;
+//            }
+//        }
+//        cout << "prueba" << endl;
+//        system("pause");
+//
+//}
 
 string Servicio:: buscarServicio(char * message) {
     int respuesta = 0;
@@ -401,7 +398,7 @@ list<Servicio> Servicio:: buscarServicioPorFecha(string fecha) {
     list<Servicio> :: iterator it = lista.begin();
 
     string _origen, _fecha, _turno, _filaA, _filaB, _filaC;
-    string nombreArchivo = "servicios/" + string(fecha) + ".txt";
+    string nombreArchivo = "servicios/" + string(fecha) + ".data";
     ifstream servicios;
 
     servicios.open(nombreArchivo, fstream::in);
@@ -414,19 +411,12 @@ list<Servicio> Servicio:: buscarServicioPorFecha(string fecha) {
     else{
         cout<<"Se encontro archivo: "<<nombreArchivo<<endl;
 
-        int cantidad = 0;
         while (!servicios.eof()) {
-            getline(servicios, _origen, ';');
-            if (_origen != "") {
-                getline(servicios, _fecha, ';');
-                getline(servicios, _turno, ';');
-                getline(servicios, _filaA, ';');
-                getline(servicios, _filaB, ';');
-                getline(servicios, _filaC);
-
-                cantidad++;
-                Servicio *servicio = new Servicio(cantidad, stoi(_origen), _fecha, stoi(_turno), _filaA, _filaB, _filaC);
-                lista.insert(it, *servicio);
+            Servicio serv = Servicio(0, "0", 0);
+            servicios.read((char*)&serv, sizeof(Servicio));
+            if (serv.getOrigen() != 0) {
+                serv.mensaje();
+                lista.insert(it, serv);
             }
         }
     }

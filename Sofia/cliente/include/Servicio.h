@@ -7,29 +7,31 @@ class Servicio
 {
     int idServicio;
     int origen;
-    string fecha;
+    char fecha[11];
     int turno;
-    string filaA;
-    string filaB;
-    string filaC;
+    char filaA[21];
+    char filaB[21];
+    char filaC[21];
 
     public:
-        Servicio(int _origen, string _fecha, int _turno);
-        Servicio(int idServicio, int _origen, string _fecha, int _turno, string _filaA, string _filaB, string _filaC);
+        Servicio();
+        Servicio(int _origen, char _fecha[21], int _turno);
+        Servicio(int _idServicio, int _origen, char _fecha[21], int _turno, char _filaA[21], char _filaB[21], char _filaC[21]);
         virtual ~Servicio();
         void setOrigen(int _origen);
         int getOrigen();
-        void setFecha(string _fecha);
-        string getFecha();
+        void setFecha(char _fecha[21]);
+        char* getFecha();
         void setTurno(int _turno);
         int getTurno();
-        void setfilaA(string _filaA);
-        string getfilaA();
-        void setfilaB(string _filaB);
-        string getfilaB();
-        void setfilaC(string _filaC);
-        string getfilaC();
+        void setfilaA(char _filaA[21]);
+        char* getfilaA();
+        void setfilaB(char _filaB[21]);
+        char* getfilaB();
+        void setfilaC(char _filaC[21]);
+        char* getfilaC();
         void mostrar();
+        void mostrarTexto();
         string mensaje();
 
     protected:

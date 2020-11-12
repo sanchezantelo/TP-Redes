@@ -1,28 +1,30 @@
 #include "Servicio.h"
 #include <string.h>
-Servicio::Servicio(int _origen, string _fecha, int _turno)
-{
-    origen = _origen;
-    fecha = _fecha;
-    turno = _turno;
-    filaA = "OOOOOOOOOOOOOOOOOOOO";
-    filaB = "OOOOOOOOOOOOOOOOOOOO";
-    filaC = "OOOOOOOOOOOOOOOOOOOO";
-}
+
+Servicio::Servicio(){}
 
 Servicio::~Servicio(){}
 
-Servicio::Servicio(int _idServicio, int _origen, string _fecha, int _turno, string _filaA, string _filaB, string _filaC)
+Servicio::Servicio(int _origen, char _fecha[21], int _turno)
+{
+    origen = _origen;
+    strcpy(fecha, _fecha);
+    turno = _turno;
+    strcpy(filaA, "OOOOOOOOOOOOOOOOOOOO");
+    strcpy(filaB, "OOOOOOOOOOOOOOOOOOOO");
+    strcpy(filaC, "OOOOOOOOOOOOOOOOOOOO");
+}
+
+Servicio::Servicio(int _idServicio, int _origen, char _fecha[21], int _turno, char _filaA[21], char _filaB[21], char _filaC[21])
 {
     idServicio = _idServicio;
     origen = _origen;
-    fecha = _fecha;
+    strcpy(fecha, _fecha);
     turno = _turno;
-    filaA = _filaA;
-    filaB = _filaB;
-    filaC = _filaC;
+    strcpy(filaA, _filaA);
+    strcpy(filaB, _filaB);
+    strcpy(filaC, _filaC);
 }
-
 
 void Servicio::setOrigen(int _origen)
 {
@@ -33,13 +35,13 @@ int Servicio::getOrigen()
 {
     return origen;
 }
-void Servicio::setFecha(string _fecha)
 
+void Servicio::setFecha(char _fecha[21])
 {
-    fecha = _fecha;
+    strcpy(fecha, _fecha);
 }
 
-string Servicio::getFecha()
+char* Servicio::getFecha()
 {
     return fecha;
 }
@@ -54,35 +56,36 @@ int Servicio::getTurno()
     return turno;
 }
 
-void Servicio::setfilaA(string _filaA)
+void Servicio::setfilaA(char _filaA[21])
 {
-    filaA = _filaA;
+    strcpy(filaA, _filaA);
 }
 
-string Servicio::getfilaA()
+char* Servicio::getfilaA()
 {
     return filaA;
 }
 
-void Servicio::setfilaB(string _filaB)
+void Servicio::setfilaB(char _filaB[21])
 {
-    filaB = _filaB;
+    strcpy(filaB, _filaB);
 }
 
-string Servicio::getfilaB()
+char* Servicio::getfilaB()
 {
     return filaB;
 }
 
-void Servicio::setfilaC(string _filaC)
+void Servicio::setfilaC(char _filaC[21])
 {
-    filaC = _filaC;
+    strcpy(filaC, _filaC);
 }
 
-string Servicio::getfilaC()
+char* Servicio::getfilaC()
 {
     return filaC;
 }
+
 
 void Servicio::mostrar()
 {
@@ -116,4 +119,18 @@ void Servicio::mostrar()
 }
 string Servicio::mensaje(){
     return to_string(getOrigen()) + ";" + getFecha() + ";" + to_string(getTurno());
+}
+
+void Servicio::mostrarTexto()
+{
+    char origen_string[3][20] = {"Buenos Aires", "Mar del Plata"};
+    char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
+    int destino = getOrigen();
+
+    if (getOrigen() == 1)
+        destino++;
+    else
+        destino--;
+
+    cout << origen_string[getOrigen() - 1] << " a " << origen_string[destino - 1] << " el " << getFecha() << " turno " << turno_string[getTurno() - 1] << endl;
 }

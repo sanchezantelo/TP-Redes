@@ -149,7 +149,7 @@ void altaServicio(Cliente &cliente, Servicio &servicio){
     int seguir = 1;
     char opcion;
     int origen;
-    string fecha;
+    char fecha[11];
     int turno;
     char origen_string[3][20] = {"Buenos Aires", "Mar del Plata"};
     char turno_string[4][20] = {"Manana", "Tarde", "Noche"};
@@ -205,7 +205,7 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
     int seguir = 1;
     char opcion;
     int origen;
-    string fecha;
+    char fecha[11];
     int turno;
     char origen_string[3][20] = {"Vacio", "Buenos Aires", "Mar del Plata"};
     char turno_string[4][20] = {"Vacio", "Manana", "Tarde", "Noche"};
@@ -304,27 +304,27 @@ void toText (string recibido){
     string mostrar = "";
     char * aux = strtok (cstr, ")");
     while (aux != 0){
-        cout << aux << ")" << endl;
+        cout << aux << ")";
         aux = strtok(NULL, ";");
         if(stricmp("1", aux))
         {
-            mostrar = mostrar + " Mar del Plata ";
+            mostrar = mostrar + " Mar del Plata a Buenos Aires ";
         }else
             {
-                mostrar = mostrar + " Buenos Aires ";
+                mostrar = mostrar + " Buenos Aires a Mar del Plata ";
             }
         aux = strtok(NULL, ";");
-        mostrar = mostrar + ";" + aux;
+        mostrar = mostrar + " el " + aux;
         aux = strtok(NULL, "|");
         int x = atoi(aux);
         switch (x){
-            case 1: mostrar = mostrar + ";" + "Manana";
+            case 1: mostrar += " turno Manana";
             break;
-            case 2: mostrar = mostrar + ";" + "Tarde";
+            case 2: mostrar += " turno Tarde";
             break;
-            case 3: mostrar = mostrar + ";" + "Noche";
+            case 3: mostrar += " turno Noche";
             break;
-            default: mostrar = mostrar + ";" + "Error";
+            default: mostrar += " Error";
         }
         cout << mostrar << '\n';
         mostrar = "";
@@ -378,7 +378,9 @@ string menuReserva(Cliente &cliente, string respuesta){
     int a = 1;
     int _orig = stoi(origen);
     int _turn = stoi(turno);
-    Servicio *servicio = new Servicio(_orig, fecha, _turn);
+    char _fech[11];
+    strcpy(_fech, fecha.c_str());
+    Servicio *servicio = new Servicio(_orig, _fech, _turn);
     cliente.Enviar(string("G3;" + respuesta));
     string resp = cliente.Recibir();
     servicio->mostrar();
