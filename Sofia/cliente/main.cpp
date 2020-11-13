@@ -239,18 +239,29 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                 seguir = 0;
                 cliente.Enviar(string("G2;" + servicio.mensaje()));
                 string recibido = cliente.Recibir();
+                if(recibido == "NS")
+                {
+                    cout << "No se encontro ningun resultado"<<endl;
+                    system("pause");
+                    break;
+                }
+                else
                 cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
                 toText(recibido);
                 cout << "Ingrese el numero de servicio que desea elegir: 0 para salir" << endl;
                 cin >> opcion;
                 string respuesta = "";
+
                 if (opcion=='0'){
                         break;}else{
                         respuesta = service (opcion, recibido);
                         cout << respuesta << endl;
                 };
+
+
                 cout << "El servicio elegido es: " << respuesta << ", desea continuar? 1.Si 2.No" << endl;
                 cin >> opcion;
+
                 switch (opcion){
                     case '1': {
                         system("cls");

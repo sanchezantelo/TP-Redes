@@ -96,3 +96,26 @@
 	"Servicio.h"
 	<string.h>
 
+1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\cliente\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Cliente.h>
+	<Servicio.h>
+	<cstring>
+
+1605226616 c:\users\ne_es\documents\unla-redes\tp-redes\sofia\cliente\include\cliente.h
+	<iostream>
+	<winsock2.h>
+
+1605226616 c:\users\ne_es\documents\unla-redes\tp-redes\sofia\cliente\include\servicio.h
+	<iostream>
+
+1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\cliente\src\cliente.cpp
+	"Cliente.h"
+	<winsock2.h>
+	<Servicio.h>
+
+1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\cliente\src\servicio.cpp
+	"Servicio.h"
+	<string.h>
+

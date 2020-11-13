@@ -60,7 +60,8 @@ int main()
             if (respuesta != "")
                 server->Enviar(respuesta);
             else
-                server->Enviar("No se encontro ningun resultado");
+                cout<<"No se encontro ningun servicio"<<endl;
+                server->Enviar("NS");
          }
          if(recibido.find("G3") == 0){
             strcpy(message, recibido.erase(0,3).c_str());

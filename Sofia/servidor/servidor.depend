@@ -118,3 +118,28 @@
 	<Servidor.h>
 	<Servicio.h>
 
+1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\src\servicio.cpp
+	"Servicio.h"
+	<string>
+	<fstream>
+	<dirent.h>
+	<cstring>
+
+1605226616 c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\include\servicio.h
+	<iostream>
+	"list"
+
+1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\src\servidor.cpp
+	"Servidor.h"
+	<time.h>
+	<fstream>
+	<sstream>
+	<ostream>
+
+1605226616 c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\include\servidor.h
+	<iostream>
+	<winsock2.h>
+	<fstream>
+	<ctime>
+	"list"
+
