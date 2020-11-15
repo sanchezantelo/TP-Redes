@@ -118,7 +118,7 @@
 	<Servidor.h>
 	<Servicio.h>
 
-1605226616 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\src\servicio.cpp
+1605367971 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\src\servicio.cpp
 	"Servicio.h"
 	<string>
 	<fstream>
@@ -142,4 +142,10 @@
 	<fstream>
 	<ctime>
 	"list"
+
+1605305490 source:c:\users\ne_es\documents\unla-redes\tp-redes\sofia\servidor\main.cpp
+	<iostream>
+	<winsock2.h>
+	<Servidor.h>
+	<Servicio.h>
 

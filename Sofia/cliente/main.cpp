@@ -3,6 +3,9 @@
 #include <Cliente.h>
 #include <Servicio.h>
 #include <cstring>
+#include <vector>
+#include <iterator>
+#include <sstream>
 
 
 using namespace std;
@@ -17,7 +20,8 @@ void menuEncabezado(void);
 void toText (string recibido);
 string service (char opcion, string recibido);
 string menuReserva(Cliente &cliente, string respuesta);
-
+string servicioSelected(string s, char opc);
+string servicioTexto(string servicio);
 
 int main(){
     bool status=false;
@@ -245,7 +249,6 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
                     system("pause");
                     break;
                 }
-                else
                 cout << "Resultados segun busqueda: " << origen_string[origen] << ", Fecha: " << fecha << ", Turno: " << turno_string[turno] << endl;
                 toText(recibido);
                 cout << "Ingrese el numero de servicio que desea elegir: 0 para salir" << endl;
@@ -254,12 +257,11 @@ void gestionarPasajes(Cliente &cliente, Servicio &servicio){
 
                 if (opcion=='0'){
                         break;}else{
-                        respuesta = service (opcion, recibido);
+                        respuesta = servicioSelected (recibido, opcion);
                         cout << respuesta << endl;
                 };
-
-
-                cout << "El servicio elegido es: " << respuesta << ", desea continuar? 1.Si 2.No" << endl;
+                string servicioToString = servicioTexto(respuesta);
+                cout << "El servicio elegido es: " << servicioToString << ", desea continuar? 1.Si 2.No \n" << endl;
                 cin >> opcion;
 
                 switch (opcion){
@@ -343,9 +345,52 @@ void toText (string recibido){
     }
 }
 
+string servicioTexto(string servicio)
+{
 
-string service (char opcion, string recibido){
+    char origen[2] = "";
+    char fecha[13] = "";
+    char turno[2] = "";
 
+    char * serviceChar = new char [servicio.size()+1];
+    strcpy (serviceChar, servicio.c_str());
+
+    string servicioARetornar;
+    strcpy(origen, strtok(serviceChar , ";"));
+    strcpy(fecha, strtok(NULL, ";"));
+    strcpy(turno, strtok(NULL, ";"));
+    string fechaString = string(fecha, 10);
+
+
+    if(stricmp("1", origen) == 0)
+    {
+        servicioARetornar = " Buenos Aires a Mar del Plata ";
+    }
+    else if(stricmp("2", origen) == 0)
+    {
+        servicioARetornar = " Mar del Plata a Buenos Aires ";
+    }
+
+    servicioARetornar = servicioARetornar + fechaString;
+
+    if(stricmp("1", turno) == 0)
+    {
+        servicioARetornar = servicioARetornar + " Manana";
+    }
+    else if(stricmp("2", turno) == 0)
+    {
+        servicioARetornar = servicioARetornar + " Tarde";
+    }
+    else if(stricmp("3",turno) == 0)
+    {
+        servicioARetornar = servicioARetornar + " Noche";
+    }
+
+    return servicioARetornar;
+}
+
+string servicioSelected(string recibido, char opcion)
+{
     string prueba = "error";
     char * cstr = new char [recibido.size()+1];
     strcpy (cstr, recibido.c_str());
@@ -373,6 +418,7 @@ string service (char opcion, string recibido){
 string menuReserva(Cliente &cliente, string respuesta){
     char * cstr = new char [respuesta.size()+1];
     strcpy (cstr, respuesta.c_str());
+    string asientos="";
 
     char * aux = strtok (cstr, ";");
     string origen="";
@@ -384,7 +430,7 @@ string menuReserva(Cliente &cliente, string respuesta){
         turno = strtok(NULL, "");
         break;
     };
-    string asiento = "";
+    char asiento[2];
     int opc = 0;
     int a = 1;
     int _orig = stoi(origen);
@@ -393,24 +439,35 @@ string menuReserva(Cliente &cliente, string respuesta){
     strcpy(_fech, fecha.c_str());
     Servicio *servicio = new Servicio(_orig, _fech, _turn);
     cliente.Enviar(string("G3;" + respuesta));
-    string resp = cliente.Recibir();
+    //string resp = cliente.Recibir();
     servicio->mostrar();
+    int cantAsientos = 0;
     while (a==1)
     {
+        cantAsientos++;
         cout << "Ingrese asiento a reservar o liberar: " << endl;
         cin >> asiento;
         cout << "1. Reservar. 2. Liberar" << endl;
         cin >> opc;
         switch (opc){
-            case 1 : respuesta = respuesta + ";" + asiento + ";" + "x" + "|";
+            case 1 : asientos = asientos + asiento + ";" + "x" + "|";
             break;
-            case 2 : respuesta = respuesta + ";" + asiento + ";" + "o" + "|";
+            case 2 : asientos = asientos + ";" + asiento + ";" + "o" + "|";
             break;
             default: break;
         }
         cout << "Desea reservar o liberar otro asiento? 1.Si 2.No" << endl;
         cin >> a;
     }
+
+    char *asientosToChar = new char[asientos.length() + 1];
+    strcpy(asientosToChar, asientos.c_str());
+    string filasAsiento = servicio-> reservayliberaAsientos(asientosToChar, cantAsientos);
+    cout <<filasAsiento <<endl;
+    string resp = cliente.Recibir();
+    toText(resp);
+
+
     cliente.Enviar(string("G4;" + resp));
     string p = cliente.Recibir();
     cout << p << endl;

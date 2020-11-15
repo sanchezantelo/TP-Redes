@@ -33,6 +33,11 @@ class Servicio
         void mostrar();
         void mostrarTexto();
         string mensaje();
+        char* reservarAsiento(char _asiento[2]);
+        bool asientoLibre(char _fila[21], char _numero);
+        void ocuparAsiento(char _fila[21], char _numero);
+        void liberarAsiento(char _fila[21], char _numero);
+        string reservayliberaAsientos(char* _asientos, int cantAsientos);
 
     protected:
 
